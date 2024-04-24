@@ -1,0 +1,2697 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/18/2024 8:20:39 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="UKWWHDSQLWI099"
+  DTS:CreatorName="UK\PAM-WMS-Migration"
+  DTS:DTSID="{9B630047-F0C2-4420-B235-DDD7E432D679}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5270.0"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="59"
+  DTS:VersionGUID="{4EDD8DE5-27A2-4FA2-9BB1-61397F7728D6}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F4A9788B-2352-43FC-A658-0121D2733C86}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="varRunID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Transform Title Data"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{018CA3F8-3BD8-4559-A090-C80D0D75A5E8}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Transform Title Data">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Transform Title Data\run_status to InProgress"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{43115dfe-32c6-493e-9ba6-4ca6694e130d}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="run_status to InProgress"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}"
+              SQLTask:SqlStatementSource="UPDATE [config].[wms_dm_run_ctl] SET run_status = 'InProgress' WHERE run_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::varRunID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Transform Title Data\run_status to Transformed"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{83D06608-BF57-4166-98AF-FCB514D28830}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="run_status to Transformed"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}"
+              SQLTask:SqlStatementSource="UPDATE [config].[wms_dm_run_ctl] &#xA;SET run_status = 'Transformed',&#xA;         run_finish_time = GetDate()&#xA;WHERE run_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::varRunID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Transform Title Data\Transform titles"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{0AF9DB4D-7D09-4118-86C7-835F284E4503}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Transform titles"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Transform Title Data\Transform titles\Read title records"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Read title records"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[transform].[titles_staging]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT tt.[record_number]
+      ,tt.[run_id]
+      ,tt.[ISBN_SuppEd]
+      ,tt.[ISBN]
+      ,tt.[Created On]
+      ,tt.[Plant]
+      ,tt.[Storage Location]
+      ,tt.[Supply Edition]
+      ,tt.[answer_code]
+      ,tt.[Answer Code Text]
+      ,tt.[title_long_desc]
+      ,tt.[Original Pub Date of Product]
+      ,tt.[commodity_code]
+      ,tt.[commodity_code2]
+      ,tt.[se_publication_date]
+      ,tt.[se_publication_price]
+	  ,tt.[author]
+      ,tt.[finance_publisher]
+      ,tt.[Finance publisher description]
+      ,tt.[finance_imprint]
+      ,tt.[Finance imprint description]
+      ,tt.[Export Pub Date of Product]
+      ,tt.[Binding]
+      ,tt.[Binding Description]
+      ,tt.[country_of_origin]
+	  ,tt.PackFlag
+	  ,tt.PackHeight
+	  ,tt.PackWeight
+	  ,tt.PackWidth
+	  ,tt.PackDepth
+	  ,tt.PackagingType
+	  ,tt.PickPackMethod
+	  ,tt.BookHeight
+	  ,tt.BookWeight
+	  ,tt.BookWidth
+	  ,tt.BookDepth
+	  ,tt.LayersPerPallet
+	  ,tt.MaxBooksPallet
+	  ,tt.[by_payload_filler]
+,REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
+      REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE( 
+      REPLACE(by_payload_filler, '&lt;filler_hrcylevel1&gt;', tt.ISBN_SuppEd)
+                                ,'&lt;filler_hrcylevel2&gt;', tt.[ISBN]) 
+                                ,'&lt;filler_hrcylevel3&gt;', tt.author) 
+                                ,'&lt;filler_hrcylevel4&gt;', tt.finance_imprint) 
+                                ,'&lt;filler_hrcylevel5&gt;', tt.finance_publisher) 
+                                ,'&lt;filler_prtnum&gt;', tt.ISBN_SuppEd) 
+                                ,'&lt;filler_comcod&gt;', tt.[commodity_code]) 
+                                ,'&lt;filler_prtfam&gt;', tt.[Binding]) 
+                                ,'&lt;filler_untcst&gt;', tt.se_publication_price) 
+                                ,'&lt;filler_prtsize&gt;', tt.answer_code) 
+                                ,'&lt;filler_dflt_orgcode&gt;', tt.country_of_origin) 
+                                ,'&lt;filler_cstms_cmmdty_cod&gt;', tt.[commodity_code2]) 
+                                ,'&lt;filler_dsp_prtnum&gt;', tt.[ISBN]) 
+                                ,'&lt;filler_prthrcy&gt;', tt.ISBN_SuppEd) 
+                                ,'&lt;filler_lngdsc&gt;', tt.title_long_desc) 
+                                ,'&lt;filler_short_dsc&gt;', tt.title_short_desc) 
+                                ,'&lt;filler_alt_prtnum&gt;', tt.[ISBN])
+								,'&lt;filler_ftpcod&gt;', tt.[ISBN])
+								,'&lt;filler_len&gt;', tt.BookDepth) 
+								,'&lt;filler_wid&gt;', tt.BookWidth) 
+								,'&lt;filler_hgt&gt;', tt.BookHeight) 
+								,'&lt;filler_wgt&gt;', tt.BookWeight) 
+								,'&lt;filler_cs_len&gt;', tt.PackDepth) 
+								,'&lt;filler_cs_wid&gt;', tt.PackWidth) 
+								,'&lt;filler_cs_hgt&gt;', tt.PackHeight) 
+								,'&lt;filler_cs_wgt&gt;', tt.PackWeight)
+								,'&lt;filler_pa_len&gt;', 0) 
+								,'&lt;filler_pa_wid&gt;', 0) 
+								,'&lt;filler_pa_hgt&gt;', 0) 
+								,'&lt;filler_pa_wgt&gt;', 0)
+								AS resultant_payload
+
+FROM (
+SELECT [record_number]
+      ,[run_id]
+      ,[ISBN_SuppEd]
+      ,[ISBN]
+      ,[Created On]
+      ,[Plant]
+      ,[Storage Location]
+      ,[Supply Edition]
+      ,[Answer Code for Reqs] AS [answer_code]
+      ,[Answer Code Text]
+      ,CAST(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE([ISBN Name],'&amp;','&amp;amp;'),'''','&amp;apos;'),'&gt;','&amp;gt;'),'&lt;','&amp;lt;'),'"','&amp;quot;') AS VARCHAR(500)) AS [title_long_desc]
+      --,CAST(SUBSTRING(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE([ISBN Name],'&amp;','&amp;amp;'),'''','&amp;apos;'),'&gt;','&amp;gt;'),'&lt;','&amp;lt;'),'"','&amp;quot;'),1,20) AS VARCHAR(20)) AS [title_short_desc]
+	  , CASE WHEN CHARINDEX('''',SUBSTRING([ISBN Name],1,20)) &gt; 0
+	          OR CHARINDEX('&amp;',SUBSTRING([ISBN Name],1,20)) &gt; 0
+	          OR CHARINDEX('"',SUBSTRING([ISBN Name],1,20)) &gt; 0
+	          OR CHARINDEX('&gt;',SUBSTRING([ISBN Name],1,20)) &gt; 0
+	          OR CHARINDEX('&lt;',SUBSTRING([ISBN Name],1,20)) &gt; 0
+			THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(SUBSTRING([ISBN Name],1,20),'&amp;','&amp;amp;'),'''','&amp;apos;'),'&gt;','&amp;gt;'),'&lt;','&amp;lt;'),'"','&amp;quot;')
+			ELSE SUBSTRING(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE([ISBN Name],'&amp;','&amp;amp;'),'''','&amp;apos;'),'&gt;','&amp;gt;'),'&lt;','&amp;lt;'),'"','&amp;quot;'),1,20) END AS [title_short_desc]
+      ,[Original Pub Date of Product]
+      ,[Comm  imp  code no ] AS [commodity_code]
+      ,[Commodity code 2] AS [commodity_code2]
+      ,[SE publication date] AS [se_publication_date]
+      ,[SE publication price] AS [se_publication_price]
+	  ,CAST(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE([Author Artist],'&amp;','&amp;amp;'),'''','&amp;apos;'),'&gt;','&amp;gt;'),'&lt;','&amp;lt;'),'"','&amp;quot;') AS VARCHAR(500)) AS [author]
+      ,[Finance publisher] AS [finance_publisher]
+      ,[Finance publisher description]
+      ,[Finance Imprint] AS [finance_imprint]
+      ,[Finance imprint description]
+      ,[Export Pub Date of Product]
+      ,[Binding]
+      ,[Binding Description]
+      ,[Country of origin] AS [country_of_origin]
+	  ,PackFlag
+	  ,PackHeight
+	  ,PackWeight
+	  ,PackWidth
+	  ,PackDepth
+	  ,PackagingType
+	  ,PickPackMethod
+	  ,BookHeight
+	  ,BookWeight
+	  ,BookWidth
+	  ,BookDepth
+	  ,LayersPerPallet
+	  ,MaxBooksPallet
+	  ,CAST([by_payload_filler] AS VARCHAR(4000)) AS [by_payload_filler]
+  FROM [transform].[titles_staging]) tt --where isbn = '9780099610816'
+  ORDER BY 1;</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Transform Title Data\Transform titles\Read title records.Connections[OleDbConnection]"
+                      connectionManagerID="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[ISBN]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[ISBN]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[ISBN]"
+                          name="ISBN"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Created On]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Created On]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Created On]"
+                          name="Created On"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Plant]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Plant]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Plant]"
+                          name="Plant"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Storage Location]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Storage Location]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Storage Location]"
+                          name="Storage Location"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Supply Edition]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Supply Edition]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Supply Edition]"
+                          name="Supply Edition"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Answer Code Text]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Answer Code Text]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Answer Code Text]"
+                          name="Answer Code Text"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Original Pub Date of Product]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Original Pub Date of Product]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Original Pub Date of Product]"
+                          name="Original Pub Date of Product"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Finance publisher description]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Finance publisher description]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Finance publisher description]"
+                          name="Finance publisher description"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Finance imprint description]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Finance imprint description]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Finance imprint description]"
+                          name="Finance imprint description"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Export Pub Date of Product]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Export Pub Date of Product]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Export Pub Date of Product]"
+                          name="Export Pub Date of Product"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Binding]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Binding]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Binding]"
+                          name="Binding"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Binding Description]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Binding Description]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Binding Description]"
+                          name="Binding Description"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[ISBN_SuppEd]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[ISBN_SuppEd]"
+                          length="101"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[ISBN_SuppEd]"
+                          name="ISBN_SuppEd"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[by_payload_filler]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[by_payload_filler]"
+                          length="4000"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[by_payload_filler]"
+                          name="by_payload_filler"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[answer_code]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[answer_code]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[answer_code]"
+                          name="answer_code"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[title_long_desc]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[title_long_desc]"
+                          length="500"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[title_long_desc]"
+                          name="title_long_desc"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[commodity_code]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[commodity_code]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[commodity_code]"
+                          name="commodity_code"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[commodity_code2]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[commodity_code2]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[commodity_code2]"
+                          name="commodity_code2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[se_publication_date]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[se_publication_date]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[se_publication_date]"
+                          name="se_publication_date"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[se_publication_price]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[se_publication_price]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[se_publication_price]"
+                          name="se_publication_price"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[author]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[author]"
+                          length="500"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[author]"
+                          name="author"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[finance_publisher]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[finance_publisher]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[finance_publisher]"
+                          name="finance_publisher"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[finance_imprint]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[finance_imprint]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[finance_imprint]"
+                          name="finance_imprint"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[country_of_origin]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[country_of_origin]"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[country_of_origin]"
+                          name="country_of_origin"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[resultant_payload]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[resultant_payload]"
+                          length="8000"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[resultant_payload]"
+                          name="resultant_payload"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[run_id]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[run_id]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[run_id]"
+                          name="run_id"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[record_number]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[record_number]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[record_number]"
+                          name="record_number"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackFlag]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackFlag]"
+                          length="1"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackFlag]"
+                          name="PackFlag"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackHeight]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackHeight]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackHeight]"
+                          name="PackHeight"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackWeight]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackWeight]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackWeight]"
+                          name="PackWeight"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackWidth]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackWidth]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackWidth]"
+                          name="PackWidth"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackDepth]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackDepth]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackDepth]"
+                          name="PackDepth"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackagingType]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackagingType]"
+                          length="1"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackagingType]"
+                          name="PackagingType"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PickPackMethod]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PickPackMethod]"
+                          length="1"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PickPackMethod]"
+                          name="PickPackMethod"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[BookHeight]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[BookHeight]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[BookHeight]"
+                          name="BookHeight"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[BookWeight]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[BookWeight]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[BookWeight]"
+                          name="BookWeight"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[BookWidth]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[BookWidth]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[BookWidth]"
+                          name="BookWidth"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[BookDepth]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[BookDepth]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[BookDepth]"
+                          name="BookDepth"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[LayersPerPallet]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[LayersPerPallet]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[LayersPerPallet]"
+                          name="LayersPerPallet"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[MaxBooksPallet]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[MaxBooksPallet]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[MaxBooksPallet]"
+                          name="MaxBooksPallet"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[ISBN]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="ISBN" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Created On]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Created On" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Plant]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Plant" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Storage Location]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Storage Location" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Supply Edition]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Supply Edition" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Answer Code Text]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Answer Code Text" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Original Pub Date of Product]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Original Pub Date of Product" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Finance publisher description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Finance publisher description" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Finance imprint description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Finance imprint description" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Export Pub Date of Product]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Export Pub Date of Product" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Binding]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Binding" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[Binding Description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Binding Description" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[ISBN_SuppEd]"
+                          codePage="1252"
+                          dataType="str"
+                          length="101"
+                          name="ISBN_SuppEd" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[by_payload_filler]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4000"
+                          name="by_payload_filler" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[answer_code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="answer_code" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[title_long_desc]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="title_long_desc" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[commodity_code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="commodity_code" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[commodity_code2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="commodity_code2" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[se_publication_date]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="se_publication_date" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[se_publication_price]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="se_publication_price" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[author]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="author" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[finance_publisher]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="finance_publisher" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[finance_imprint]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="finance_imprint" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[country_of_origin]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="country_of_origin" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[resultant_payload]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          name="resultant_payload" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[run_id]"
+                          dataType="i4"
+                          name="run_id" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[record_number]"
+                          dataType="i8"
+                          name="record_number" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackFlag]"
+                          dataType="wstr"
+                          length="1"
+                          name="PackFlag" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackHeight]"
+                          dataType="i4"
+                          name="PackHeight" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackWeight]"
+                          dataType="i4"
+                          name="PackWeight" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackWidth]"
+                          dataType="i4"
+                          name="PackWidth" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackDepth]"
+                          dataType="i4"
+                          name="PackDepth" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackagingType]"
+                          dataType="wstr"
+                          length="1"
+                          name="PackagingType" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PickPackMethod]"
+                          dataType="wstr"
+                          length="1"
+                          name="PickPackMethod" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[BookHeight]"
+                          dataType="i4"
+                          name="BookHeight" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[BookWeight]"
+                          dataType="i4"
+                          name="BookWeight" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[BookWidth]"
+                          dataType="i4"
+                          name="BookWidth" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[BookDepth]"
+                          dataType="i4"
+                          name="BookDepth" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[LayersPerPallet]"
+                          dataType="i4"
+                          name="LayersPerPallet" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[MaxBooksPallet]"
+                          dataType="i4"
+                          name="MaxBooksPallet" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[record_number]"
+                          dataType="i8"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[record_number]"
+                          name="record_number" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[run_id]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[run_id]"
+                          name="run_id" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[ISBN]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[ISBN]"
+                          name="ISBN" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Created On]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Created On]"
+                          name="Created On" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Plant]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Plant]"
+                          name="Plant" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Storage Location]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Storage Location]"
+                          name="Storage Location" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Supply Edition]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Supply Edition]"
+                          name="Supply Edition" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Answer Code Text]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Answer Code Text]"
+                          name="Answer Code Text" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[answer_code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[answer_code]"
+                          name="answer_code" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Original Pub Date of Product]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Original Pub Date of Product]"
+                          name="Original Pub Date of Product" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[title_long_desc]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[title_long_desc]"
+                          name="title_long_desc" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Finance publisher description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Finance publisher description]"
+                          name="Finance publisher description" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[commodity_code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[commodity_code]"
+                          name="commodity_code" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[commodity_code2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[commodity_code2]"
+                          name="commodity_code2" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[se_publication_date]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[se_publication_date]"
+                          name="se_publication_date" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[se_publication_price]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[se_publication_price]"
+                          name="se_publication_price" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[author]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[author]"
+                          name="author" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[finance_publisher]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[finance_publisher]"
+                          name="finance_publisher" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Finance imprint description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Finance imprint description]"
+                          name="Finance imprint description" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[finance_imprint]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[finance_imprint]"
+                          name="finance_imprint" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Export Pub Date of Product]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Export Pub Date of Product]"
+                          name="Export Pub Date of Product" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Binding]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Binding]"
+                          name="Binding" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Binding Description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[Binding Description]"
+                          name="Binding Description" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[ISBN_SuppEd]"
+                          codePage="1252"
+                          dataType="str"
+                          length="101"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[ISBN_SuppEd]"
+                          name="ISBN_SuppEd" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[country_of_origin]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[country_of_origin]"
+                          name="country_of_origin" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PackFlag]"
+                          dataType="wstr"
+                          length="1"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PackFlag]"
+                          name="PackFlag" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PackHeight]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PackHeight]"
+                          name="PackHeight" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PackWeight]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PackWeight]"
+                          name="PackWeight" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PackWidth]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PackWidth]"
+                          name="PackWidth" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PackDepth]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PackDepth]"
+                          name="PackDepth" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PackagingType]"
+                          dataType="wstr"
+                          length="1"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PackagingType]"
+                          name="PackagingType" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PickPackMethod]"
+                          dataType="wstr"
+                          length="1"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PickPackMethod]"
+                          name="PickPackMethod" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[BookHeight]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[BookHeight]"
+                          name="BookHeight" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[BookWeight]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[BookWeight]"
+                          name="BookWeight" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[BookWidth]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[BookWidth]"
+                          name="BookWidth" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[BookDepth]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[BookDepth]"
+                          name="BookDepth" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[LayersPerPallet]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[LayersPerPallet]"
+                          name="LayersPerPallet" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[MaxBooksPallet]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[MaxBooksPallet]"
+                          name="MaxBooksPallet" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[by_payload_filler]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4000"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[by_payload_filler]"
+                          name="by_payload_filler" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[resultant_payload]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[resultant_payload]"
+                          name="resultant_payload" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Transform Title Data\Transform titles\titles_transform_errors"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="titles_transform_errors"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[transform].[titles_transform_errors]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Connections[OleDbConnection]"
+                      connectionManagerID="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[ISBN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="ISBN"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[ISBN]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[ISBN]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[Created On]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Created On"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Created On]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Created On]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[Plant]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Plant"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Plant]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Plant]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[Storage Location]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Storage Location"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Storage Location]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Storage Location]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[Supply Edition]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Supply Edition"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Supply Edition]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Supply Edition]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[Answer Code Text]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Answer Code Text"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Answer Code Text]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Answer Code Text]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[Original Pub Date of Product]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Original Pub Date of Product"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Original Pub Date of Product]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Original Pub Date of Product]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[Finance publisher description]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Finance publisher description"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Finance publisher description]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Finance publisher description]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[Finance imprint description]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Finance imprint description"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Finance imprint description]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Finance imprint description]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[Export Pub Date of Product]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Export Pub Date of Product"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Export Pub Date of Product]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Export Pub Date of Product]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[Binding]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Binding"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Binding]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Binding]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[Binding Description]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Binding Description"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Binding Description]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Binding Description]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[ISBN_SuppEd]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="101"
+                          cachedName="ISBN_SuppEd"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[ISBN_SuppEd]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[ISBN_SuppEd]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[by_payload_filler]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="4000"
+                          cachedName="by_payload_filler"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[by_payload_filler]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[by_payload_filler]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[answer_code]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="answer_code"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[answer_code]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[answer_code]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[title_long_desc]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="title_long_desc"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[title_long_desc]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[title_long_desc]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[commodity_code]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="commodity_code"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[commodity_code]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[commodity_code]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[commodity_code2]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="commodity_code2"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[commodity_code2]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[commodity_code2]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[se_publication_date]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="se_publication_date"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[se_publication_date]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[se_publication_date]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[se_publication_price]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="se_publication_price"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[se_publication_price]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[se_publication_price]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[author]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="author"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[author]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[author]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[finance_publisher]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="finance_publisher"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[finance_publisher]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[finance_publisher]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[finance_imprint]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="finance_imprint"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[finance_imprint]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[finance_imprint]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[country_of_origin]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="country_of_origin"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[country_of_origin]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[country_of_origin]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[resultant_payload]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="8000"
+                          cachedName="resultant_payload"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[resultant_payload]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[resultant_payload]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[ErrorCode]"
+                          cachedDataType="i4"
+                          cachedName="ErrorCode"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[ErrorCode]"
+                          lineageId="Package\Transform Title Data\Transform titles\transformed_data.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[ErrorColumn]"
+                          cachedDataType="i4"
+                          cachedName="ErrorColumn"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[ErrorColumn]"
+                          lineageId="Package\Transform Title Data\Transform titles\transformed_data.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[run_id]"
+                          cachedDataType="i4"
+                          cachedName="run_id"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[run_id]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[run_id]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[record_number]"
+                          cachedDataType="i8"
+                          cachedName="record_number"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[record_number]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[record_number]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[PackFlag]"
+                          cachedDataType="wstr"
+                          cachedLength="1"
+                          cachedName="PackFlag"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackFlag]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackFlag]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[PackHeight]"
+                          cachedDataType="i4"
+                          cachedName="PackHeight"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackHeight]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackHeight]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[PackWeight]"
+                          cachedDataType="i4"
+                          cachedName="PackWeight"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackWeight]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackWeight]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[PackWidth]"
+                          cachedDataType="i4"
+                          cachedName="PackWidth"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackWidth]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackWidth]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[PackDepth]"
+                          cachedDataType="i4"
+                          cachedName="PackDepth"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackDepth]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackDepth]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[PackagingType]"
+                          cachedDataType="wstr"
+                          cachedLength="1"
+                          cachedName="PackagingType"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackagingType]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackagingType]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[PickPackMethod]"
+                          cachedDataType="wstr"
+                          cachedLength="1"
+                          cachedName="PickPackMethod"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PickPackMethod]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PickPackMethod]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[BookHeight]"
+                          cachedDataType="i4"
+                          cachedName="BookHeight"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[BookHeight]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[BookHeight]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[BookWeight]"
+                          cachedDataType="i4"
+                          cachedName="BookWeight"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[BookWeight]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[BookWeight]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[BookWidth]"
+                          cachedDataType="i4"
+                          cachedName="BookWidth"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[BookWidth]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[BookWidth]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[BookDepth]"
+                          cachedDataType="i4"
+                          cachedName="BookDepth"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[BookDepth]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[BookDepth]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[LayersPerPallet]"
+                          cachedDataType="i4"
+                          cachedName="LayersPerPallet"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[LayersPerPallet]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[LayersPerPallet]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[MaxBooksPallet]"
+                          cachedDataType="i4"
+                          cachedName="MaxBooksPallet"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[MaxBooksPallet]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[MaxBooksPallet]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[ISBN]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="ISBN" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Created On]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Created On" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Plant]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Plant" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Storage Location]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Storage Location" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Supply Edition]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Supply Edition" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Answer Code Text]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Answer Code Text" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Original Pub Date of Product]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Original Pub Date of Product" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Finance publisher description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Finance publisher description" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Finance imprint description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Finance imprint description" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Export Pub Date of Product]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Export Pub Date of Product" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Binding]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Binding" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Binding Description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Binding Description" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[ISBN_SuppEd]"
+                          codePage="1252"
+                          dataType="str"
+                          length="101"
+                          name="ISBN_SuppEd" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[by_payload_filler]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4000"
+                          name="by_payload_filler" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[answer_code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="answer_code" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[title_long_desc]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="title_long_desc" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[commodity_code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="commodity_code" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[commodity_code2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="commodity_code2" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[se_publication_date]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="se_publication_date" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[se_publication_price]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="se_publication_price" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[author]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="author" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[finance_publisher]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="finance_publisher" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[finance_imprint]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="finance_imprint" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[country_of_origin]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="country_of_origin" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[resultant_payload]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          name="resultant_payload" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[ErrorCode]"
+                          dataType="i4"
+                          name="ErrorCode" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[ErrorColumn]"
+                          dataType="i4"
+                          name="ErrorColumn" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[run_id]"
+                          dataType="i4"
+                          name="run_id" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[record_number]"
+                          dataType="i8"
+                          name="record_number" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackFlag]"
+                          dataType="wstr"
+                          length="1"
+                          name="PackFlag" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackHeight]"
+                          dataType="i4"
+                          name="PackHeight" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackWeight]"
+                          dataType="i4"
+                          name="PackWeight" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackWidth]"
+                          dataType="i4"
+                          name="PackWidth" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackDepth]"
+                          dataType="i4"
+                          name="PackDepth" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackagingType]"
+                          dataType="wstr"
+                          length="1"
+                          name="PackagingType" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PickPackMethod]"
+                          dataType="wstr"
+                          length="1"
+                          name="PickPackMethod" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[BookHeight]"
+                          dataType="i4"
+                          name="BookHeight" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[BookWeight]"
+                          dataType="i4"
+                          name="BookWeight" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[BookWidth]"
+                          dataType="i4"
+                          name="BookWidth" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[BookDepth]"
+                          dataType="i4"
+                          name="BookDepth" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[LayersPerPallet]"
+                          dataType="i4"
+                          name="LayersPerPallet" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[MaxBooksPallet]"
+                          dataType="i4"
+                          name="MaxBooksPallet" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\titles_transform_errors.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\titles_transform_errors.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Transform Title Data\Transform titles\transformed_data"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="transformed_data"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[final].[titles]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Transform Title Data\Transform titles\transformed_data.Connections[OleDbConnection]"
+                      connectionManagerID="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="RedirectRow"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[ISBN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="ISBN"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[ISBN]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[ISBN]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[Created On]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Created On"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Created On]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Created On]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[Plant]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Plant"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Plant]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Plant]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[Storage Location]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Storage Location"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Storage Location]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Storage Location]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[Supply Edition]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Supply Edition"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Supply Edition]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Supply Edition]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[Answer Code Text]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Answer Code Text"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Answer Code Text]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Answer Code Text]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[Original Pub Date of Product]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Original Pub Date of Product"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Original Pub Date of Product]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Original Pub Date of Product]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[Finance publisher description]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Finance publisher description"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Finance publisher description]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Finance publisher description]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[Finance imprint description]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Finance imprint description"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Finance imprint description]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Finance imprint description]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[Export Pub Date of Product]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Export Pub Date of Product"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Export Pub Date of Product]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Export Pub Date of Product]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[Binding]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Binding"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Binding]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Binding]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[Binding Description]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Binding Description"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Binding Description]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[Binding Description]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[ISBN_SuppEd]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="101"
+                          cachedName="ISBN_SuppEd"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[ISBN_SuppEd]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[ISBN_SuppEd]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[answer_code]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="answer_code"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[answer_code]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[answer_code]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[title_long_desc]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="title_long_desc"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[title_long_desc]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[title_long_desc]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[commodity_code]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="commodity_code"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[commodity_code]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[commodity_code]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[commodity_code2]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="commodity_code2"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[commodity_code2]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[commodity_code2]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[se_publication_date]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="se_publication_date"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[se_publication_date]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[se_publication_date]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[se_publication_price]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="se_publication_price"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[se_publication_price]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[se_publication_price]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[author]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="author"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[author]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[author]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[finance_publisher]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="finance_publisher"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[finance_publisher]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[finance_publisher]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[finance_imprint]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="finance_imprint"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[finance_imprint]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[finance_imprint]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[country_of_origin]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="country_of_origin"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[country_of_origin]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[country_of_origin]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[resultant_payload]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="8000"
+                          cachedName="resultant_payload"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[resultant_payload]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[resultant_payload]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[run_id]"
+                          cachedDataType="i4"
+                          cachedName="run_id"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[run_id]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[run_id]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[record_number]"
+                          cachedDataType="i8"
+                          cachedName="record_number"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[record_number]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[record_number]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[PackFlag]"
+                          cachedDataType="wstr"
+                          cachedLength="1"
+                          cachedName="PackFlag"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PackFlag]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackFlag]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[PackHeight]"
+                          cachedDataType="i4"
+                          cachedName="PackHeight"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PackHeight]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackHeight]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[PackWeight]"
+                          cachedDataType="i4"
+                          cachedName="PackWeight"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PackWeight]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackWeight]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[PackWidth]"
+                          cachedDataType="i4"
+                          cachedName="PackWidth"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PackWidth]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackWidth]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[PackDepth]"
+                          cachedDataType="i4"
+                          cachedName="PackDepth"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PackDepth]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackDepth]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[PackagingType]"
+                          cachedDataType="wstr"
+                          cachedLength="1"
+                          cachedName="PackagingType"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PackagingType]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackagingType]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[PickPackMethod]"
+                          cachedDataType="wstr"
+                          cachedLength="1"
+                          cachedName="PickPackMethod"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PickPackMethod]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PickPackMethod]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[BookHeight]"
+                          cachedDataType="i4"
+                          cachedName="BookHeight"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[BookHeight]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[BookHeight]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[BookWeight]"
+                          cachedDataType="i4"
+                          cachedName="BookWeight"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[BookWeight]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[BookWeight]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[BookWidth]"
+                          cachedDataType="i4"
+                          cachedName="BookWidth"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[BookWidth]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[BookWidth]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[BookDepth]"
+                          cachedDataType="i4"
+                          cachedName="BookDepth"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[BookDepth]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[BookDepth]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[LayersPerPallet]"
+                          cachedDataType="i4"
+                          cachedName="LayersPerPallet"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[LayersPerPallet]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[LayersPerPallet]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[MaxBooksPallet]"
+                          cachedDataType="i4"
+                          cachedName="MaxBooksPallet"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[MaxBooksPallet]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[MaxBooksPallet]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[ISBN]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="ISBN" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Created On]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Created On" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Plant]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Plant" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Storage Location]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Storage Location" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Supply Edition]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Supply Edition" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Answer Code Text]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Answer Code Text" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Original Pub Date of Product]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Original Pub Date of Product" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Finance publisher description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Finance publisher description" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Finance imprint description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Finance imprint description" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Export Pub Date of Product]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Export Pub Date of Product" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Binding]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Binding" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[Binding Description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Binding Description" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[ISBN_SuppEd]"
+                          codePage="1252"
+                          dataType="str"
+                          length="101"
+                          name="ISBN_SuppEd" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[answer_code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="answer_code" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[title_long_desc]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="title_long_desc" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[commodity_code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="commodity_code" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[commodity_code2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="commodity_code2" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[se_publication_date]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="se_publication_date" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[se_publication_price]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="se_publication_price" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[author]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="author" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[finance_publisher]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="finance_publisher" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[finance_imprint]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="finance_imprint" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[country_of_origin]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="country_of_origin" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[resultant_payload]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          name="resultant_payload" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[run_id]"
+                          dataType="i4"
+                          name="run_id" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[by_payload_filler]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4000"
+                          name="by_payload_filler" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[record_number]"
+                          dataType="i8"
+                          name="record_number" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PackFlag]"
+                          dataType="wstr"
+                          length="1"
+                          name="PackFlag" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PackHeight]"
+                          dataType="i4"
+                          name="PackHeight" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PackWeight]"
+                          dataType="i4"
+                          name="PackWeight" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PackWidth]"
+                          dataType="i4"
+                          name="PackWidth" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PackDepth]"
+                          dataType="i4"
+                          name="PackDepth" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PackagingType]"
+                          dataType="wstr"
+                          length="1"
+                          name="PackagingType" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PickPackMethod]"
+                          dataType="wstr"
+                          length="1"
+                          name="PickPackMethod" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[BookHeight]"
+                          dataType="i4"
+                          name="BookHeight" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[BookWeight]"
+                          dataType="i4"
+                          name="BookWeight" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[BookWidth]"
+                          dataType="i4"
+                          name="BookWidth" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[BookDepth]"
+                          dataType="i4"
+                          name="BookDepth" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[LayersPerPallet]"
+                          dataType="i4"
+                          name="LayersPerPallet" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[MaxBooksPallet]"
+                          dataType="i4"
+                          name="MaxBooksPallet" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Transform Title Data\Transform titles\transformed_data.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\transformed_data.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\transformed_data.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Transform Title Data\Transform titles.Paths[OLE DB Destination Error Output]"
+                  endId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Destination Error Output"
+                  startId="Package\Transform Title Data\Transform titles\transformed_data.Outputs[OLE DB Destination Error Output]" />
+                <path
+                  refId="Package\Transform Title Data\Transform titles.Paths[OLE DB Source Output]"
+                  endId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Transform Title Data\Truncate"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{1D163089-602A-498E-9799-4165DC3A1B7D}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE final.titles;&#xA;GO&#xA; SELECT ?=run_id FROM [config].[wms_dm_run_ctl] WHERE package_name = 'titles' AND run_status = 'Staged';&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::varRunID"
+                SQLTask:ParameterDirection="Output"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Transform Title Data.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{33E7AB3C-FB45-4846-A0D1-EABF6E164113}"
+          DTS:From="Package\Transform Title Data\Truncate"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Transform Title Data\run_status to InProgress" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Transform Title Data.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{5ED1BD86-3AB7-4DED-9EBB-5A35C787B197}"
+          DTS:From="Package\Transform Title Data\Transform titles"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Transform Title Data\run_status to Transformed" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Transform Title Data.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{850AAD21-1F54-4561-86E5-02F885B41666}"
+          DTS:From="Package\Transform Title Data\run_status to InProgress"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Transform Title Data\Transform titles" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="196,42.6666666666667"
+          Id="Package\Transform Title Data\run_status to InProgress"
+          TopLeft="16.8333306883773,85.2280735238658" />
+        <NodeLayout
+          Size="204,42.6666666666667"
+          Id="Package\Transform Title Data\run_status to Transformed"
+          TopLeft="8.70833080944908,226.175444597903" />
+        <NodeLayout
+          Size="153.333333333334,42.6666666666667"
+          Id="Package\Transform Title Data\Transform titles"
+          TopLeft="33.0833304462334,154.333337982496" />
+        <NodeLayout
+          Size="121.333333333334,42.6666666666667"
+          Id="Package\Transform Title Data\Truncate"
+          TopLeft="49.3333302040895,11.3333352908754" />
+        <EdgeLayout
+          Id="Package\Transform Title Data.PrecedenceConstraints[Constraint]"
+          TopLeft="112.416663779567,54.0000019575421">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31.2280715663237"
+              Start="0,0"
+              End="0,23.7280715663237">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.7280715663237" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transform Title Data.PrecedenceConstraints[Constraint 1]"
+          TopLeft="110.229163961175,197.000004649163">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.1754399487403"
+              Start="0,0"
+              End="0,21.6754399487403">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.6754399487403" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transform Title Data.PrecedenceConstraints[Constraint 2]"
+          TopLeft="112.291663900639,127.894740190532">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26.4385977919635"
+              Start="0,0"
+              End="0,18.9385977919635">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.9385977919635" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="228.666666666667,324"
+          Size="228.666666666667,366.666666666667"
+          Id="Package\Transform Title Data"
+          TopLeft="160.624997606501,49.947369361188" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Transform Title Data\Transform titles">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="186.666666666667,42.6666666666667"
+          Id="Package\Transform Title Data\Transform titles\titles_transform_errors"
+          TopLeft="483.124992800876,296.263163471156" />
+        <NodeLayout
+          Size="162.666666666667,42.6666666666667"
+          Id="Package\Transform Title Data\Transform titles\Read title records"
+          TopLeft="116.874998258427,117.684212741429" />
+        <NodeLayout
+          Size="162.666666666667,42.6666666666667"
+          Id="Package\Transform Title Data\Transform titles\transformed_data"
+          TopLeft="496.249992605299,121.105265437401" />
+        <EdgeLayout
+          Id="Package\Transform Title Data\Transform titles.Paths[OLE DB Source Output]"
+          TopLeft="279.541664925093,140.728072422748">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="216.708327680205,0"
+              Start="0,0"
+              End="209.208327680205,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="209.208327680205,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transform Title Data\Transform titles.Paths[OLE DB Destination Error Output]"
+          TopLeft="577.020826036421,163.771932104068">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,132.491231367088"
+              Start="0,0"
+              End="0,124.991231367088">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,124.991231367088" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-73.20890625,56.7788188085442,146.4178125,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transform Title Data\Transform titles\titles_transform_errors">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transform Title Data\Transform titles\Read title records">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transform Title Data\Transform titles\transformed_data">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

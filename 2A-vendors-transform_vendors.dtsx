@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="67"
-  DTS:VersionGUID="{80840DDB-E1E1-4CE2-8CB6-AA433B3ACF56}">
+  DTS:VersionBuild="68"
+  DTS:VersionGUID="{788A044B-F7A4-47F7-BD6A-D005B8E94A41}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -163,7 +163,7 @@
                                 ,'&lt;filler_hostextid&gt;', vend.[Binder Code])--* 
                                 ,'&lt;filler_adrnam&gt;', vend.name1) 
                                 ,'&lt;filler_adrtyp&gt;', '')--* 
-                                ,'&lt;filler_adrln1&gt;', vend.name2) 
+                                ,'&lt;filler_adrln1&gt;', LTRIM(RTRIM(vend.name2)) + ',' + LTRIM(RTRIM(vend.[Street and House No ]))) --REVISIT IF REQUIRED after speaking with Dan Tovey
                                 ,'&lt;filler_adrln2&gt;', vend.name3) 
                                 ,'&lt;filler_adrln3&gt;', vend.name4) 
                                 ,'&lt;filler_adrcty&gt;', vend.City) 

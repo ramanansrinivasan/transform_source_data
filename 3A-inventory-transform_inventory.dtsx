@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="3A-inventory-transform_inventory_NEW"
   DTS:PackageType="5"
-  DTS:VersionBuild="72"
-  DTS:VersionGUID="{25488C96-C312-44F6-89D9-A338282E9D28}">
+  DTS:VersionBuild="73"
+  DTS:VersionGUID="{9C9EA09F-FAF4-4683-8527-0F5C5C8621E8}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -1266,7 +1266,7 @@
       REPLACE(REPLACE(REPLACE(REPLACE(--REPLACE(REPLACE(REPLACE( 
       REPLACE(by_payload_filler, '&lt;filler_prtnum&gt;', tt.[ISBN_SuppEd]) 
                                 --,'&lt;filler_untcas&gt;', 0) --clarify whether mandatory, if mandatory, find mapping from Dan.
-                                ,'&lt;filler_invsts&gt;', CASE WHEN tt.[Frozen-Code-2] = '' THEN '' ELSE tt.[Frozen-Code-2] END)--tt.[FrozenCode]) -- remove hardcoding once we have new datacut.
+                                ,'&lt;filler_invsts&gt;', CASE WHEN tt.[Frozen-Code-2] = '' THEN 'A' ELSE tt.[Frozen-Code-2] END)--tt.[FrozenCode]) -- remove hardcoding once we have new datacut.
                                 ,'&lt;filler_untqty&gt;', tt.[No-of-Units-1] + tt.[No-of-Units-2]) --clarify with Dan if it has been converted to eaches.
                                 ,'&lt;filler_orgcod&gt;', '') --clarify whether mandatory, if mandatory, find mapping from Dan.
                                 ,'&lt;filler_dstloc&gt;', tt.[Location]) 

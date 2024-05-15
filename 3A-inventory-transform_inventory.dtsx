@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="3A-inventory-transform_inventory_NEW"
   DTS:PackageType="5"
-  DTS:VersionBuild="73"
-  DTS:VersionGUID="{9C9EA09F-FAF4-4683-8527-0F5C5C8621E8}">
+  DTS:VersionBuild="78"
+  DTS:VersionGUID="{E574BAA6-120C-405C-8D36-AF30B15D0B61}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -723,6 +723,12 @@
                           cachedName="ErrorColumn"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_new_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[ErrorColumn]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\transformed_data.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]" />
+                        <inputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\inventories_new_transform_errors.Inputs[OLE DB Destination Input].Columns[PackSize]"
+                          cachedDataType="i4"
+                          cachedName="PackSize"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_new_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackSize]"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[PackSize]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -1140,6 +1146,10 @@
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_new_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[ErrorColumn]"
                           dataType="i4"
                           name="ErrorColumn" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\inventories_new_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackSize]"
+                          dataType="i4"
+                          name="PackSize" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -1261,11 +1271,12 @@
       ,tt.[Pick-Access-Sta]
       ,tt.[Repl-Access-Sta]
       ,tt.[Release-When-Empty]
+	  ,tt.[PackSize]
       ,CAST([by_payload_filler] AS VARCHAR(8000)) AS [by_payload_filler]
      ,CAST(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
-      REPLACE(REPLACE(REPLACE(REPLACE(--REPLACE(REPLACE(REPLACE( 
+      REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(--REPLACE(REPLACE( 
       REPLACE(by_payload_filler, '&lt;filler_prtnum&gt;', tt.[ISBN_SuppEd]) 
-                                --,'&lt;filler_untcas&gt;', 0) --clarify whether mandatory, if mandatory, find mapping from Dan.
+                                ,'&lt;filler_untcas&gt;', CASE WHEN tt.[PackSize] = 0 THEN 1 ELSE tt.[PackSize] END) --clarify whether mandatory, if mandatory, find mapping from Dan.
                                 ,'&lt;filler_invsts&gt;', CASE WHEN tt.[Frozen-Code-2] = '' THEN 'A' ELSE tt.[Frozen-Code-2] END)--tt.[FrozenCode]) -- remove hardcoding once we have new datacut.
                                 ,'&lt;filler_untqty&gt;', tt.[No-of-Units-1] + tt.[No-of-Units-2]) --clarify with Dan if it has been converted to eaches.
                                 ,'&lt;filler_orgcod&gt;', '') --clarify whether mandatory, if mandatory, find mapping from Dan.
@@ -1273,7 +1284,7 @@
                                 ,'&lt;filler_lodnum&gt;', tt.[LPN]) --clarify whether mandatory, if mandatory, find mapping from Dan.
                                 ,'&lt;filler_ftpcod&gt;', tt.[ISBN]) 
                                --,'&lt;filler_untpak&gt;', 0) --clarify whether mandatory, if mandatory, find mapping from Dan.
-                                ,'&lt;filler_fifdte&gt;', '') -- as per mapping
+                                ,'&lt;filler_fifdte&gt;', CASE WHEN REPLACE(CONVERT(VARCHAR,CONVERT(DATE,tt.[Received-date], 103),112) ,'19000101','') &lt;&gt; '' THEN REPLACE(CONVERT(VARCHAR,CONVERT(DATE,tt.[Received-date], 103),112) ,'19000101','') + '000000' ELSE '' END) -- as per mapping
                                 ,'&lt;filler_suppnum&gt;', '') --clarify whether mandatory, if mandatory, find mapping from Dan.
                                 ,'&lt;filler_assettyp&gt;', '')--clarify whether mandatory, if mandatory, find mapping from Dan.
 								AS VARCHAR(8000))
@@ -1345,6 +1356,7 @@ SELECT stg.[run_id]
       ,stg.[Pick-Access-Sta]
       ,stg.[Repl-Access-Sta]
       ,stg.[Release-When-Empty]
+	  ,stg.[PackSize]
       ,CAST([by_payload_filler] AS VARCHAR(8000)) AS [by_payload_filler]
       ,LEFT(stg.[ISBN_SuppEd],CHARINDEX('-',stg.[ISBN_SuppEd])-1) as ISBN
       ,LTRIM(RIGHT(stg.[ISBN_SuppEd],LEN(stg.[ISBN_SuppEd]) - CHARINDEX('-',stg.[ISBN_SuppEd]) )) AS SupplyEd
@@ -2131,6 +2143,15 @@ SELECT stg.[run_id]
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[resultant_payload]"
                           name="resultant_payload"
                           truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[PackSize]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[PackSize]"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[PackSize]"
+                          name="PackSize"
+                          truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -2540,6 +2561,10 @@ SELECT stg.[run_id]
                           dataType="str"
                           length="8000"
                           name="resultant_payload" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[PackSize]"
+                          dataType="i4"
+                          name="PackSize" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -3007,6 +3032,11 @@ SELECT stg.[run_id]
                           length="50"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[Release-When-Empty]"
                           name="Release-When-Empty" />
+                        <outputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[PackSize]"
+                          dataType="i4"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[PackSize]"
+                          name="PackSize" />
                         <outputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[by_payload_filler]"
                           codePage="1252"
@@ -3644,6 +3674,12 @@ SELECT stg.[run_id]
                           cachedName="resultant_payload"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[resultant_payload]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[resultant_payload]" />
+                        <inputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\transformed_data.Inputs[OLE DB Destination Input].Columns[PackSize]"
+                          cachedDataType="i4"
+                          cachedName="PackSize"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PackSize]"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[PackSize]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -4053,6 +4089,10 @@ SELECT stg.[run_id]
                           dataType="str"
                           length="8000"
                           name="resultant_payload" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PackSize]"
+                          dataType="i4"
+                          name="PackSize" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -4259,17 +4299,17 @@ SELECT stg.[run_id]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="158.666666666667,42.6666666666667"
-          Id="Package\Transform Inventory Data\Transform inventories\Read Inventory Records"
-          TopLeft="74.5333333333333,88.1333333333333" />
+          Size="137.333333333334,42.6666666666667"
+          Id="Package\Transform Inventory Data\Transform inventories\transformed_data"
+          TopLeft="446.933333333333,86.9333333333333" />
         <NodeLayout
           Size="190.666666666667,42.6666666666667"
           Id="Package\Transform Inventory Data\Transform inventories\inventories_new_transform_errors"
           TopLeft="424.8,229.2" />
         <NodeLayout
-          Size="137.333333333334,42.6666666666667"
-          Id="Package\Transform Inventory Data\Transform inventories\transformed_data"
-          TopLeft="446.933333333333,86.9333333333333" />
+          Size="158.666666666667,42.6666666666667"
+          Id="Package\Transform Inventory Data\Transform inventories\Read Inventory Records"
+          TopLeft="74.5333333333333,88.1333333333333" />
         <EdgeLayout
           Id="Package\Transform Inventory Data\Transform inventories.Paths[OLE DB Source Output]"
           TopLeft="233.2,108.866666666667">
@@ -4298,14 +4338,14 @@ SELECT stg.[run_id]
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,99.6000000000001"
+              EndConnector="0,99.6"
               Start="0,0"
-              End="0,92.1000000000001">
+              End="0,92.1">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,92.1000000000001" />
+                    End="0,92.1" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4320,10 +4360,15 @@ SELECT stg.[run_id]
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Transform Inventory Data\Transform inventories\Read Inventory Records">
+    design-time-name="Package\Transform Inventory Data\Transform inventories\transformed_data">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -4341,15 +4386,10 @@ SELECT stg.[run_id]
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Transform Inventory Data\Transform inventories\transformed_data">
+    design-time-name="Package\Transform Inventory Data\Transform inventories\Read Inventory Records">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

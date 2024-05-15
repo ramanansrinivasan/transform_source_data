@@ -5,21 +5,21 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="UKWWHDSQLWI099"
   DTS:CreatorName="UK\PAM-WMS-Migration"
-  DTS:DTSID="{A79C1B77-1866-4EC0-BA33-FA0FED8D2B6B}"
+  DTS:DTSID="{A2388E03-D6A8-4978-A9D1-1B53ED080D5D}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="16.0.5270.0"
   DTS:LocaleID="2057"
   DTS:ObjectName="3B-inventory-create_output_xml_NEW"
   DTS:PackageType="5"
-  DTS:VersionBuild="51"
-  DTS:VersionGUID="{92BF63F5-4BB1-4A97-BC95-DABAFD8E78E8}">
+  DTS:VersionBuild="52"
+  DTS:VersionGUID="{0718A6E4-4943-4F00-B6FD-7B941769B43C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[title_output_files]"
       DTS:CreationName="FLATFILE"
-      DTS:DTSID="{55757001-83A4-4D98-8DC3-28FCA511913C}"
+      DTS:DTSID="{4220104A-9A37-4ACD-B73A-26298B5B00BC}"
       DTS:ObjectName="title_output_files">
       <DTS:PropertyExpression
         DTS:Name="ConnectionString">@[$Package::pOutputFileName]  + (DT_WSTR,4)DATEPART("yyyy",GetDate()) +
@@ -36,7 +36,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="V:\\inventories\\inventory_data_payloads_20240508_1548.xml">
+          DTS:ConnectionString="V:\\inventories\\inventory_data_payloads_20240509_1140.xml">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -45,7 +45,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="resultant_payload"
-              DTS:DTSID="{1F65E066-92D5-4F81-96ED-45A5C9FFA557}"
+              DTS:DTSID="{B35FE98F-B081-494A-BB22-01D268899084}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -54,13 +54,13 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{3E0FD922-6C9A-44B5-8169-1940842E04B9}"
+      DTS:DTSID="{799F1BAD-9751-45B7-8F40-552F170A383F}"
       DTS:ObjectName="UKWWHDSQLWI099.DM_Dev_NP3">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=UKWWHDSQLWI099;Initial Catalog=DM_Dev_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{3E0FD922-6C9A-44B5-8169-1940842E04B9}UKWWHDSQLWI099.DM_Dev_NP3;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=UKWWHDSQLWI099;Initial Catalog=DM_Dev_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{799F1BAD-9751-45B7-8F40-552F170A383F}UKWWHDSQLWI099.DM_Dev_NP3;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -68,7 +68,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
     <DTS:PackageParameter
       DTS:CreationName=""
       DTS:DataType="8"
-      DTS:DTSID="{F65BD2EC-C06C-4493-9571-A62A8ADEBBE8}"
+      DTS:DTSID="{7EE7655C-BA59-4857-8C59-EF35AF715BCD}"
       DTS:ObjectName="pFileExtension">
       <DTS:Property
         DTS:DataType="8"
@@ -77,7 +77,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
     <DTS:PackageParameter
       DTS:CreationName=""
       DTS:DataType="8"
-      DTS:DTSID="{AAB3CD1D-154A-42E7-9288-8FEAACBE1CE5}"
+      DTS:DTSID="{F07FA6D5-3ECD-42AA-B248-8FF118596FED}"
       DTS:ObjectName="pOutputFileName">
       <DTS:Property
         DTS:DataType="8"
@@ -86,7 +86,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
     <DTS:PackageParameter
       DTS:CreationName=""
       DTS:DataType="3"
-      DTS:DTSID="{D3638640-1A30-4D0B-890B-CAE906A258A1}"
+      DTS:DTSID="{FACAC379-8E9D-40B2-9298-B1DE70E07EF0}"
       DTS:ObjectName="pRunID">
       <DTS:Property
         DTS:DataType="3"
@@ -95,11 +95,11 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
     <DTS:PackageParameter
       DTS:CreationName=""
       DTS:DataType="8"
-      DTS:DTSID="{6932987C-56C6-41BB-9D4A-F766A9448312}"
+      DTS:DTSID="{A8F2B1FF-794D-427A-A2F0-E2B1371990E0}"
       DTS:ObjectName="pSQLQuery">
       <DTS:Property
         DTS:DataType="8"
-        DTS:Name="ParameterValue">SELECT '&lt;CREATE_INVENTORY_IN_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), inv.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/CREATE_INVENTORY_IN_IFD&gt;' AS resultant_payload   FROM final.inventories_new inv    LEFT JOIN config.wms_dm_run_ctl ctl ON inv.run_id = ctl.run_id   CROSS JOIN config.data_element_payload_fillers de    WHERE ctl.package_name = 'inventory'     AND ctl.run_status = 'Transformed'     AND de.data_element_name = 'inventory' --AND  inv.record_number &gt;=1 AND inv.record_number &lt;= 5000;</DTS:Property>
+        DTS:Name="ParameterValue">SELECT '&lt;CREATE_INVENTORY_IN_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), inv.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/CREATE_INVENTORY_IN_IFD&gt;' AS resultant_payload    FROM final.inventories_new inv    LEFT JOIN config.wms_dm_run_ctl ctl ON inv.run_id = ctl.run_id   CROSS JOIN config.data_element_payload_fillers de     WHERE ctl.package_name = 'inventory'      AND de.data_element_name = 'inventory' AND inv.lpn &lt;&gt; '' AND inv.ISBN_SuppEd IN ( SELECT TOP 20 ILV.ISBN_SuppEd  FROM ( SELECT distinct t.ISBN_SuppEd, CAST(inv.[No-of-Units-1] + inv.[No-of-Units-2] AS INTEGER) as no_of_units   FROM final.titles t   JOIN final.inventories_new inv ON t.ISBN_SuppEd = inv.ISBN_SuppEd  WHERE t.PackSize &gt; 0 AND CAST(inv.[No-of-Units-1] + inv.[No-of-Units-2] AS INTEGER) &gt; 0    AND LPN &lt;&gt; '') ilv);</DTS:Property>
     </DTS:PackageParameter>
   </DTS:PackageParameters>
   <DTS:Variables />
@@ -108,7 +108,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
       DTS:refId="Package\Create Output File"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:DTSID="{3B72B997-8C63-47A0-A671-FFD04F5E6535}"
+      DTS:DTSID="{68CA8C5B-EF31-4676-A9F0-EDAF8B3C2070}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
       DTS:ObjectName="Create Output File">
@@ -118,7 +118,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
           DTS:refId="Package\Create Output File\Create Output File"
           DTS:CreationName="Microsoft.Pipeline"
           DTS:Description="Data Flow Task"
-          DTS:DTSID="{24876061-85DC-4599-A386-3A245DE2DAD6}"
+          DTS:DTSID="{1EE876F7-00E8-471A-B382-87AB7CB52C85}"
           DTS:ExecutableType="Microsoft.Pipeline"
           DTS:LocaleID="-1"
           DTS:ObjectName="Create Output File"
@@ -310,7 +310,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
           DTS:refId="Package\Create Output File\run_status to SentToFile"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{52CB697A-8AB4-4563-8263-692F8F0D310E}"
+          DTS:DTSID="{0E5CE90E-ACBF-4C65-9C77-00A35FECE8D1}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="run_status to SentToFile"
@@ -318,7 +318,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{3E0FD922-6C9A-44B5-8169-1940842E04B9}"
+              SQLTask:Connection="{799F1BAD-9751-45B7-8F40-552F170A383F}"
               SQLTask:SqlStatementSource="UPDATE [config].[wms_dm_run_ctl] &#xA;SET run_status = 'SentToFile' &#xA;       ,run_finish_time = GetDate()&#xA;WHERE run_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
@@ -334,7 +334,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Create Output File.PrecedenceConstraints[Constraint]"
           DTS:CreationName=""
-          DTS:DTSID="{5695BD04-7802-4EDA-A124-965A874671CE}"
+          DTS:DTSID="{7ED86055-3FE0-4999-95F1-1B383B3B2E9C}"
           DTS:From="Package\Create Output File\Create Output File"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
@@ -355,11 +355,11 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="167,43"
+          Size="166.666666666667,42.6666666666667"
           Id="Package\Create Output File\Create Output File"
           TopLeft="45.8333289747438,63.1578985231405" />
         <NodeLayout
-          Size="196,43"
+          Size="196,42.6666666666667"
           Id="Package\Create Output File\run_status to SentToFile"
           TopLeft="25.2083292820801,152.105268618407" />
         <EdgeLayout
@@ -387,8 +387,8 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="236,251"
-          Size="236,293"
+          PanelSize="236,250.666666666667"
+          Size="236,293.333333333334"
           Id="Package\Create Output File"
           TopLeft="246.874996321276,95.1052649480154" />
       </GraphLayout>

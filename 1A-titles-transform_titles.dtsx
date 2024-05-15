@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="59"
-  DTS:VersionGUID="{4EDD8DE5-27A2-4FA2-9BB1-61397F7728D6}">
+  DTS:VersionBuild="63"
+  DTS:VersionGUID="{6EAF58A5-7D4F-4F4E-BD9F-C36474AC585C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -152,6 +152,7 @@
 	  ,tt.PackWeight
 	  ,tt.PackWidth
 	  ,tt.PackDepth
+	  ,tt.PackSize
 	  ,tt.PackagingType
 	  ,tt.PickPackMethod
 	  ,tt.BookHeight
@@ -162,7 +163,7 @@
 	  ,tt.MaxBooksPallet
 	  ,tt.[by_payload_filler]
 ,REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
-      REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE( 
+ REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE( 
       REPLACE(by_payload_filler, '&lt;filler_hrcylevel1&gt;', tt.ISBN_SuppEd)
                                 ,'&lt;filler_hrcylevel2&gt;', tt.[ISBN]) 
                                 ,'&lt;filler_hrcylevel3&gt;', tt.author) 
@@ -189,6 +190,7 @@
 								,'&lt;filler_cs_wid&gt;', tt.PackWidth) 
 								,'&lt;filler_cs_hgt&gt;', tt.PackHeight) 
 								,'&lt;filler_cs_wgt&gt;', tt.PackWeight)
+								,'&lt;filler_cs_untqty&gt;', tt.PackSize)
 								,'&lt;filler_pa_len&gt;', 0) 
 								,'&lt;filler_pa_wid&gt;', 0) 
 								,'&lt;filler_pa_hgt&gt;', 0) 
@@ -234,6 +236,7 @@ SELECT [record_number]
 	  ,PackWeight
 	  ,PackWidth
 	  ,PackDepth
+	  ,PackSize
 	  ,PackagingType
 	  ,PickPackMethod
 	  ,BookHeight
@@ -243,7 +246,7 @@ SELECT [record_number]
 	  ,LayersPerPallet
 	  ,MaxBooksPallet
 	  ,CAST([by_payload_filler] AS VARCHAR(4000)) AS [by_payload_filler]
-  FROM [transform].[titles_staging]) tt --where isbn = '9780099610816'
+  FROM [transform].[titles_staging]) tt --where PackSize &gt; 0--where isbn = '9780099610816'
   ORDER BY 1;</property>
                     <property
                       dataType="System.String"
@@ -693,6 +696,15 @@ SELECT [record_number]
                           lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[MaxBooksPallet]"
                           name="MaxBooksPallet"
                           truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackSize]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackSize]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackSize]"
+                          name="PackSize"
+                          truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -909,6 +921,10 @@ SELECT [record_number]
                           refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[MaxBooksPallet]"
                           dataType="i4"
                           name="MaxBooksPallet" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackSize]"
+                          dataType="i4"
+                          name="PackSize" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -1113,6 +1129,11 @@ SELECT [record_number]
                           dataType="i4"
                           lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PackDepth]"
                           name="PackDepth" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PackSize]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PackSize]"
+                          name="PackSize" />
                         <outputColumn
                           refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PackagingType]"
                           dataType="wstr"
@@ -1563,6 +1584,12 @@ SELECT [record_number]
                           cachedName="MaxBooksPallet"
                           externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[MaxBooksPallet]"
                           lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[MaxBooksPallet]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].Columns[PackSize]"
+                          cachedDataType="i4"
+                          cachedName="PackSize"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackSize]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackSize]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -1787,6 +1814,10 @@ SELECT [record_number]
                           refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[MaxBooksPallet]"
                           dataType="i4"
                           name="MaxBooksPallet" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PackSize]"
+                          dataType="i4"
+                          name="PackSize" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -2172,6 +2203,12 @@ SELECT [record_number]
                           cachedName="MaxBooksPallet"
                           externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[MaxBooksPallet]"
                           lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[MaxBooksPallet]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[PackSize]"
+                          cachedDataType="i4"
+                          cachedName="PackSize"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PackSize]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackSize]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -2388,6 +2425,10 @@ SELECT [record_number]
                           refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[MaxBooksPallet]"
                           dataType="i4"
                           name="MaxBooksPallet" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PackSize]"
+                          dataType="i4"
+                          name="PackSize" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -2497,19 +2538,19 @@ SELECT [record_number]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="196,42.6666666666667"
+          Size="196,43"
           Id="Package\Transform Title Data\run_status to InProgress"
           TopLeft="16.8333306883773,85.2280735238658" />
         <NodeLayout
-          Size="204,42.6666666666667"
+          Size="204,43"
           Id="Package\Transform Title Data\run_status to Transformed"
           TopLeft="8.70833080944908,226.175444597903" />
         <NodeLayout
-          Size="153.333333333334,42.6666666666667"
+          Size="153,43"
           Id="Package\Transform Title Data\Transform titles"
           TopLeft="33.0833304462334,154.333337982496" />
         <NodeLayout
-          Size="121.333333333334,42.6666666666667"
+          Size="121,43"
           Id="Package\Transform Title Data\Truncate"
           TopLeft="49.3333302040895,11.3333352908754" />
         <EdgeLayout
@@ -2581,8 +2622,8 @@ SELECT [record_number]
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="228.666666666667,324"
-          Size="228.666666666667,366.666666666667"
+          PanelSize="229,324"
+          Size="229,367"
           Id="Package\Transform Title Data"
           TopLeft="160.624997606501,49.947369361188" />
       </GraphLayout>
@@ -2594,17 +2635,17 @@ SELECT [record_number]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="186.666666666667,42.6666666666667"
-          Id="Package\Transform Title Data\Transform titles\titles_transform_errors"
-          TopLeft="483.124992800876,296.263163471156" />
+          Size="163,43"
+          Id="Package\Transform Title Data\Transform titles\transformed_data"
+          TopLeft="496.249992605299,121.105265437401" />
         <NodeLayout
-          Size="162.666666666667,42.6666666666667"
+          Size="163,43"
           Id="Package\Transform Title Data\Transform titles\Read title records"
           TopLeft="116.874998258427,117.684212741429" />
         <NodeLayout
-          Size="162.666666666667,42.6666666666667"
-          Id="Package\Transform Title Data\Transform titles\transformed_data"
-          TopLeft="496.249992605299,121.105265437401" />
+          Size="187,43"
+          Id="Package\Transform Title Data\Transform titles\titles_transform_errors"
+          TopLeft="483.124992800876,296.263163471156" />
         <EdgeLayout
           Id="Package\Transform Title Data\Transform titles.Paths[OLE DB Source Output]"
           TopLeft="279.541664925093,140.728072422748">
@@ -2655,7 +2696,7 @@ SELECT [record_number]
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Transform Title Data\Transform titles\titles_transform_errors">
+    design-time-name="Package\Transform Title Data\Transform titles\transformed_data">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2681,7 +2722,7 @@ SELECT [record_number]
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Transform Title Data\Transform titles\transformed_data">
+    design-time-name="Package\Transform Title Data\Transform titles\titles_transform_errors">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

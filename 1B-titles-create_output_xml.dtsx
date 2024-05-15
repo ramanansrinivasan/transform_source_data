@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="1B-titles-create_output_xml"
   DTS:PackageType="5"
-  DTS:VersionBuild="42"
-  DTS:VersionGUID="{7382E701-15DC-4FAC-BA25-F8619D6ECAF8}">
+  DTS:VersionBuild="54"
+  DTS:VersionGUID="{0D6A468E-8F63-401F-B729-FA1551F7A0AE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -36,7 +36,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="V:\\titles\\title_data_payloads_20240422_1549.xml">
+          DTS:ConnectionString="V:\\titles\\title_data_payloads_20240508_1540.xml">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -99,7 +99,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
       DTS:ObjectName="pSQLQuery">
       <DTS:Property
         DTS:DataType="8"
-        DTS:Name="ParameterValue">SELECT '&lt;UC_PART_INB_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), tit.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/UC_PART_INB_IFD&gt;' AS resultant_payload  FROM final.titles tit   LEFT JOIN config.wms_dm_run_ctl ctl ON tit.run_id = ctl.run_id  CROSS JOIN config.data_element_payload_fillers de   WHERE ctl.package_name = 'titles'    AND ctl.run_status = 'Transformed'    AND de.data_element_name = 'title'    AND  tit.record_number &gt;=1 AND tit.record_number &lt;= 5000;</DTS:Property>
+        DTS:Name="ParameterValue">SELECT '&lt;UC_PART_INB_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), tit.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/UC_PART_INB_IFD&gt;' AS resultant_payload   FROM final.titles tit   LEFT JOIN config.wms_dm_run_ctl ctl ON tit.run_id = ctl.run_id  CROSS JOIN config.data_element_payload_fillers de    WHERE ctl.package_name = 'titles'    AND ctl.run_status = 'SentToFile'    AND de.data_element_name = 'title'  AND tit.ISBN_SuppEd IN ( SELECT TOP 20 ISBN_SuppEd FROM final.inventories_new WHERE LPN &lt;&gt; '' ORDER BY CAST([No-of-Units-1] + [No-of-Units-2] AS INTEGER) DESC);</DTS:Property>
     </DTS:PackageParameter>
   </DTS:PackageParameters>
   <DTS:Variables />
@@ -355,11 +355,11 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="166.666666666667,42.6666666666667"
+          Size="167,43"
           Id="Package\Create Output File\Create Output File"
           TopLeft="45.8333289747438,63.1578985231405" />
         <NodeLayout
-          Size="196,42.6666666666667"
+          Size="196,43"
           Id="Package\Create Output File\run_status to SentToFile"
           TopLeft="25.2083292820801,152.105268618407" />
         <EdgeLayout
@@ -387,8 +387,8 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="236,250.666666666667"
-          Size="236,293.333333333334"
+          PanelSize="236,251"
+          Size="236,293"
           Id="Package\Create Output File"
           TopLeft="246.874996321276,95.1052649480154" />
       </GraphLayout>
@@ -400,11 +400,11 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="189.333333333334,42.6666666666667"
+          Size="189,43"
           Id="Package\Create Output File\Create Output File\get Payloads for output"
           TopLeft="235.624996488914,134.105265682094" />
         <NodeLayout
-          Size="161.333333333334,42.6666666666667"
+          Size="161,43"
           Id="Package\Create Output File\Create Output File\create output_file"
           TopLeft="583,132" />
         <EdgeLayout

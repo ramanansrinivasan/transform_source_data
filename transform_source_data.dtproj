@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">UKWWHDSQLWI099</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAUJfCzS892E+JlQpbJ2WtHgAAAAACAAAAAAADZgAAwAAAABAAAADPSsrv93sb+UMFFhDImbdmAAAAAASAAACgAAAAEAAAAKunlC9dFf0TLshnxha33kmIAAAA4ZjchCZTOq5P9q991e+6IrwcB2wZQ7r+zjBBznglG7gmRQRlPuNLVchol2UjNQktaTmgBfzLCFbQLOfGZgS4p/0EWyFnesoIsOPKoK8EueGsvMNxS9oS4t/BaLDko4weWo0MeZ1EvvlkfGy/w4XAimmw1q9H/+6ruUX7EoL2PWUZg6otA6HeyBQAAABq4faWv6AM54hsrgRkhhQiEDerqw==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAUJfCzS892E+JlQpbJ2WtHgAAAAACAAAAAAADZgAAwAAAABAAAACkej1PIxX+6HVzUNP3dLhTAAAAAASAAACgAAAAEAAAAF1MUavWCFaswaz+hr4mcyqIAAAARa3nx/GrAtTROyjfNg6jfZ039K+3Hw6fLPUirPu/O9ZIk2hsPhQ1xTT9YG6Rp1+7faBDQQra+obqOTsRIeLwzfC7Q5vOZ88dNO0lTC4A9XAYdz9FqG8lWkXYedOpLZBgi69lw6S7Si/tb6XYcQOSMQeMtiVGnjFRD7lAVIh9Gszy8lFFEVuQKBQAAADkJY2yGm4Cumk/SGWSeqvnYI9D4Q==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -37,8 +37,8 @@
           <SSIS:Package SSIS:Name="1A-titles-transform_titles.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="3A-inventory-transform_inventory.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="3B-inventory-create_output_xml.dtsx" SSIS:EntryPoint="1" />
-          <SSIS:Package SSIS:Name="1B-titles-create_output_xml 1.dtsx" SSIS:EntryPoint="1" />
-          <SSIS:Package SSIS:Name="3B-inventory-create_output_xml 1.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="3B-inventory-create_output_xml_limited.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="1B-titles-create_output_xml_limited.dtsx" SSIS:EntryPoint="1" />
         </SSIS:Packages>
         <SSIS:ConnectionManagers>
           <SSIS:ConnectionManager SSIS:Name="UKWWHDSQLWI099.DM_Dev_NP3.conmgr" />
@@ -203,10 +203,10 @@
                 <SSIS:Property SSIS:Name="Name">Package1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">68</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">70</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{788A044B-F7A4-47F7-BD6A-D005B8E94A41}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{6A92BFCB-79A8-462B-A941-7B96354A6C80}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -1058,10 +1058,10 @@
                 <SSIS:Property SSIS:Name="Name">3B-inventory-create_output_xml_NEW</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">51</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">53</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{92BF63F5-4BB1-4A97-BC95-DABAFD8E78E8}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{DC6C371D-CD66-4398-9404-E538016A8B3B}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -1120,7 +1120,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">SELECT '&lt;CREATE_INVENTORY_IN_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), inv.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/CREATE_INVENTORY_IN_IFD&gt;' AS resultant_payload   FROM final.inventories_new inv    LEFT JOIN config.wms_dm_run_ctl ctl ON inv.run_id = ctl.run_id   CROSS JOIN config.data_element_payload_fillers de    WHERE ctl.package_name = 'inventory'     AND ctl.run_status = 'Transformed'     AND de.data_element_name = 'inventory' --AND  inv.record_number &gt;=1 AND inv.record_number &lt;= 5000;</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">SELECT '&lt;CREATE_INVENTORY_IN_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), inv.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/CREATE_INVENTORY_IN_IFD&gt;' AS resultant_payload   FROM final.inventories inv    LEFT JOIN config.wms_dm_run_ctl ctl ON inv.run_id = ctl.run_id   CROSS JOIN config.data_element_payload_fillers de    WHERE ctl.package_name = 'inventory'     AND ctl.run_status = 'Transformed'     AND de.data_element_name = 'inventory' --AND  inv.record_number &gt;=1 AND inv.record_number &lt;= 5000;</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -1271,6 +1271,8 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">
+                    </SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -1454,16 +1456,16 @@
                 </SSIS:Parameter>
               </SSIS:Parameters>
             </SSIS:PackageMetaData>
-            <SSIS:PackageMetaData SSIS:Name="1B-titles-create_output_xml 1.dtsx">
+            <SSIS:PackageMetaData SSIS:Name="3B-inventory-create_output_xml_limited.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{31827901-DD6E-4F82-A483-967EB063FF62}</SSIS:Property>
-                <SSIS:Property SSIS:Name="Name">1B-titles-create_output_xml</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{A2388E03-D6A8-4978-A9D1-1B53ED080D5D}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">3B-inventory-create_output_xml_NEW</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">55</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">54</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{9073B47F-F0EB-4152-A52F-EB2ABB558167}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{D568A786-E2EE-429F-B107-4D834F02DA76}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -1472,7 +1474,7 @@
               <SSIS:Parameters>
                 <SSIS:Parameter SSIS:Name="pFileExtension">
                   <SSIS:Properties>
-                    <SSIS:Property SSIS:Name="ID">{82027517-E6AF-425E-AE59-BFE28B0B4FB2}</SSIS:Property>
+                    <SSIS:Property SSIS:Name="ID">{7EE7655C-BA59-4857-8C59-EF35AF715BCD}</SSIS:Property>
                     <SSIS:Property SSIS:Name="CreationName">
                     </SSIS:Property>
                     <SSIS:Property SSIS:Name="Description">
@@ -1486,7 +1488,7 @@
                 </SSIS:Parameter>
                 <SSIS:Parameter SSIS:Name="pOutputFileName">
                   <SSIS:Properties>
-                    <SSIS:Property SSIS:Name="ID">{580AE321-D418-4C3B-8313-6F0FB1CD5F38}</SSIS:Property>
+                    <SSIS:Property SSIS:Name="ID">{F07FA6D5-3ECD-42AA-B248-8FF118596FED}</SSIS:Property>
                     <SSIS:Property SSIS:Name="CreationName">
                     </SSIS:Property>
                     <SSIS:Property SSIS:Name="Description">
@@ -1494,13 +1496,13 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">V:\\titles\\title_data_payloads_</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">V:\\inventories\\inventory_data_payloads_</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
                 <SSIS:Parameter SSIS:Name="pRunID">
                   <SSIS:Properties>
-                    <SSIS:Property SSIS:Name="ID">{BD193F9A-730D-43FC-8903-9225ABB5945F}</SSIS:Property>
+                    <SSIS:Property SSIS:Name="ID">{FACAC379-8E9D-40B2-9298-B1DE70E07EF0}</SSIS:Property>
                     <SSIS:Property SSIS:Name="CreationName">
                     </SSIS:Property>
                     <SSIS:Property SSIS:Name="Description">
@@ -1508,13 +1510,13 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">1</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">3</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
                 <SSIS:Parameter SSIS:Name="pSQLQuery">
                   <SSIS:Properties>
-                    <SSIS:Property SSIS:Name="ID">{6CE79543-8B1A-4D49-882B-F58A48BE5B82}</SSIS:Property>
+                    <SSIS:Property SSIS:Name="ID">{A8F2B1FF-794D-427A-A2F0-E2B1371990E0}</SSIS:Property>
                     <SSIS:Property SSIS:Name="CreationName">
                     </SSIS:Property>
                     <SSIS:Property SSIS:Name="Description">
@@ -1522,7 +1524,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">SELECT '&lt;UC_PART_INB_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), tit.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/UC_PART_INB_IFD&gt;' AS resultant_payload   FROM final.titles tit   LEFT JOIN config.wms_dm_run_ctl ctl ON tit.run_id = ctl.run_id  CROSS JOIN config.data_element_payload_fillers de    WHERE ctl.package_name = 'titles'    AND ctl.run_status = 'Transformed'    AND de.data_element_name = 'title'  AND tit.ISBN_SuppEd IN ( SELECT TOP 20 ILV.ISBN_SuppEd FROM ( SELECT distinct t.ISBN_SuppEd, CAST(inv.[No-of-Units-1] + inv.[No-of-Units-2] AS INTEGER) as no_of_units   FROM final.titles t   JOIN final.inventories_new inv ON t.ISBN_SuppEd = inv.ISBN_SuppEd  WHERE t.PackSize &gt; 0 AND CAST(inv.[No-of-Units-1] + inv.[No-of-Units-2] AS INTEGER) &gt; 0    AND LPN &lt;&gt; '') ilv);</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">SELECT '&lt;CREATE_INVENTORY_IN_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), inv.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/CREATE_INVENTORY_IN_IFD&gt;' AS resultant_payload    FROM final.inventories inv    LEFT JOIN config.wms_dm_run_ctl ctl ON inv.run_id = ctl.run_id   CROSS JOIN config.data_element_payload_fillers de     WHERE ctl.package_name = 'inventory'      AND de.data_element_name = 'inventory' AND inv.[BaseLuId] &lt;&gt; '' AND inv.ISBN_SuppEd IN ( SELECT TOP 20 ILV.ISBN_SuppEd  FROM ( SELECT distinct t.ISBN_SuppEd, CAST(inv.[No-of-Units-1] + inv.[No-of-Units-2] AS INTEGER) as no_of_units   FROM final.titles t   JOIN final.inventories inv ON t.ISBN_SuppEd = inv.ISBN_SuppEd  WHERE t.PackSize &gt; 0 AND CAST(inv.[No-of-Units-1] + inv.[No-of-Units-2] AS INTEGER) &gt; 0    AND [BaseLuId] &lt;&gt; '') ilv);</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -1673,6 +1675,8 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">
+                    </SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -1732,7 +1736,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Data Source=UKWWHDSQLWI099;Initial Catalog=DM_Dev_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{0D4193C2-048C-4C07-9F10-BD8586CF81DD}UKWWHDSQLWI099.DM_Dev_NP3;Auto Translate=False;</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Data Source=UKWWHDSQLWI099;Initial Catalog=DM_Dev_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{799F1BAD-9751-45B7-8F40-552F170A383F}UKWWHDSQLWI099.DM_Dev_NP3;Auto Translate=False;</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -1856,16 +1860,16 @@
                 </SSIS:Parameter>
               </SSIS:Parameters>
             </SSIS:PackageMetaData>
-            <SSIS:PackageMetaData SSIS:Name="3B-inventory-create_output_xml 1.dtsx">
+            <SSIS:PackageMetaData SSIS:Name="1B-titles-create_output_xml_limited.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{A2388E03-D6A8-4978-A9D1-1B53ED080D5D}</SSIS:Property>
-                <SSIS:Property SSIS:Name="Name">3B-inventory-create_output_xml_NEW</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{298FA4A4-FE36-4E4B-802C-7A22CA86038F}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">1B-titles-create_output_xml_limited</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">52</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">57</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{0718A6E4-4943-4F00-B6FD-7B941769B43C}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{330DE6E9-CCB4-4ACF-AF1B-7F269770F72A}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -1874,7 +1878,7 @@
               <SSIS:Parameters>
                 <SSIS:Parameter SSIS:Name="pFileExtension">
                   <SSIS:Properties>
-                    <SSIS:Property SSIS:Name="ID">{7EE7655C-BA59-4857-8C59-EF35AF715BCD}</SSIS:Property>
+                    <SSIS:Property SSIS:Name="ID">{82027517-E6AF-425E-AE59-BFE28B0B4FB2}</SSIS:Property>
                     <SSIS:Property SSIS:Name="CreationName">
                     </SSIS:Property>
                     <SSIS:Property SSIS:Name="Description">
@@ -1888,7 +1892,7 @@
                 </SSIS:Parameter>
                 <SSIS:Parameter SSIS:Name="pOutputFileName">
                   <SSIS:Properties>
-                    <SSIS:Property SSIS:Name="ID">{F07FA6D5-3ECD-42AA-B248-8FF118596FED}</SSIS:Property>
+                    <SSIS:Property SSIS:Name="ID">{580AE321-D418-4C3B-8313-6F0FB1CD5F38}</SSIS:Property>
                     <SSIS:Property SSIS:Name="CreationName">
                     </SSIS:Property>
                     <SSIS:Property SSIS:Name="Description">
@@ -1896,13 +1900,13 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">V:\\inventories\\inventory_data_payloads_</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">V:\\titles\\title_data_payloads_</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
                 <SSIS:Parameter SSIS:Name="pRunID">
                   <SSIS:Properties>
-                    <SSIS:Property SSIS:Name="ID">{FACAC379-8E9D-40B2-9298-B1DE70E07EF0}</SSIS:Property>
+                    <SSIS:Property SSIS:Name="ID">{BD193F9A-730D-43FC-8903-9225ABB5945F}</SSIS:Property>
                     <SSIS:Property SSIS:Name="CreationName">
                     </SSIS:Property>
                     <SSIS:Property SSIS:Name="Description">
@@ -1910,13 +1914,13 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">3</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">1</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
                 <SSIS:Parameter SSIS:Name="pSQLQuery">
                   <SSIS:Properties>
-                    <SSIS:Property SSIS:Name="ID">{A8F2B1FF-794D-427A-A2F0-E2B1371990E0}</SSIS:Property>
+                    <SSIS:Property SSIS:Name="ID">{6CE79543-8B1A-4D49-882B-F58A48BE5B82}</SSIS:Property>
                     <SSIS:Property SSIS:Name="CreationName">
                     </SSIS:Property>
                     <SSIS:Property SSIS:Name="Description">
@@ -1924,7 +1928,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">SELECT '&lt;CREATE_INVENTORY_IN_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), inv.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/CREATE_INVENTORY_IN_IFD&gt;' AS resultant_payload    FROM final.inventories_new inv    LEFT JOIN config.wms_dm_run_ctl ctl ON inv.run_id = ctl.run_id   CROSS JOIN config.data_element_payload_fillers de     WHERE ctl.package_name = 'inventory'      AND de.data_element_name = 'inventory' AND inv.lpn &lt;&gt; '' AND inv.ISBN_SuppEd IN ( SELECT TOP 20 ILV.ISBN_SuppEd  FROM ( SELECT distinct t.ISBN_SuppEd, CAST(inv.[No-of-Units-1] + inv.[No-of-Units-2] AS INTEGER) as no_of_units   FROM final.titles t   JOIN final.inventories_new inv ON t.ISBN_SuppEd = inv.ISBN_SuppEd  WHERE t.PackSize &gt; 0 AND CAST(inv.[No-of-Units-1] + inv.[No-of-Units-2] AS INTEGER) &gt; 0    AND LPN &lt;&gt; '') ilv);</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">SELECT '&lt;UC_PART_INB_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), tit.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/UC_PART_INB_IFD&gt;' AS resultant_payload   FROM final.titles tit   LEFT JOIN config.wms_dm_run_ctl ctl ON tit.run_id = ctl.run_id  CROSS JOIN config.data_element_payload_fillers de    WHERE ctl.package_name = 'titles'    AND ctl.run_status = 'Transformed'    AND de.data_element_name = 'title'  AND tit.ISBN_SuppEd IN ( SELECT TOP 20 ILV.ISBN_SuppEd FROM ( SELECT distinct t.ISBN_SuppEd, CAST(inv.[No-of-Units-1] + inv.[No-of-Units-2] AS INTEGER) as no_of_units   FROM final.titles t   JOIN final.inventories inv ON t.ISBN_SuppEd = inv.ISBN_SuppEd  WHERE t.PackSize &gt; 0 AND CAST(inv.[No-of-Units-1] AS INTEGER) + CAST(inv.[No-of-Units-2] AS INTEGER) &gt; 0    AND BaseLuId &lt;&gt; '') ilv);</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -2075,6 +2079,8 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">
+                    </SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -2134,7 +2140,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Data Source=UKWWHDSQLWI099;Initial Catalog=DM_Dev_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{799F1BAD-9751-45B7-8F40-552F170A383F}UKWWHDSQLWI099.DM_Dev_NP3;Auto Translate=False;</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Data Source=UKWWHDSQLWI099;Initial Catalog=DM_Dev_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{0D4193C2-048C-4C07-9F10-BD8586CF81DD}UKWWHDSQLWI099.DM_Dev_NP3;Auto Translate=False;</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>

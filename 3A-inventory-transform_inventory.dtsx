@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="3A-inventory-transform_inventory_NEW"
   DTS:PackageType="5"
-  DTS:VersionBuild="84"
-  DTS:VersionGUID="{C86FDADC-FFF7-4C94-96FF-B4E762E63D42}">
+  DTS:VersionBuild="86"
+  DTS:VersionGUID="{E5D97DD1-687F-4DAE-AC3D-C787F5262255}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -930,13 +930,13 @@
                           cachedDataType="i4"
                           cachedName="ErrorCode"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[ErrorCode]"
-                          lineageId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]" />
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]" />
                         <inputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[ErrorColumn]"
                           cachedDataType="i4"
                           cachedName="ErrorColumn"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[ErrorColumn]"
-                          lineageId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]" />
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]" />
                         <inputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[BaseLuType]"
                           cachedCodepage="1252"
@@ -4157,11 +4157,11 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA"
+                  refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data"
                   componentClassID="Microsoft.OLEDBDestination"
                   contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
                   description="OLE DB Destination"
-                  name="TRANSFORMED_DATA"
+                  name="Transformed_Data"
                   usesDispositions="true"
                   version="4">
                   <properties>
@@ -4214,7 +4214,7 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Connections[OleDbConnection]"
+                      refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Connections[OleDbConnection]"
                       connectionManagerID="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}:external"
                       connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
                       description="The OLE DB runtime connection used to access the database."
@@ -4222,1321 +4222,1321 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                   </connections>
                   <inputs>
                     <input
-                      refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input]"
+                      refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input]"
                       errorOrTruncationOperation="Insert"
                       errorRowDisposition="RedirectRow"
                       hasSideEffects="true"
                       name="OLE DB Destination Input">
                       <inputColumns>
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[run_id]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[run_id]"
                           cachedDataType="i4"
                           cachedName="run_id"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[run_id]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[run_id]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[run_id]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[Site]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[Site]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="Site"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Site]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Site]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Site]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[Placement]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[Placement]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="Placement"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Placement]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Placement]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Placement]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[Location]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[Location]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="Location"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Location]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Location]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Location]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[ISBN_SuppEd]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[ISBN_SuppEd]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="ISBN_SuppEd"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[ISBN_SuppEd]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[ISBN_SuppEd]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[ISBN_SuppEd]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[ReceivedDate]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[ReceivedDate]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="ReceivedDate"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[ReceivedDate]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[ReceivedDate]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[ReceivedDate]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[No-of-Units-1]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[No-of-Units-1]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="No-of-Units-1"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-1]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-1]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-1]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[Frozen-Code-1]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[Frozen-Code-1]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="Frozen-Code-1"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-1]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-1]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-1]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[No-of-Units-2]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[No-of-Units-2]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="No-of-Units-2"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-2]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-2]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-2]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[Frozen-Code-2]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[Frozen-Code-2]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="Frozen-Code-2"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-2]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-2]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-2]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[No-of-Units-3]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[No-of-Units-3]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="No-of-Units-3"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-3]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-3]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-3]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[Frozen-Code-3]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[Frozen-Code-3]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="Frozen-Code-3"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-3]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-3]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-3]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[No-of-Units-4]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[No-of-Units-4]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="No-of-Units-4"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-4]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-4]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-4]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[Frozen-Code-4]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[Frozen-Code-4]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="Frozen-Code-4"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-4]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-4]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-4]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[No-of-Units-5]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[No-of-Units-5]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="No-of-Units-5"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-5]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-5]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-5]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[Frozen-Code-5]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[Frozen-Code-5]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="Frozen-Code-5"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-5]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-5]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-5]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[No-of-Units-6]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[No-of-Units-6]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="No-of-Units-6"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-6]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-6]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-6]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[Frozen-Code-6]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[Frozen-Code-6]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="Frozen-Code-6"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-6]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-6]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-6]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[by_payload_filler]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[by_payload_filler]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="8000"
                           cachedName="by_payload_filler"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[by_payload_filler]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[by_payload_filler]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[by_payload_filler]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[resultant_payload]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[resultant_payload]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="8000"
                           cachedName="resultant_payload"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[resultant_payload]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[resultant_payload]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[resultant_payload]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[PackSize]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[PackSize]"
                           cachedDataType="i4"
                           cachedName="PackSize"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PackSize]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PackSize]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[PackSize]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[ISBN]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[ISBN]"
                           cachedDataType="wstr"
                           cachedLength="13"
                           cachedName="ISBN"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[ISBN]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[ISBN]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[ISBN]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[SupplyEd]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[SupplyEd]"
                           cachedDataType="wstr"
                           cachedLength="10"
                           cachedName="SupplyEd"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[SupplyEd]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[SupplyEd]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[SupplyEd]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[LocationType]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[LocationType]"
                           cachedDataType="wstr"
                           cachedLength="3"
                           cachedName="LocationType"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[LocationType]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[LocationType]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[LocationType]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[BookWeight]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[BookWeight]"
                           cachedDataType="i4"
                           cachedName="BookWeight"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[BookWeight]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[BookWeight]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[BookWeight]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[ID]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[ID]"
                           cachedDataType="i4"
                           cachedName="ID"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[ID]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[ID]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[ID]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[RecSta]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[RecSta]"
                           cachedDataType="wstr"
                           cachedLength="1"
                           cachedName="RecSta"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[RecSta]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[RecSta]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[RecSta]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[SegNumber]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[SegNumber]"
                           cachedDataType="wstr"
                           cachedLength="2"
                           cachedName="SegNumber"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[SegNumber]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[SegNumber]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[SegNumber]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[LuPerSegment]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[LuPerSegment]"
                           cachedDataType="i4"
                           cachedName="LuPerSegment"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[LuPerSegment]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[LuPerSegment]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[LuPerSegment]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[LuInSegment]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[LuInSegment]"
                           cachedDataType="i4"
                           cachedName="LuInSegment"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[LuInSegment]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[LuInSegment]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[LuInSegment]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[LuAwaitIn]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[LuAwaitIn]"
                           cachedDataType="i4"
                           cachedName="LuAwaitIn"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[LuAwaitIn]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[LuAwaitIn]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[LuAwaitIn]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[SegLuType]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[SegLuType]"
                           cachedDataType="wstr"
                           cachedLength="3"
                           cachedName="SegLuType"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[SegLuType]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[SegLuType]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[SegLuType]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[SegmentStatus]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[SegmentStatus]"
                           cachedDataType="wstr"
                           cachedLength="1"
                           cachedName="SegmentStatus"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[SegmentStatus]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[SegmentStatus]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[SegmentStatus]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[ImpressionNo]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[ImpressionNo]"
                           cachedDataType="wstr"
                           cachedLength="3"
                           cachedName="ImpressionNo"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[ImpressionNo]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[ImpressionNo]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[ImpressionNo]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[BindOrderNo]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[BindOrderNo]"
                           cachedDataType="wstr"
                           cachedLength="3"
                           cachedName="BindOrderNo"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[BindOrderNo]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[BindOrderNo]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[BindOrderNo]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[DeliveryNo]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[DeliveryNo]"
                           cachedDataType="wstr"
                           cachedLength="3"
                           cachedName="DeliveryNo"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryNo]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryNo]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[DeliveryNo]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[ProductPrice]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[ProductPrice]"
                           cachedDataType="numeric"
                           cachedName="ProductPrice"
                           cachedPrecision="6"
                           cachedScale="2"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[ProductPrice]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[ProductPrice]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[ProductPrice]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitSize]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitSize]"
                           cachedDataType="i4"
                           cachedName="UnitSize"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitSize]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitSize]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitSize]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitWeight]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitWeight]"
                           cachedDataType="i4"
                           cachedName="UnitWeight"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitWeight]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitWeight]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitWeight]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[BaseDimLong]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[BaseDimLong]"
                           cachedDataType="i4"
                           cachedName="BaseDimLong"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[BaseDimLong]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[BaseDimLong]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[BaseDimLong]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[BaseDimShort]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[BaseDimShort]"
                           cachedDataType="i4"
                           cachedName="BaseDimShort"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[BaseDimShort]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[BaseDimShort]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[BaseDimShort]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitDimHigh]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitDimHigh]"
                           cachedDataType="i4"
                           cachedName="UnitDimHigh"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitDimHigh]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitDimHigh]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitDimHigh]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwIn1A]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwIn1A]"
                           cachedDataType="i4"
                           cachedName="UnitsAwIn1A"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1A]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1A]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwIn1A]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwIn2A]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwIn2A]"
                           cachedDataType="i4"
                           cachedName="UnitsAwIn2A"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2A]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2A]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwIn2A]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwIn3A]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwIn3A]"
                           cachedDataType="i4"
                           cachedName="UnitsAwIn3A"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3A]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3A]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwIn3A]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwOut1A]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwOut1A]"
                           cachedDataType="i4"
                           cachedName="UnitsAwOut1A"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1A]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1A]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwOut1A]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwOut2A]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwOut2A]"
                           cachedDataType="i4"
                           cachedName="UnitsAwOut2A"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2A]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2A]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwOut2A]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwOut3A]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwOut3A]"
                           cachedDataType="i4"
                           cachedName="UnitsAwOut3A"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3A]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3A]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwOut3A]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwIn1B]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwIn1B]"
                           cachedDataType="i4"
                           cachedName="UnitsAwIn1B"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1B]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1B]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwIn1B]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwIn2B]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwIn2B]"
                           cachedDataType="i4"
                           cachedName="UnitsAwIn2B"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2B]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2B]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwIn2B]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwIn3B]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwIn3B]"
                           cachedDataType="i4"
                           cachedName="UnitsAwIn3B"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3B]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3B]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwIn3B]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwOut1B]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwOut1B]"
                           cachedDataType="i4"
                           cachedName="UnitsAwOut1B"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1B]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1B]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwOut1B]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwOut2B]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwOut2B]"
                           cachedDataType="i4"
                           cachedName="UnitsAwOut2B"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2B]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2B]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwOut2B]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwOut3B]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwOut3B]"
                           cachedDataType="i4"
                           cachedName="UnitsAwOut3B"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3B]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3B]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwOut3B]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwIn1C]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwIn1C]"
                           cachedDataType="i4"
                           cachedName="UnitsAwIn1C"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1C]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1C]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwIn1C]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwIn2C]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwIn2C]"
                           cachedDataType="i4"
                           cachedName="UnitsAwIn2C"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2C]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2C]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwIn2C]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwIn3C]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwIn3C]"
                           cachedDataType="i4"
                           cachedName="UnitsAwIn3C"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3C]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3C]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwIn3C]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwOut1C]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwOut1C]"
                           cachedDataType="i4"
                           cachedName="UnitsAwOut1C"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1C]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1C]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwOut1C]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwOut2C]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwOut2C]"
                           cachedDataType="i4"
                           cachedName="UnitsAwOut2C"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2C]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2C]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwOut2C]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwOut3C]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwOut3C]"
                           cachedDataType="i4"
                           cachedName="UnitsAwOut3C"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3C]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3C]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwOut3C]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwIn1D]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwIn1D]"
                           cachedDataType="i4"
                           cachedName="UnitsAwIn1D"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1D]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1D]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwIn1D]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwIn2D]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwIn2D]"
                           cachedDataType="i4"
                           cachedName="UnitsAwIn2D"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2D]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2D]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwIn2D]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwIn3D]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwIn3D]"
                           cachedDataType="i4"
                           cachedName="UnitsAwIn3D"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3D]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3D]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwIn3D]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwOut1D]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwOut1D]"
                           cachedDataType="i4"
                           cachedName="UnitsAwOut1D"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1D]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1D]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwOut1D]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwOut2D]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwOut2D]"
                           cachedDataType="i4"
                           cachedName="UnitsAwOut2D"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2D]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2D]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwOut2D]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwOut3D]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwOut3D]"
                           cachedDataType="i4"
                           cachedName="UnitsAwOut3D"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3D]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3D]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwOut3D]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwIn1E]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwIn1E]"
                           cachedDataType="i4"
                           cachedName="UnitsAwIn1E"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1E]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1E]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwIn1E]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwIn2E]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwIn2E]"
                           cachedDataType="i4"
                           cachedName="UnitsAwIn2E"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2E]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2E]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwIn2E]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwIn3E]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwIn3E]"
                           cachedDataType="i4"
                           cachedName="UnitsAwIn3E"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3E]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3E]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwIn3E]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwOut1E]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwOut1E]"
                           cachedDataType="i4"
                           cachedName="UnitsAwOut1E"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1E]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1E]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwOut1E]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwOut2E]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwOut2E]"
                           cachedDataType="i4"
                           cachedName="UnitsAwOut2E"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2E]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2E]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwOut2E]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwOut3E]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwOut3E]"
                           cachedDataType="i4"
                           cachedName="UnitsAwOut3E"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3E]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3E]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwOut3E]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwIn1F]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwIn1F]"
                           cachedDataType="i4"
                           cachedName="UnitsAwIn1F"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1F]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1F]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwIn1F]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwIn2F]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwIn2F]"
                           cachedDataType="i4"
                           cachedName="UnitsAwIn2F"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2F]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2F]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwIn2F]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwIn3F]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwIn3F]"
                           cachedDataType="i4"
                           cachedName="UnitsAwIn3F"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3F]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3F]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwIn3F]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwOut1F]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwOut1F]"
                           cachedDataType="i4"
                           cachedName="UnitsAwOut1F"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1F]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1F]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwOut1F]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwOut2F]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwOut2F]"
                           cachedDataType="i4"
                           cachedName="UnitsAwOut2F"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2F]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2F]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwOut2F]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[UnitsAwOut3F]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[UnitsAwOut3F]"
                           cachedDataType="i4"
                           cachedName="UnitsAwOut3F"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3F]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3F]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[UnitsAwOut3F]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[OpenedDate]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[OpenedDate]"
                           cachedDataType="dbDate"
                           cachedName="OpenedDate"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[OpenedDate]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[OpenedDate]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[OpenedDate]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[NoOfAccesses]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[NoOfAccesses]"
                           cachedDataType="i4"
                           cachedName="NoOfAccesses"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[NoOfAccesses]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[NoOfAccesses]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[NoOfAccesses]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[LastTransferDate]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[LastTransferDate]"
                           cachedDataType="dbDate"
                           cachedName="LastTransferDate"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[LastTransferDate]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[LastTransferDate]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[LastTransferDate]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[LastTransferQty]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[LastTransferQty]"
                           cachedDataType="i4"
                           cachedName="LastTransferQty"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[LastTransferQty]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[LastTransferQty]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[LastTransferQty]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[CiCountIn]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[CiCountIn]"
                           cachedDataType="i4"
                           cachedName="CiCountIn"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[CiCountIn]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[CiCountIn]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[CiCountIn]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[CiCountOut]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[CiCountOut]"
                           cachedDataType="i4"
                           cachedName="CiCountOut"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[CiCountOut]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[CiCountOut]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[CiCountOut]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[CiCountDate]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[CiCountDate]"
                           cachedDataType="dbDate"
                           cachedName="CiCountDate"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[CiCountDate]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[CiCountDate]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[CiCountDate]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[CiCountTotal]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[CiCountTotal]"
                           cachedDataType="i4"
                           cachedName="CiCountTotal"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[CiCountTotal]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[CiCountTotal]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[CiCountTotal]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[CiCountAdjust]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[CiCountAdjust]"
                           cachedDataType="i4"
                           cachedName="CiCountAdjust"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[CiCountAdjust]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[CiCountAdjust]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[CiCountAdjust]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[PiCountIn]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[PiCountIn]"
                           cachedDataType="i4"
                           cachedName="PiCountIn"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PiCountIn]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PiCountIn]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[PiCountIn]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[PiCountOut]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[PiCountOut]"
                           cachedDataType="i4"
                           cachedName="PiCountOut"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PiCountOut]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PiCountOut]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[PiCountOut]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[PiCountDate]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[PiCountDate]"
                           cachedDataType="dbDate"
                           cachedName="PiCountDate"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PiCountDate]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PiCountDate]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[PiCountDate]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[PiCountTotal]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[PiCountTotal]"
                           cachedDataType="i4"
                           cachedName="PiCountTotal"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PiCountTotal]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PiCountTotal]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[PiCountTotal]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[PiCountAdjust]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[PiCountAdjust]"
                           cachedDataType="i4"
                           cachedName="PiCountAdjust"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PiCountAdjust]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PiCountAdjust]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[PiCountAdjust]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[GbsManifest]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[GbsManifest]"
                           cachedDataType="wstr"
                           cachedLength="8"
                           cachedName="GbsManifest"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[GbsManifest]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[GbsManifest]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[GbsManifest]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[GbsSpare]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[GbsSpare]"
                           cachedDataType="wstr"
                           cachedLength="10"
                           cachedName="GbsSpare"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[GbsSpare]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[GbsSpare]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[GbsSpare]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[HoldUnitSize]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[HoldUnitSize]"
                           cachedDataType="i4"
                           cachedName="HoldUnitSize"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[HoldUnitSize]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[HoldUnitSize]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[HoldUnitSize]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[HoldUnitWeight]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[HoldUnitWeight]"
                           cachedDataType="i4"
                           cachedName="HoldUnitWeight"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[HoldUnitWeight]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[HoldUnitWeight]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[HoldUnitWeight]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[HoldDimLong]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[HoldDimLong]"
                           cachedDataType="i4"
                           cachedName="HoldDimLong"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[HoldDimLong]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[HoldDimLong]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[HoldDimLong]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[HoldDimShort]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[HoldDimShort]"
                           cachedDataType="i4"
                           cachedName="HoldDimShort"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[HoldDimShort]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[HoldDimShort]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[HoldDimShort]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[HoldDimHigh]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[HoldDimHigh]"
                           cachedDataType="i4"
                           cachedName="HoldDimHigh"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[HoldDimHigh]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[HoldDimHigh]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[HoldDimHigh]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[FullPalletExtr]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[FullPalletExtr]"
                           cachedDataType="wstr"
                           cachedLength="1"
                           cachedName="FullPalletExtr"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[FullPalletExtr]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[FullPalletExtr]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[FullPalletExtr]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[PiCountRequested]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[PiCountRequested]"
                           cachedDataType="wstr"
                           cachedLength="1"
                           cachedName="PiCountRequested"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PiCountRequested]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PiCountRequested]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[PiCountRequested]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[PiCountQcCheck]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[PiCountQcCheck]"
                           cachedDataType="wstr"
                           cachedLength="1"
                           cachedName="PiCountQcCheck"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PiCountQcCheck]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PiCountQcCheck]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[PiCountQcCheck]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[FreeLocnFlag]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[FreeLocnFlag]"
                           cachedDataType="wstr"
                           cachedLength="1"
                           cachedName="FreeLocnFlag"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[FreeLocnFlag]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[FreeLocnFlag]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[FreeLocnFlag]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[TransferDate]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[TransferDate]"
                           cachedDataType="dbDate"
                           cachedName="TransferDate"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[TransferDate]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[TransferDate]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[TransferDate]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[MiscSpare]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[MiscSpare]"
                           cachedDataType="wstr"
                           cachedLength="4"
                           cachedName="MiscSpare"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[MiscSpare]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[MiscSpare]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[MiscSpare]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[CumulativeAccesses]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[CumulativeAccesses]"
                           cachedDataType="i4"
                           cachedName="CumulativeAccesses"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[CumulativeAccesses]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[CumulativeAccesses]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[CumulativeAccesses]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[PiGeneratedDate]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[PiGeneratedDate]"
                           cachedDataType="dbDate"
                           cachedName="PiGeneratedDate"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PiGeneratedDate]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PiGeneratedDate]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[PiGeneratedDate]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[Shippable]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[Shippable]"
                           cachedDataType="wstr"
                           cachedLength="1"
                           cachedName="Shippable"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Shippable]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Shippable]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Shippable]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[InProgress]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[InProgress]"
                           cachedDataType="i4"
                           cachedName="InProgress"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[InProgress]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[InProgress]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[InProgress]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[PickAccessSta]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[PickAccessSta]"
                           cachedDataType="wstr"
                           cachedLength="1"
                           cachedName="PickAccessSta"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PickAccessSta]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PickAccessSta]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[PickAccessSta]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[ReplAccessSta]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[ReplAccessSta]"
                           cachedDataType="wstr"
                           cachedLength="1"
                           cachedName="ReplAccessSta"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[ReplAccessSta]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[ReplAccessSta]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[ReplAccessSta]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[ReleaseWhenEmpty]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[ReleaseWhenEmpty]"
                           cachedDataType="wstr"
                           cachedLength="1"
                           cachedName="ReleaseWhenEmpty"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[ReleaseWhenEmpty]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[ReleaseWhenEmpty]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[ReleaseWhenEmpty]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[BindPickPackExcl]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[BindPickPackExcl]"
                           cachedDataType="wstr"
                           cachedLength="1"
                           cachedName="BindPickPackExcl"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[BindPickPackExcl]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[BindPickPackExcl]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[BindPickPackExcl]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[main_tag_starter]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[main_tag_starter]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="200"
                           cachedName="main_tag_starter"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_starter]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_starter]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[main_tag_starter]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[main_tag_finisher]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[main_tag_finisher]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="200"
                           cachedName="main_tag_finisher"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_finisher]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_finisher]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[main_tag_finisher]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[BaseLuType]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[BaseLuType]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="5"
                           cachedName="BaseLuType"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[BaseLuType]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[BaseLuType]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[BaseLuType]" />
                         <inputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].Columns[BaseLuId]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[BaseLuId]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="20"
                           cachedName="BaseLuId"
-                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[BaseLuId]"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[BaseLuId]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[BaseLuId]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[run_id]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[run_id]"
                           dataType="i4"
                           name="run_id" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Site]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Site]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="Site" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Placement]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Placement]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="Placement" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Location]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Location]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="Location" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[ISBN_SuppEd]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[ISBN_SuppEd]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="ISBN_SuppEd" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[ReceivedDate]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[ReceivedDate]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="ReceivedDate" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-1]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-1]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="No-of-Units-1" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-1]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-1]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="Frozen-Code-1" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-2]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-2]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="No-of-Units-2" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-2]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-2]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="Frozen-Code-2" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-3]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-3]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="No-of-Units-3" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-3]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-3]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="Frozen-Code-3" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-4]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-4]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="No-of-Units-4" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-4]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-4]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="Frozen-Code-4" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-5]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-5]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="No-of-Units-5" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-5]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-5]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="Frozen-Code-5" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-6]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-6]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="No-of-Units-6" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-6]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-6]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="Frozen-Code-6" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[by_payload_filler]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[by_payload_filler]"
                           codePage="1252"
                           dataType="str"
                           length="8000"
                           name="by_payload_filler" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[resultant_payload]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[resultant_payload]"
                           codePage="1252"
                           dataType="str"
                           length="8000"
                           name="resultant_payload" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PackSize]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PackSize]"
                           dataType="i4"
                           name="PackSize" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[ISBN]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[ISBN]"
                           dataType="wstr"
                           length="13"
                           name="ISBN" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[SupplyEd]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[SupplyEd]"
                           dataType="wstr"
                           length="10"
                           name="SupplyEd" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[LocationType]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[LocationType]"
                           dataType="wstr"
                           length="3"
                           name="LocationType" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[BookWeight]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[BookWeight]"
                           dataType="i4"
                           name="BookWeight" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[ID]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[ID]"
                           dataType="i4"
                           name="ID" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[RecSta]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[RecSta]"
                           dataType="wstr"
                           length="1"
                           name="RecSta" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[SegNumber]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[SegNumber]"
                           dataType="wstr"
                           length="2"
                           name="SegNumber" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[LuPerSegment]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[LuPerSegment]"
                           dataType="i4"
                           name="LuPerSegment" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[LuInSegment]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[LuInSegment]"
                           dataType="i4"
                           name="LuInSegment" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[LuAwaitIn]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[LuAwaitIn]"
                           dataType="i4"
                           name="LuAwaitIn" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[SegLuType]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[SegLuType]"
                           dataType="wstr"
                           length="3"
                           name="SegLuType" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[SegmentStatus]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[SegmentStatus]"
                           dataType="wstr"
                           length="1"
                           name="SegmentStatus" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[ImpressionNo]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[ImpressionNo]"
                           dataType="wstr"
                           length="3"
                           name="ImpressionNo" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[BindOrderNo]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[BindOrderNo]"
                           dataType="wstr"
                           length="3"
                           name="BindOrderNo" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryNo]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryNo]"
                           dataType="wstr"
                           length="3"
                           name="DeliveryNo" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[ProductPrice]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[ProductPrice]"
                           dataType="numeric"
                           name="ProductPrice"
                           precision="6"
                           scale="2" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitSize]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitSize]"
                           dataType="i4"
                           name="UnitSize" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitWeight]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitWeight]"
                           dataType="i4"
                           name="UnitWeight" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[BaseDimLong]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[BaseDimLong]"
                           dataType="i4"
                           name="BaseDimLong" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[BaseDimShort]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[BaseDimShort]"
                           dataType="i4"
                           name="BaseDimShort" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitDimHigh]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitDimHigh]"
                           dataType="i4"
                           name="UnitDimHigh" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1A]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1A]"
                           dataType="i4"
                           name="UnitsAwIn1A" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2A]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2A]"
                           dataType="i4"
                           name="UnitsAwIn2A" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3A]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3A]"
                           dataType="i4"
                           name="UnitsAwIn3A" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1A]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1A]"
                           dataType="i4"
                           name="UnitsAwOut1A" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2A]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2A]"
                           dataType="i4"
                           name="UnitsAwOut2A" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3A]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3A]"
                           dataType="i4"
                           name="UnitsAwOut3A" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1B]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1B]"
                           dataType="i4"
                           name="UnitsAwIn1B" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2B]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2B]"
                           dataType="i4"
                           name="UnitsAwIn2B" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3B]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3B]"
                           dataType="i4"
                           name="UnitsAwIn3B" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1B]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1B]"
                           dataType="i4"
                           name="UnitsAwOut1B" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2B]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2B]"
                           dataType="i4"
                           name="UnitsAwOut2B" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3B]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3B]"
                           dataType="i4"
                           name="UnitsAwOut3B" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1C]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1C]"
                           dataType="i4"
                           name="UnitsAwIn1C" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2C]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2C]"
                           dataType="i4"
                           name="UnitsAwIn2C" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3C]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3C]"
                           dataType="i4"
                           name="UnitsAwIn3C" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1C]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1C]"
                           dataType="i4"
                           name="UnitsAwOut1C" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2C]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2C]"
                           dataType="i4"
                           name="UnitsAwOut2C" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3C]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3C]"
                           dataType="i4"
                           name="UnitsAwOut3C" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1D]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1D]"
                           dataType="i4"
                           name="UnitsAwIn1D" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2D]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2D]"
                           dataType="i4"
                           name="UnitsAwIn2D" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3D]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3D]"
                           dataType="i4"
                           name="UnitsAwIn3D" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1D]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1D]"
                           dataType="i4"
                           name="UnitsAwOut1D" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2D]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2D]"
                           dataType="i4"
                           name="UnitsAwOut2D" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3D]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3D]"
                           dataType="i4"
                           name="UnitsAwOut3D" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1E]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1E]"
                           dataType="i4"
                           name="UnitsAwIn1E" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2E]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2E]"
                           dataType="i4"
                           name="UnitsAwIn2E" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3E]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3E]"
                           dataType="i4"
                           name="UnitsAwIn3E" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1E]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1E]"
                           dataType="i4"
                           name="UnitsAwOut1E" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2E]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2E]"
                           dataType="i4"
                           name="UnitsAwOut2E" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3E]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3E]"
                           dataType="i4"
                           name="UnitsAwOut3E" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1F]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn1F]"
                           dataType="i4"
                           name="UnitsAwIn1F" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2F]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn2F]"
                           dataType="i4"
                           name="UnitsAwIn2F" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3F]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwIn3F]"
                           dataType="i4"
                           name="UnitsAwIn3F" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1F]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut1F]"
                           dataType="i4"
                           name="UnitsAwOut1F" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2F]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut2F]"
                           dataType="i4"
                           name="UnitsAwOut2F" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3F]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[UnitsAwOut3F]"
                           dataType="i4"
                           name="UnitsAwOut3F" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[OpenedDate]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[OpenedDate]"
                           dataType="dbDate"
                           name="OpenedDate" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[NoOfAccesses]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[NoOfAccesses]"
                           dataType="i4"
                           name="NoOfAccesses" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[LastTransferDate]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[LastTransferDate]"
                           dataType="dbDate"
                           name="LastTransferDate" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[LastTransferQty]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[LastTransferQty]"
                           dataType="i4"
                           name="LastTransferQty" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[CiCountIn]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[CiCountIn]"
                           dataType="i4"
                           name="CiCountIn" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[CiCountOut]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[CiCountOut]"
                           dataType="i4"
                           name="CiCountOut" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[CiCountDate]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[CiCountDate]"
                           dataType="dbDate"
                           name="CiCountDate" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[CiCountTotal]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[CiCountTotal]"
                           dataType="i4"
                           name="CiCountTotal" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[CiCountAdjust]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[CiCountAdjust]"
                           dataType="i4"
                           name="CiCountAdjust" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PiCountIn]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PiCountIn]"
                           dataType="i4"
                           name="PiCountIn" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PiCountOut]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PiCountOut]"
                           dataType="i4"
                           name="PiCountOut" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PiCountDate]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PiCountDate]"
                           dataType="dbDate"
                           name="PiCountDate" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PiCountTotal]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PiCountTotal]"
                           dataType="i4"
                           name="PiCountTotal" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PiCountAdjust]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PiCountAdjust]"
                           dataType="i4"
                           name="PiCountAdjust" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[GbsManifest]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[GbsManifest]"
                           dataType="wstr"
                           length="8"
                           name="GbsManifest" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[GbsSpare]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[GbsSpare]"
                           dataType="wstr"
                           length="10"
                           name="GbsSpare" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[HoldUnitSize]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[HoldUnitSize]"
                           dataType="i4"
                           name="HoldUnitSize" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[HoldUnitWeight]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[HoldUnitWeight]"
                           dataType="i4"
                           name="HoldUnitWeight" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[HoldDimLong]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[HoldDimLong]"
                           dataType="i4"
                           name="HoldDimLong" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[HoldDimShort]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[HoldDimShort]"
                           dataType="i4"
                           name="HoldDimShort" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[HoldDimHigh]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[HoldDimHigh]"
                           dataType="i4"
                           name="HoldDimHigh" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[FullPalletExtr]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[FullPalletExtr]"
                           dataType="wstr"
                           length="1"
                           name="FullPalletExtr" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PiCountRequested]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PiCountRequested]"
                           dataType="wstr"
                           length="1"
                           name="PiCountRequested" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PiCountQcCheck]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PiCountQcCheck]"
                           dataType="wstr"
                           length="1"
                           name="PiCountQcCheck" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[FreeLocnFlag]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[FreeLocnFlag]"
                           dataType="wstr"
                           length="1"
                           name="FreeLocnFlag" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[TransferDate]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[TransferDate]"
                           dataType="dbDate"
                           name="TransferDate" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[MiscSpare]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[MiscSpare]"
                           dataType="wstr"
                           length="4"
                           name="MiscSpare" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[CumulativeAccesses]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[CumulativeAccesses]"
                           dataType="i4"
                           name="CumulativeAccesses" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PiGeneratedDate]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PiGeneratedDate]"
                           dataType="dbDate"
                           name="PiGeneratedDate" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[Shippable]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Shippable]"
                           dataType="wstr"
                           length="1"
                           name="Shippable" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[InProgress]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[InProgress]"
                           dataType="i4"
                           name="InProgress" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[PickAccessSta]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[PickAccessSta]"
                           dataType="wstr"
                           length="1"
                           name="PickAccessSta" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[ReplAccessSta]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[ReplAccessSta]"
                           dataType="wstr"
                           length="1"
                           name="ReplAccessSta" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[ReleaseWhenEmpty]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[ReleaseWhenEmpty]"
                           dataType="wstr"
                           length="1"
                           name="ReleaseWhenEmpty" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[BindPickPackExcl]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[BindPickPackExcl]"
                           dataType="wstr"
                           length="1"
                           name="BindPickPackExcl" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_starter]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_starter]"
                           codePage="1252"
                           dataType="str"
                           length="200"
                           name="main_tag_starter" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_finisher]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_finisher]"
                           codePage="1252"
                           dataType="str"
                           length="200"
                           name="main_tag_finisher" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[BaseLuType]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[BaseLuType]"
                           codePage="1252"
                           dataType="str"
                           length="5"
                           name="BaseLuType" />
                         <externalMetadataColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input].ExternalColumns[BaseLuId]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[BaseLuId]"
                           codePage="1252"
                           dataType="str"
                           length="20"
@@ -5546,22 +5546,22 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Outputs[OLE DB Destination Error Output]"
+                      refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Outputs[OLE DB Destination Error Output]"
                       exclusionGroup="1"
                       isErrorOut="true"
                       name="OLE DB Destination Error Output"
-                      synchronousInputId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input]">
+                      synchronousInputId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -5572,13 +5572,13 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
               </components>
               <paths>
                 <path
-                  refId="Package\Transform Inventory Data\Transform inventories.Paths[OLE DB Destination Error Output]"
+                  refId="Package\Transform Inventory Data\Transform inventories.Paths[Capture Errors]"
                   endId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input]"
-                  name="OLE DB Destination Error Output"
-                  startId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Outputs[OLE DB Destination Error Output]" />
+                  name="Capture Errors"
+                  startId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Outputs[OLE DB Destination Error Output]" />
                 <path
                   refId="Package\Transform Inventory Data\Transform inventories.Paths[OLE DB Source Output]"
-                  endId="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA.Inputs[OLE DB Destination Input]"
+                  endId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input]"
                   name="OLE DB Source Output"
                   startId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output]" />
               </paths>
@@ -5650,19 +5650,19 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="196,42.6666666666667"
+          Size="196,43"
           Id="Package\Transform Inventory Data\run_status to InProgress"
           TopLeft="16.8333306883773,85.2280735238658" />
         <NodeLayout
-          Size="204,42.6666666666667"
+          Size="204,43"
           Id="Package\Transform Inventory Data\run_status to Transformed"
           TopLeft="8.70833080944908,226.175444597903" />
         <NodeLayout
-          Size="150.666666666667,42.6666666666667"
+          Size="151,43"
           Id="Package\Transform Inventory Data\Transform inventories"
           TopLeft="33.0833304462334,154.333337982496" />
         <NodeLayout
-          Size="121.333333333334,42.6666666666667"
+          Size="121,43"
           Id="Package\Transform Inventory Data\Truncate"
           TopLeft="49.3333302040895,11.3333352908754" />
         <EdgeLayout
@@ -5734,8 +5734,8 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="228.666666666667,324"
-          Size="228.666666666667,366.666666666667"
+          PanelSize="229,324"
+          Size="229,367"
           Id="Package\Transform Inventory Data"
           TopLeft="160.624997606501,49.947369361188" />
       </GraphLayout>
@@ -5747,61 +5747,61 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="158.666666666667,42.6666666666667"
+          Size="159,43"
           Id="Package\Transform Inventory Data\Transform inventories\Read Inventory Records"
           TopLeft="74.5333333333333,88.1333333333333" />
         <NodeLayout
-          Size="160,42.6666666666667"
-          Id="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA"
+          Size="173,43"
+          Id="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors"
+          TopLeft="421.999993816018,223.473688473332" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Transform Inventory Data\Transform inventories\Transformed_Data"
           TopLeft="426.874993639067,82.7017553904931" />
         <EdgeLayout
-          Id="Package\Transform Inventory Data\Transform inventories.Paths[OLE DB Source Output]"
-          TopLeft="233.2,106.750877695247">
+          Id="Package\Transform Inventory Data\Transform inventories.Paths[Capture Errors]"
+          TopLeft="510.437493727543,124.701755390493">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="193.674993639067,0"
+              EndConnector="0,98.7719330828389"
               Start="0,0"
-              End="186.174993639067,0">
+              End="0,91.2719330828389">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="186.174993639067,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="173.333333333334,42.6666666666667"
-          Id="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors"
-          TopLeft="414.999993816018,226.473688473332" />
-        <EdgeLayout
-          Id="Package\Transform Inventory Data\Transform inventories.Paths[OLE DB Destination Error Output]"
-          TopLeft="504.270827060876,125.36842205716">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,101.105266416172"
-              Start="0,0"
-              End="0,93.6052664161719">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,93.6052664161719" />
+                    End="0,91.2719330828389" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-73.20890625,41.085836333086,146.4178125,11.43359375"
+              BoundingBox="-32.74509765625,39.9289352914195,65.4901953125,11.4140625"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transform Inventory Data\Transform inventories.Paths[OLE DB Source Output]"
+          TopLeft="233.533333333333,106.667544361913">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="193.341660305734,0"
+              Start="0,0"
+              End="185.841660305734,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="185.841660305734,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -5816,7 +5816,7 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Transform Inventory Data\Transform inventories\TRANSFORMED_DATA">
+    design-time-name="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -5829,7 +5829,7 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors">
+    design-time-name="Package\Transform Inventory Data\Transform inventories\Transformed_Data">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

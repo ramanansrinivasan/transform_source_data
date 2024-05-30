@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="66"
-  DTS:VersionGUID="{8702A26B-F72C-43BD-8A6A-D4AA872507F0}">
+  DTS:VersionBuild="67"
+  DTS:VersionGUID="{830B9B16-6E28-415C-BCAB-59921415D3CD}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -2460,9 +2460,9 @@ SELECT [record_number]
               </components>
               <paths>
                 <path
-                  refId="Package\Transform Title Data\Transform titles.Paths[OLE DB Destination Error Output]"
+                  refId="Package\Transform Title Data\Transform titles.Paths[Capture Errors]"
                   endId="Package\Transform Title Data\Transform titles\titles_transform_errors.Inputs[OLE DB Destination Input]"
-                  name="OLE DB Destination Error Output"
+                  name="Capture Errors"
                   startId="Package\Transform Title Data\Transform titles\transformed_data.Outputs[OLE DB Destination Error Output]" />
                 <path
                   refId="Package\Transform Title Data\Transform titles.Paths[OLE DB Source Output]"
@@ -2538,19 +2538,19 @@ SELECT [record_number]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="196,42.6666666666667"
+          Size="196,43"
           Id="Package\Transform Title Data\run_status to InProgress"
           TopLeft="16.8333306883773,85.2280735238658" />
         <NodeLayout
-          Size="204,42.6666666666667"
+          Size="204,43"
           Id="Package\Transform Title Data\run_status to Transformed"
           TopLeft="8.70833080944908,226.175444597903" />
         <NodeLayout
-          Size="153.333333333334,42.6666666666667"
+          Size="153,43"
           Id="Package\Transform Title Data\Transform titles"
           TopLeft="33.0833304462334,154.333337982496" />
         <NodeLayout
-          Size="121.333333333334,42.6666666666667"
+          Size="121,43"
           Id="Package\Transform Title Data\Truncate"
           TopLeft="49.3333302040895,11.3333352908754" />
         <EdgeLayout
@@ -2622,8 +2622,8 @@ SELECT [record_number]
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="229.333333333334,324"
-          Size="229.333333333334,366.666666666667"
+          PanelSize="229,324"
+          Size="229,367"
           Id="Package\Transform Title Data"
           TopLeft="79.4583284438901,35.3684215677742" />
       </GraphLayout>
@@ -2635,15 +2635,15 @@ SELECT [record_number]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="162.666666666667,42.6666666666667"
+          Size="163,43"
           Id="Package\Transform Title Data\Transform titles\transformed_data"
           TopLeft="496.249992605299,121.105265437401" />
         <NodeLayout
-          Size="162.666666666667,42.6666666666667"
+          Size="163,43"
           Id="Package\Transform Title Data\Transform titles\Read title records"
           TopLeft="116.874998258427,117.684212741429" />
         <NodeLayout
-          Size="186.666666666667,42.6666666666667"
+          Size="187,43"
           Id="Package\Transform Title Data\Transform titles\titles_transform_errors"
           TopLeft="483.124992800876,296.263163471156" />
         <EdgeLayout
@@ -2669,7 +2669,7 @@ SELECT [record_number]
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Transform Title Data\Transform titles.Paths[OLE DB Destination Error Output]"
+          Id="Package\Transform Title Data\Transform titles.Paths[Capture Errors]"
           TopLeft="577.020826036421,163.771932104068">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -2688,7 +2688,7 @@ SELECT [record_number]
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-73.20890625,56.7788188085442,146.4178125,11.43359375"
+              BoundingBox="-32.74509765625,56.788584433544,65.4901953125,11.4140625"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>

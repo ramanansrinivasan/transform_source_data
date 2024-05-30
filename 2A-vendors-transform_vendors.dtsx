@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="70"
-  DTS:VersionGUID="{6A92BFCB-79A8-462B-A941-7B96354A6C80}">
+  DTS:VersionBuild="71"
+  DTS:VersionGUID="{1CD9B91D-1B22-44A0-95EB-1EA1DE686570}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -2285,9 +2285,9 @@ SELECT v.[record_number]
               </components>
               <paths>
                 <path
-                  refId="Package\Transform Vendor Data\Transform vendors.Paths[OLE DB Destination Error Output]"
+                  refId="Package\Transform Vendor Data\Transform vendors.Paths[Capture Errors]"
                   endId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input]"
-                  name="OLE DB Destination Error Output"
+                  name="Capture Errors"
                   startId="Package\Transform Vendor Data\Transform vendors\transformed_data.Outputs[OLE DB Destination Error Output]" />
                 <path
                   refId="Package\Transform Vendor Data\Transform vendors.Paths[OLE DB Source Output]"
@@ -2363,19 +2363,19 @@ SELECT v.[record_number]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="196,42.6666666666667"
+          Size="196,43"
           Id="Package\Transform Vendor Data\run_status to InProgress"
           TopLeft="16.8333306883773,85.2280735238658" />
         <NodeLayout
-          Size="204,42.6666666666667"
+          Size="204,43"
           Id="Package\Transform Vendor Data\run_status to Transformed"
           TopLeft="8.70833080944908,226.175444597903" />
         <NodeLayout
-          Size="169.333333333334,42.6666666666667"
+          Size="169,43"
           Id="Package\Transform Vendor Data\Transform vendors"
           TopLeft="33.0833304462334,154.333337982496" />
         <NodeLayout
-          Size="121.333333333334,42.6666666666667"
+          Size="121,43"
           Id="Package\Transform Vendor Data\Truncate"
           TopLeft="49.3333302040895,11.3333352908754" />
         <EdgeLayout
@@ -2447,8 +2447,8 @@ SELECT v.[record_number]
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="228.666666666667,324"
-          Size="228.666666666667,366.666666666667"
+          PanelSize="229,324"
+          Size="229,367"
           Id="Package\Transform Vendor Data"
           TopLeft="160.624997606501,49.947369361188" />
       </GraphLayout>
@@ -2460,15 +2460,15 @@ SELECT v.[record_number]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="202.666666666667,42.6666666666667"
+          Size="203,43"
           Id="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors"
-          TopLeft="491.874992670492,268.894741903382" />
+          TopLeft="450.874992670492,270.894741903382" />
         <NodeLayout
-          Size="162.666666666667,42.6666666666667"
+          Size="163,43"
           Id="Package\Transform Vendor Data\Transform vendors\transformed_data"
           TopLeft="478.749992866069,114.947370584652" />
         <NodeLayout
-          Size="178.666666666667,42.6666666666667"
+          Size="179,43"
           Id="Package\Transform Vendor Data\Transform vendors\Read vendor records"
           TopLeft="116.874998258427,117.684212741429" />
         <EdgeLayout
@@ -2494,38 +2494,26 @@ SELECT v.[record_number]
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Transform Vendor Data\Transform vendors.Paths[OLE DB Destination Error Output]"
-          TopLeft="560.083326199402,157.614037251319">
+          Id="Package\Transform Vendor Data\Transform vendors.Paths[Capture Errors]"
+          TopLeft="556.312492768281,157.947370584652">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="33.1249998044231,111.280704652063"
+              EndConnector="0,112.94737131873"
               Start="0,0"
-              End="33.1249998044231,103.780704652063">
+              End="0,105.44737131873">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,51.6403523260317" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,51.6403523260317"
-                    Point2="0,55.6403523260317"
-                    Point3="4,55.6403523260317" />
-                  <mssgle:LineSegment
-                    End="29.1249998044231,55.6403523260317" />
-                  <mssgle:CubicBezierSegment
-                    Point1="29.1249998044231,55.6403523260317"
-                    Point2="33.1249998044231,55.6403523260317"
-                    Point3="33.1249998044231,59.6403523260317" />
-                  <mssgle:LineSegment
-                    End="33.1249998044231,103.780704652063" />
+                    End="0,105.44737131873" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-56.6464063477885,60.6403523260317,146.4178125,11.43359375"
+              BoundingBox="-32.74509765625,47.016654409365,65.4901953125,11.4140625"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>

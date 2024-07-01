@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">UKWWHDSQLWI099</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAUJfCzS892E+JlQpbJ2WtHgAAAAACAAAAAAADZgAAwAAAABAAAACkej1PIxX+6HVzUNP3dLhTAAAAAASAAACgAAAAEAAAAF1MUavWCFaswaz+hr4mcyqIAAAARa3nx/GrAtTROyjfNg6jfZ039K+3Hw6fLPUirPu/O9ZIk2hsPhQ1xTT9YG6Rp1+7faBDQQra+obqOTsRIeLwzfC7Q5vOZ88dNO0lTC4A9XAYdz9FqG8lWkXYedOpLZBgi69lw6S7Si/tb6XYcQOSMQeMtiVGnjFRD7lAVIh9Gszy8lFFEVuQKBQAAADkJY2yGm4Cumk/SGWSeqvnYI9D4Q==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAUJfCzS892E+JlQpbJ2WtHgAAAAACAAAAAAADZgAAwAAAABAAAAC/Bip0ylcy0iaiMviFhGH3AAAAAASAAACgAAAAEAAAAHDgIF7VDspOe/UlnRnAPVeIAAAA8crM41jR9zhtITdPvpKqMaK8X6MCY5D6mAZ55BbYd2bmLUBHmLT4sv4iP7P8hw38DqYl8lFmK07jMEq51AFYsxIuLuPJ2NQTU7Sk4lpuM1TQIFoTTn5wv70o75MoOV9DfaC/ccMsijRyKvsummlUmVX7yt7fY8KXav0IQFCa5W+l7x2e/37TFRQAAABbLwRh2L0cZd05LYKTfDlSSYJ5vg==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -186,10 +186,10 @@
                 <SSIS:Property SSIS:Name="Name">Package</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">34</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">38</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{39083108-1659-486B-AE35-6AF49177316B}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{FE92846A-4C1E-43B2-9C87-D248F8C83C1B}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -1024,10 +1024,10 @@
                 <SSIS:Property SSIS:Name="Name">Package1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">63</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">70</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{6EAF58A5-7D4F-4F4E-BD9F-C36474AC585C}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{B8578876-1687-467E-8F7C-3A0C5BA6CE73}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -1271,8 +1271,6 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">
-                    </SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -1675,8 +1673,6 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">
-                    </SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -1866,10 +1862,10 @@
                 <SSIS:Property SSIS:Name="Name">1B-titles-create_output_xml_limited</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">57</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">100</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{330DE6E9-CCB4-4ACF-AF1B-7F269770F72A}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{9186078D-A2F5-44B9-899C-A161D90C5827}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -1928,7 +1924,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">SELECT '&lt;UC_PART_INB_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), tit.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/UC_PART_INB_IFD&gt;' AS resultant_payload   FROM final.titles tit   LEFT JOIN config.wms_dm_run_ctl ctl ON tit.run_id = ctl.run_id  CROSS JOIN config.data_element_payload_fillers de    WHERE ctl.package_name = 'titles'    AND ctl.run_status = 'Transformed'    AND de.data_element_name = 'title'  AND tit.ISBN_SuppEd IN ( SELECT TOP 20 ILV.ISBN_SuppEd FROM ( SELECT distinct t.ISBN_SuppEd, CAST(inv.[No-of-Units-1] + inv.[No-of-Units-2] AS INTEGER) as no_of_units   FROM final.titles t   JOIN final.inventories inv ON t.ISBN_SuppEd = inv.ISBN_SuppEd  WHERE t.PackSize &gt; 0 AND CAST(inv.[No-of-Units-1] AS INTEGER) + CAST(inv.[No-of-Units-2] AS INTEGER) &gt; 0    AND BaseLuId &lt;&gt; '') ilv);</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">SELECT '&lt;UC_PART_INB_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), tit.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/UC_PART_INB_IFD&gt;' AS resultant_payload FROM final.titles tit LEFT JOIN config.wms_dm_run_ctl ctl ON tit.run_id = ctl.run_id CROSS JOIN config.data_element_payload_fillers de WHERE ctl.package_name = 'titles'    AND ctl.run_status = 'SentToFile'    AND de.data_element_name = 'title' AND tit.record_number &gt;20000 AND tit.record_number &lt;= 25000--AND tit.ISBN_SuppEd IN ( SELECT TOP 20 ILV.ISBN_SuppEd FROM ( SELECT distinct t.ISBN_SuppEd, CAST(inv.[No-of-Units-1] + inv.[No-of-Units-2] AS INTEGER) as no_of_units   FROM final.titles t   JOIN final.inventories inv ON t.ISBN_SuppEd = inv.ISBN_SuppEd  WHERE t.PackSize &gt; 0 AND CAST(inv.[No-of-Units-1] AS INTEGER) + CAST(inv.[No-of-Units-2] AS INTEGER) &gt; 0    AND BaseLuId &lt;&gt; '') ilv);</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>

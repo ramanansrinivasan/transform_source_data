@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="71"
-  DTS:VersionGUID="{1CD9B91D-1B22-44A0-95EB-1EA1DE686570}">
+  DTS:VersionBuild="72"
+  DTS:VersionGUID="{29A31D8A-89D7-482D-88EE-60CB730EFEFE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -2363,19 +2363,19 @@ SELECT v.[record_number]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="196,43"
+          Size="196,42.6666666666667"
           Id="Package\Transform Vendor Data\run_status to InProgress"
           TopLeft="16.8333306883773,85.2280735238658" />
         <NodeLayout
-          Size="204,43"
+          Size="204,42.6666666666667"
           Id="Package\Transform Vendor Data\run_status to Transformed"
           TopLeft="8.70833080944908,226.175444597903" />
         <NodeLayout
-          Size="169,43"
+          Size="169.333333333334,42.6666666666667"
           Id="Package\Transform Vendor Data\Transform vendors"
           TopLeft="33.0833304462334,154.333337982496" />
         <NodeLayout
-          Size="121,43"
+          Size="121.333333333334,42.6666666666667"
           Id="Package\Transform Vendor Data\Truncate"
           TopLeft="49.3333302040895,11.3333352908754" />
         <EdgeLayout
@@ -2447,8 +2447,8 @@ SELECT v.[record_number]
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="229,324"
-          Size="229,367"
+          PanelSize="229.333333333334,324"
+          Size="229.333333333334,366.666666666667"
           Id="Package\Transform Vendor Data"
           TopLeft="160.624997606501,49.947369361188" />
       </GraphLayout>
@@ -2460,15 +2460,15 @@ SELECT v.[record_number]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="203,43"
+          Size="202.666666666667,42.6666666666667"
           Id="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors"
           TopLeft="450.874992670492,270.894741903382" />
         <NodeLayout
-          Size="163,43"
+          Size="162.666666666667,42.6666666666667"
           Id="Package\Transform Vendor Data\Transform vendors\transformed_data"
           TopLeft="478.749992866069,114.947370584652" />
         <NodeLayout
-          Size="179,43"
+          Size="178.666666666667,42.6666666666667"
           Id="Package\Transform Vendor Data\Transform vendors\Read vendor records"
           TopLeft="116.874998258427,117.684212741429" />
         <EdgeLayout

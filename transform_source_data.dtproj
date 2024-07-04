@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">UKWWHDSQLWI099</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAUJfCzS892E+JlQpbJ2WtHgAAAAACAAAAAAADZgAAwAAAABAAAAAkuw3S5K4Us/RMR9JuenKmAAAAAASAAACgAAAAEAAAALDgGOG2DGKlabF4+vHcYwqIAAAA5pKq99y8bKNccFnpgN+byIZbsqK1Bz2Lfqn1WsEjt7+znPews5z/W9uB/ndW49kI7a+0xxUuiIEnnBnSRnyatBF/H+vpZmfi8O/37TqoWcMAlFSpeufxLOESQt8MlhzbfgyKvuD5W2248iq2yTghI2lBZp9ogvOyV6pm9qzKG1cLJiiCymV+ARQAAAA/LYK8MXBt1bHqzwUL3wBkQUA1CQ==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAUJfCzS892E+JlQpbJ2WtHgAAAAACAAAAAAADZgAAwAAAABAAAABjVj+hoIWZOPHYmHRFZIE7AAAAAASAAACgAAAAEAAAADGlzKKPeWPxPrXKQmPLZB2IAAAAVwn/RadvThBG8Ygrc8G8fNEVSPG9vmJW2nWSNaPLSTBRgM8HiU7gOVJPmK12c2nxKbB4HEuZHJDECEdkIv1bpJlGpBp4IVT9KL7eQcEqvjc6ooGGSEwnickaOJyIBAzlKUQY1+KdVI22kn0TvuOnHEi0q7j7Kbt0E/9QifRZv7cZg0DFx+cTxRQAAAA2YMJJzOLXQtvAR5bkNVf/r1XjoA==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -1673,8 +1673,6 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">
-                    </SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -1860,14 +1858,14 @@
             </SSIS:PackageMetaData>
             <SSIS:PackageMetaData SSIS:Name="1B-titles-create_output_xml_new.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{EF9F864A-1CD6-4D0C-BB32-C826BDDFFC2E}</SSIS:Property>
-                <SSIS:Property SSIS:Name="Name">1B-titles-create_output_xml_loop</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{466275C5-9DFC-4FA0-A57A-8CE3F5408CB1}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">1B-titles-create_output_xml_new</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">118</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">144</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{C34F2400-B2A1-442E-88E4-82F53A86B2CD}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{F538968D-9FEF-405B-91C8-0282A4049F6A}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -1926,7 +1924,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">SELECT '&lt;UC_PART_INB_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), tit.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/UC_PART_INB_IFD&gt;' AS resultant_payload    FROM final.titles tit   WHERE tit.output_file_batch = 2</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">SELECT '&lt;UC_PART_INB_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), tit.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/UC_PART_INB_IFD&gt;' AS resultant_payload    FROM final.titles tit   WHERE tit.output_file_batch = </SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>

@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="1B-titles-create_output_xml_limited"
   DTS:PackageType="5"
-  DTS:VersionBuild="100"
-  DTS:VersionGUID="{9186078D-A2F5-44B9-899C-A161D90C5827}">
+  DTS:VersionBuild="110"
+  DTS:VersionGUID="{CABB2FB4-7EA4-495E-815A-0A1A78F1FC27}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -36,7 +36,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="V:\\titles\\title_data_payloads_20240701_1303.xml">
+          DTS:ConnectionString="V:\\titles\\title_data_payloads_20240703_1037.xml">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"

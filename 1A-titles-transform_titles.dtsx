@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="70"
-  DTS:VersionGUID="{B8578876-1687-467E-8F7C-3A0C5BA6CE73}">
+  DTS:VersionBuild="73"
+  DTS:VersionGUID="{1971135B-F313-4783-9E57-F5B8B5AB2DEC}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -122,7 +122,9 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT tt.[record_number]
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT tt.[output_file_batch]
+	  ,tt.[record_number]
+	  ,tt.[dataset_count]
       ,tt.[run_id]
       ,tt.[ISBN_SuppEd]
       ,tt.[ISBN]
@@ -198,7 +200,9 @@
 								AS resultant_payload
 
 FROM (
-SELECT [record_number]
+SELECT [output_file_batch]
+	  ,[record_number]
+	  ,[dataset_count]
       ,[run_id]
       ,[ISBN_SuppEd]
       ,[ISBN]
@@ -705,6 +709,24 @@ SELECT [record_number]
                           lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackSize]"
                           name="PackSize"
                           truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[output_file_batch]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[output_file_batch]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[output_file_batch]"
+                          name="output_file_batch"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[dataset_count]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[dataset_count]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[dataset_count]"
+                          name="dataset_count"
+                          truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -925,6 +947,14 @@ SELECT [record_number]
                           refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PackSize]"
                           dataType="i4"
                           name="PackSize" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[output_file_batch]"
+                          dataType="i8"
+                          name="output_file_batch" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[dataset_count]"
+                          dataType="i4"
+                          name="dataset_count" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -933,10 +963,20 @@ SELECT [record_number]
                       name="OLE DB Source Error Output">
                       <outputColumns>
                         <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[output_file_batch]"
+                          dataType="i8"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[output_file_batch]"
+                          name="output_file_batch" />
+                        <outputColumn
                           refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[record_number]"
                           dataType="i8"
                           lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[record_number]"
                           name="record_number" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[dataset_count]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[dataset_count]"
+                          name="dataset_count" />
                         <outputColumn
                           refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[run_id]"
                           dataType="i4"
@@ -2209,6 +2249,18 @@ SELECT [record_number]
                           cachedName="PackSize"
                           externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PackSize]"
                           lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PackSize]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[output_file_batch]"
+                          cachedDataType="i8"
+                          cachedName="output_file_batch"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[output_file_batch]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[output_file_batch]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[dataset_count]"
+                          cachedDataType="i4"
+                          cachedName="dataset_count"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[dataset_count]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[dataset_count]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -2429,6 +2481,14 @@ SELECT [record_number]
                           refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PackSize]"
                           dataType="i4"
                           name="PackSize" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[output_file_batch]"
+                          dataType="i8"
+                          name="output_file_batch" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[dataset_count]"
+                          dataType="i4"
+                          name="dataset_count" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>

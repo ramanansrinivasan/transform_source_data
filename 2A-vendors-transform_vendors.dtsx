@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="72"
-  DTS:VersionGUID="{29A31D8A-89D7-482D-88EE-60CB730EFEFE}">
+  DTS:VersionBuild="74"
+  DTS:VersionGUID="{B4AA3AC8-AD78-4DE2-A19A-8A636A7DF8A2}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -122,7 +122,12 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT vend.[record_number]
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--SELECT sv.[Binder Code], count(1) 
+--  FROM source.sap_vendor_data sv
+-- group by sv.[Binder Code] having count(1) &gt; 1;
+
+
+SELECT vend.[record_number]
       ,vend.[run_id]
       ,vend.[Vendor]
       ,vend.[Purch  Organization]
@@ -159,11 +164,11 @@
 	  --,REPLACE(CAST(by_payload_filler AS VARCHAR(8000)), '&lt;filler_supnum&gt;', vend.[Binder Code])
       ,REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
        REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE( 
-       REPLACE(CAST(by_payload_filler AS VARCHAR(8000)), '&lt;filler_supnum&gt;', vend.[Binder Code])
+       REPLACE(CAST(by_payload_filler AS VARCHAR(8000)), '&lt;filler_supnum&gt;', vend.[Vendor])
                                 ,'&lt;filler_hostextid&gt;', vend.[Binder Code])--* 
                                 ,'&lt;filler_adrnam&gt;', vend.name1) 
                                 ,'&lt;filler_adrtyp&gt;', '')--* 
-                                ,'&lt;filler_adrln1&gt;', LTRIM(RTRIM(vend.name2)) + ',' + LTRIM(RTRIM(vend.[Street and House No ]))) --REVISIT IF REQUIRED after speaking with Dan Tovey
+                                ,'&lt;filler_adrln1&gt;', CASE WHEN LTRIM(RTRIM(vend.name2)) &lt;&gt; '' THEN LTRIM(RTRIM(vend.name2)) + ',' + LTRIM(RTRIM(vend.[Street and House No ])) ELSE LTRIM(RTRIM(vend.[Street and House No ])) END) --REVISIT IF REQUIRED after speaking with Dan Tovey
                                 ,'&lt;filler_adrln2&gt;', vend.name3) 
                                 ,'&lt;filler_adrln3&gt;', vend.name4) 
                                 ,'&lt;filler_adrcty&gt;', vend.City) 

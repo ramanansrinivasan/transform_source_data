@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="80"
-  DTS:VersionGUID="{0085CCC4-9647-45C4-82CA-6558C50791D0}">
+  DTS:VersionBuild="81"
+  DTS:VersionGUID="{17223C80-F638-43E6-8AA1-25E55291E11B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -185,13 +185,21 @@
                                 ,'&lt;filler_short_dsc&gt;', tt.title_short_desc) 
                                 ,'&lt;filler_alt_prtnum&gt;', tt.[ISBN])
 								,'&lt;filler_ftpcod&gt;', tt.[ISBN])
-								,'&lt;filler_len&gt;', tt.BookDepth) 
+								--,'&lt;filler_len&gt;', tt.BookDepth) 
+								--,'&lt;filler_wid&gt;', tt.BookWidth) 
+								--,'&lt;filler_hgt&gt;', tt.BookHeight) 
+								--,'&lt;filler_wgt&gt;', tt.BookWeight) 
+								,'&lt;filler_len&gt;', tt.BookHeight) 
 								,'&lt;filler_wid&gt;', tt.BookWidth) 
-								,'&lt;filler_hgt&gt;', tt.BookHeight) 
+								,'&lt;filler_hgt&gt;', tt.BookDepth) 
 								,'&lt;filler_wgt&gt;', tt.BookWeight) 
-								,'&lt;filler_cs_len&gt;', tt.PackDepth) 
+								--,'&lt;filler_cs_len&gt;', tt.PackDepth) 
+								--,'&lt;filler_cs_wid&gt;', tt.PackWidth) 
+								--,'&lt;filler_cs_hgt&gt;', tt.PackHeight) 
+								--,'&lt;filler_cs_wgt&gt;', tt.PackWeight)
+								,'&lt;filler_cs_len&gt;', tt.PackHeight) 
 								,'&lt;filler_cs_wid&gt;', tt.PackWidth) 
-								,'&lt;filler_cs_hgt&gt;', tt.PackHeight) 
+								,'&lt;filler_cs_hgt&gt;', tt.PackDepth) 
 								,'&lt;filler_cs_wgt&gt;', tt.PackWeight)
 								,'&lt;filler_cs_untqty&gt;', CASE WHEN tt.[PackSize] = 0 THEN 1 ELSE tt.[PackSize] END)
 								,'&lt;filler_pa_len&gt;', 0) 
@@ -255,7 +263,7 @@ SELECT [output_file_batch]
 	  ,LayersPerPallet
 	  ,MaxBooksPallet
 	  ,CAST([by_payload_filler] AS VARCHAR(8000)) AS [by_payload_filler]
-  FROM [transform].[titles_staging]) tt where PackSize &gt; 0--where isbn = '9780099610816'
+  FROM [transform].[titles_staging]) tt where PackSize &gt; 0 --and isbn = '9780241550540'
   ORDER BY 1;</property>
                     <property
                       dataType="System.String"

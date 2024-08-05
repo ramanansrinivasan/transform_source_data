@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="81"
-  DTS:VersionGUID="{17223C80-F638-43E6-8AA1-25E55291E11B}">
+  DTS:VersionBuild="91"
+  DTS:VersionGUID="{F6FD8FC6-5982-4135-AE0F-452CD886C48D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -161,13 +161,17 @@
 	  ,tt.BookWeight
 	  ,tt.BookWidth
 	  ,tt.BookDepth
+	  ,tt.PalletHeight
+	  ,tt.PalletWeight
+	  ,tt.PalletWidth
+	  ,tt.PalletDepth
 	  ,tt.CasesPerLayer
 	  ,tt.LayersPerPallet
 	  ,tt.MaxBooksPallet
 	  ,tt.[by_payload_filler]
 ,REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
  REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE( 
-      REPLACE(by_payload_filler, '&lt;filler_hrcylevel1&gt;', tt.ISBN_SuppEd)
+      REPLACE(REPLACE(by_payload_filler, '&lt;filler_hrcylevel1&gt;', tt.ISBN_SuppEd)
                                 ,'&lt;filler_hrcylevel2&gt;', tt.[ISBN]) 
                                 ,'&lt;filler_hrcylevel3&gt;', tt.author) 
                                 ,'&lt;filler_hrcylevel4&gt;', tt.finance_imprint) 
@@ -184,7 +188,8 @@
                                 ,'&lt;filler_lngdsc&gt;', tt.title_long_desc) 
                                 ,'&lt;filler_short_dsc&gt;', tt.title_short_desc) 
                                 ,'&lt;filler_alt_prtnum&gt;', tt.[ISBN])
-								,'&lt;filler_ftpcod&gt;', tt.[ISBN])
+								--,'&lt;filler_ftpcod&gt;', tt.[ISBN])
+								,'&lt;filler_ftpcod&gt;', tt.[ISBN])--tt.[ISBN_SuppEd]) --BYWP-3041 : Same ISBN but different Supply Edition with the same footprint description (Need To Add SE to Footprint Description) 25/07/2024
 								--,'&lt;filler_len&gt;', tt.BookDepth) 
 								--,'&lt;filler_wid&gt;', tt.BookWidth) 
 								--,'&lt;filler_hgt&gt;', tt.BookHeight) 
@@ -202,11 +207,12 @@
 								,'&lt;filler_cs_hgt&gt;', tt.PackDepth) 
 								,'&lt;filler_cs_wgt&gt;', tt.PackWeight)
 								,'&lt;filler_cs_untqty&gt;', CASE WHEN tt.[PackSize] = 0 THEN 1 ELSE tt.[PackSize] END)
-								,'&lt;filler_pa_len&gt;', 0) 
-								,'&lt;filler_pa_wid&gt;', 0) 
-								,'&lt;filler_pa_hgt&gt;', 0) 
-								,'&lt;filler_pa_wgt&gt;', 0)
+								,'&lt;filler_pa_len&gt;', tt.PalletHeight) 
+								,'&lt;filler_pa_wid&gt;', tt.PalletWidth) 
+								,'&lt;filler_pa_hgt&gt;', tt.PalletDepth) 
+								,'&lt;filler_pa_wgt&gt;', tt.PalletWeight)
 								,'&lt;filler_deptcod&gt;', CASE WHEN tt.PackagingType IS NOT NULL THEN CAST(tt.PackagingType as VARCHAR) ELSE '' END)
+								,'&lt;filler_caslvl&gt;', CASE WHEN tt.CasesPerLayer IS NOT NULL THEN tt.CasesPerLayer ELSE 0 END) --BYWP-3134 : Fixing Cases Per Layer or Level issue.
 								--BYWP-3074 : Pallet footprint UOM quantity and Unit quantity are set to 9999 Fix
 								,'&lt;filler_pa_untqty&gt;', CASE WHEN tt.CasesPerLayer*tt.LayersPerPallet*tt.PackSize &gt; 0 THEN tt.CasesPerLayer*tt.LayersPerPallet*tt.PackSize ELSE 9999 END)
 								AS resultant_payload
@@ -259,11 +265,15 @@ SELECT [output_file_batch]
 	  ,BookWeight
 	  ,BookWidth
 	  ,BookDepth
+	  ,1160 AS PalletWidth --default value currently
+	  ,920 AS PalletDepth  --default value currently
+	  ,(LayersPerPallet*PackHeight)+200 AS PalletHeight -- calculated currently
+	  ,(CasesPerLayer*LayersPerPallet*PackWeight) + 20000 AS PalletWeight -- calculated currently
 	  ,CasesPerLayer
 	  ,LayersPerPallet
 	  ,MaxBooksPallet
 	  ,CAST([by_payload_filler] AS VARCHAR(8000)) AS [by_payload_filler]
-  FROM [transform].[titles_staging]) tt where PackSize &gt; 0 --and isbn = '9780241550540'
+  FROM [transform].[titles_staging]) tt --and isbn = '9780241550540'
   ORDER BY 1;</property>
                     <property
                       dataType="System.String"
@@ -749,6 +759,42 @@ SELECT [output_file_batch]
                           lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[CasesPerLayer]"
                           name="CasesPerLayer"
                           truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PalletHeight]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PalletHeight]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PalletHeight]"
+                          name="PalletHeight"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PalletWeight]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PalletWeight]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PalletWeight]"
+                          name="PalletWeight"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PalletWidth]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PalletWidth]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PalletWidth]"
+                          name="PalletWidth"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PalletDepth]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PalletDepth]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PalletDepth]"
+                          name="PalletDepth"
+                          truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -981,6 +1027,22 @@ SELECT [output_file_batch]
                           refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[CasesPerLayer]"
                           dataType="i4"
                           name="CasesPerLayer" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PalletHeight]"
+                          dataType="i4"
+                          name="PalletHeight" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PalletWeight]"
+                          dataType="i4"
+                          name="PalletWeight" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PalletWidth]"
+                          dataType="i4"
+                          name="PalletWidth" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].ExternalColumns[PalletDepth]"
+                          dataType="i4"
+                          name="PalletDepth" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -1232,6 +1294,26 @@ SELECT [output_file_batch]
                           dataType="i4"
                           lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[BookDepth]"
                           name="BookDepth" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PalletHeight]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PalletHeight]"
+                          name="PalletHeight" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PalletWeight]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PalletWeight]"
+                          name="PalletWeight" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PalletWidth]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PalletWidth]"
+                          name="PalletWidth" />
+                        <outputColumn
+                          refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PalletDepth]"
+                          dataType="i4"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[PalletDepth]"
+                          name="PalletDepth" />
                         <outputColumn
                           refId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Error Output].Columns[CasesPerLayer]"
                           dataType="i4"
@@ -2308,6 +2390,30 @@ SELECT [output_file_batch]
                           cachedName="CasesPerLayer"
                           externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[CasesPerLayer]"
                           lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[CasesPerLayer]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[PalletWidth]"
+                          cachedDataType="i4"
+                          cachedName="PalletWidth"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PalletWidth]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PalletWidth]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[PalletDepth]"
+                          cachedDataType="i4"
+                          cachedName="PalletDepth"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PalletDepth]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PalletDepth]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[PalletHeight]"
+                          cachedDataType="i4"
+                          cachedName="PalletHeight"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PalletHeight]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PalletHeight]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[PalletWeight]"
+                          cachedDataType="i4"
+                          cachedName="PalletWeight"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PalletWeight]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PalletWeight]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -2540,6 +2646,22 @@ SELECT [output_file_batch]
                           refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[CasesPerLayer]"
                           dataType="i4"
                           name="CasesPerLayer" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PalletWidth]"
+                          dataType="i4"
+                          name="PalletWidth" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PalletDepth]"
+                          dataType="i4"
+                          name="PalletDepth" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PalletHeight]"
+                          dataType="i4"
+                          name="PalletHeight" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PalletWeight]"
+                          dataType="i4"
+                          name="PalletWeight" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -2746,10 +2868,6 @@ SELECT [output_file_batch]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="186.666666666667,42.6666666666667"
-          Id="Package\Transform Title Data\Transform titles\titles_transform_errors"
-          TopLeft="483.124992800876,296.263163471156" />
-        <NodeLayout
           Size="162.666666666667,42.6666666666667"
           Id="Package\Transform Title Data\Transform titles\transformed_data"
           TopLeft="496.249992605299,121.105265437401" />
@@ -2757,6 +2875,10 @@ SELECT [output_file_batch]
           Size="162.666666666667,42.6666666666667"
           Id="Package\Transform Title Data\Transform titles\Read title records"
           TopLeft="116.874998258427,117.684212741429" />
+        <NodeLayout
+          Size="186.666666666667,42.6666666666667"
+          Id="Package\Transform Title Data\Transform titles\titles_transform_errors"
+          TopLeft="483.124992800876,296.263163471156" />
         <EdgeLayout
           Id="Package\Transform Title Data\Transform titles.Paths[OLE DB Source Output]"
           TopLeft="279.541664925093,140.728072422748">
@@ -2807,19 +2929,6 @@ SELECT [output_file_batch]
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Transform Title Data\Transform titles\titles_transform_errors">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Transform Title Data\Transform titles\transformed_data">
     <Properties>
       <Property>
@@ -2834,6 +2943,19 @@ SELECT [output_file_batch]
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Transform Title Data\Transform titles\Read title records">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transform Title Data\Transform titles\titles_transform_errors">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

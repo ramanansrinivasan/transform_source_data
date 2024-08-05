@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="3A-inventory-transform_inventory_NEW"
   DTS:PackageType="5"
-  DTS:VersionBuild="90"
-  DTS:VersionGUID="{E72AA8CD-5350-4112-98AE-6941D33FCE38}">
+  DTS:VersionBuild="98"
+  DTS:VersionGUID="{FD05AC28-4E7E-4759-8FBB-FA446A6D8A43}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -1555,14 +1555,18 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT tt.[ISBN_SuppEd]
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT tt.output_file_batch
+	  ,tt.dataset_count
+	  ,tt.record_number
+      ,tt.[ISBN_SuppEd]
       ,tt.[ISBN]
       ,tt.[SupplyEd]
 	  ,tt.[BaseLuType]
 	  ,tt.[BaseLuId]
       ,tt.[LocationType]
       ,tt.[BookWeight]
-	  ,tt.binder
+	  ,CAST(tt.binder AS VARCHAR(50)) AS binder
+	  ,tt.VendorID
       ,tt.[ID]
       ,tt.[RecSta]
       ,tt.[Site]
@@ -1671,6 +1675,7 @@
       ,tt.[main_tag_starter]
       ,tt.[main_tag_finisher]
       ,tt.[PackSize]
+	  ,tt.country_of_origin
       ,CAST([by_payload_filler] AS VARCHAR(8000)) AS [by_payload_filler]
       ,CAST(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
        REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(--REPLACE(REPLACE( 
@@ -1678,13 +1683,14 @@
                                  ,'&lt;filler_untcas&gt;', CASE WHEN tt.[PackSize] = 0 THEN 1 ELSE tt.[PackSize] END) --clarify whether mandatory, if mandatory, find mapping from Dan.
                                  ,'&lt;filler_invsts&gt;', CASE WHEN tt.[Frozen-Code-2] = '' THEN 'A' ELSE tt.[Frozen-Code-2] END)--tt.[FrozenCode]) -- remove hardcoding once we have new datacut.
                                  ,'&lt;filler_untqty&gt;', CAST(tt.[No-of-Units-1] AS INTEGER) + CAST(tt.[No-of-Units-2] AS INTEGER)) --clarify with Dan if it has been converted to eaches.
-                                 ,'&lt;filler_orgcod&gt;', '') --clarify whether mandatory, if mandatory, find mapping from Dan.
+                                 ,'&lt;filler_orgcod&gt;', tt.country_of_origin) --Uncomment before final inventory run.
                                  ,'&lt;filler_dstloc&gt;', tt.[Location])                       
 		                         ,'&lt;filler_lodnum&gt;', tt.[BaseLuId])--tt.[LPN]) --clarify whether mandatory
-                                 ,'&lt;filler_ftpcod&gt;', tt.[ISBN]) 
+                                 --,'&lt;filler_ftpcod&gt;', tt.[ISBN]) 
+								 ,'&lt;filler_ftpcod&gt;', tt.ISBN)--tt.[ISBN_SuppEd]) --BYWP-3041 : Same ISBN but different Supply Edition with the same footprint description (Need To Add SE to Footprint Description) 25/07/2024
                                 --,'&lt;filler_untpak&gt;', 0) --clarify whether mandatory, if mandatory, find mapping from Dan.
                                  ,'&lt;filler_fifdte&gt;', CASE WHEN REPLACE(CONVERT(VARCHAR,CONVERT(DATE,tt.[ReceivedDate], 103),112) ,'19000101','') &lt;&gt; '' THEN REPLACE(CONVERT(VARCHAR,CONVERT(DATE,tt.[ReceivedDate], 103),112) ,'19000101','') + '000000' ELSE '' END) -- as per mapping
-                                 ,'&lt;filler_suppnum&gt;', CASE WHEN tt.binder IS NULL THEN '' ELSE tt.binder END) --clarify whether mandatory, if mandatory, find mapping from Dan.
+                                 ,'&lt;filler_suppnum&gt;', CASE WHEN tt.VendorID IS NULL THEN '' ELSE tt.VendorID END) --clarify whether mandatory, if mandatory, find mapping from Dan.
                                  ,'&lt;filler_assettyp&gt;', '')--clarify whether mandatory, if mandatory, find mapping from Dan.
 	  							AS VARCHAR(8000))
 	  							AS resultant_payload
@@ -1697,6 +1703,7 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
       ,stg.[LocationType]
       ,stg.[BookWeight]
 	  ,stg.binder
+	  ,stg.VendorID
       ,stg.[ID]
       ,stg.[RecSta]
       ,CAST(stg.[Site] AS VARCHAR) AS [Site]
@@ -1805,9 +1812,13 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
       ,stg.[main_tag_starter]
       ,stg.[main_tag_finisher]
       ,stg.[PackSize]
+	  ,stg.country_of_origin
+	  ,stg.output_file_batch
+	  ,stg.dataset_count
+	  ,stg.record_number
       ,CAST(stg.[by_payload_filler] AS VARCHAR(8000)) AS [by_payload_filler]
-  FROM [DM_Dev_NP3].[transform].[vista_inventory] stg
-  ) tt</property>
+  FROM [transform].[vista_inventory] stg
+  ) tt;</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -2973,9 +2984,58 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[binder]"
-                          length="4"
+                          length="50"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[binder]"
                           name="binder"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[VendorID]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[VendorID]"
+                          length="50"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[VendorID]"
+                          name="VendorID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[country_of_origin]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[country_of_origin]"
+                          length="50"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[country_of_origin]"
+                          name="country_of_origin"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[output_file_batch]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[output_file_batch]"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[output_file_batch]"
+                          name="output_file_batch"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[dataset_count]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[dataset_count]"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[dataset_count]"
+                          name="dataset_count"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[record_number]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[record_number]"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[record_number]"
+                          name="record_number"
                           truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
@@ -3508,8 +3568,32 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[binder]"
                           codePage="1252"
                           dataType="str"
-                          length="4"
+                          length="50"
                           name="binder" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[VendorID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="VendorID" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[country_of_origin]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="country_of_origin" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[output_file_batch]"
+                          dataType="i8"
+                          name="output_file_batch" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[dataset_count]"
+                          dataType="i4"
+                          name="dataset_count" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[record_number]"
+                          dataType="i8"
+                          name="record_number" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -3517,6 +3601,21 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                       isErrorOut="true"
                       name="OLE DB Source Error Output">
                       <outputColumns>
+                        <outputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[output_file_batch]"
+                          dataType="i8"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[output_file_batch]"
+                          name="output_file_batch" />
+                        <outputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[dataset_count]"
+                          dataType="i4"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[dataset_count]"
+                          name="dataset_count" />
+                        <outputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[record_number]"
+                          dataType="i8"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[record_number]"
+                          name="record_number" />
                         <outputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[run_id]"
                           dataType="i4"
@@ -3563,9 +3662,16 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[binder]"
                           codePage="1252"
                           dataType="str"
-                          length="4"
+                          length="50"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[binder]"
                           name="binder" />
+                        <outputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[VendorID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[VendorID]"
+                          name="VendorID" />
                         <outputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[ID]"
                           dataType="i4"
@@ -4151,6 +4257,13 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           dataType="i4"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[PackSize]"
                           name="PackSize" />
+                        <outputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[country_of_origin]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[country_of_origin]"
+                          name="country_of_origin" />
                         <outputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[by_payload_filler]"
                           codePage="1252"
@@ -5030,10 +5143,44 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[binder]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="4"
+                          cachedLength="50"
                           cachedName="binder"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[binder]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[binder]" />
+                        <inputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[country_of_origin]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="country_of_origin"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[country_of_origin]"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[country_of_origin]" />
+                        <inputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[VendorID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="VendorID"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[VendorID]"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[VendorID]" />
+                        <inputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[output_file_batch]"
+                          cachedDataType="i8"
+                          cachedName="output_file_batch"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[output_file_batch]"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[output_file_batch]" />
+                        <inputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[dataset_count]"
+                          cachedDataType="i4"
+                          cachedName="dataset_count"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[dataset_count]"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[dataset_count]" />
+                        <inputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[record_number]"
+                          cachedDataType="i8"
+                          cachedName="record_number"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[record_number]"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[record_number]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -5581,6 +5728,30 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           dataType="str"
                           length="4"
                           name="binder" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[country_of_origin]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="country_of_origin" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[VendorID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="VendorID" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[output_file_batch]"
+                          dataType="i8"
+                          name="output_file_batch" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[dataset_count]"
+                          dataType="i4"
+                          name="dataset_count" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[record_number]"
+                          dataType="i8"
+                          name="record_number" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -5787,7 +5958,7 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="158.666666666667,42.6666666666667"
+          Size="194.666666666667,42.6666666666667"
           Id="Package\Transform Inventory Data\Transform inventories\Read Inventory Records"
           TopLeft="74.5333333333333,88.1333333333333" />
         <NodeLayout
@@ -5800,18 +5971,18 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
           TopLeft="421.999993816018,223.473688473332" />
         <EdgeLayout
           Id="Package\Transform Inventory Data\Transform inventories.Paths[OLE DB Source Output]"
-          TopLeft="233.533333333333,106.667544361913">
+          TopLeft="269.2,106.58421102858">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="193.341660305734,0"
+              EndConnector="157.674993639067,0"
               Start="0,0"
-              End="185.841660305734,0">
+              End="150.174993639067,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="185.841660305734,0" />
+                    End="150.174993639067,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

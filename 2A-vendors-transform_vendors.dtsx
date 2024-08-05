@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="74"
-  DTS:VersionGUID="{B4AA3AC8-AD78-4DE2-A19A-8A636A7DF8A2}">
+  DTS:VersionBuild="75"
+  DTS:VersionGUID="{E13E987A-4B85-4169-8A85-08BB277FF300}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -215,7 +215,7 @@ SELECT v.[record_number]
       ,v.[main_tag_starter]
       ,v.[by_payload_filler]
       ,v.[main_tag_finisher]
-  FROM [DM_Dev_NP3].[transform].[vendors_staging] v
+  FROM [transform].[vendors_staging] v
   ) vend;</property>
                     <property
                       dataType="System.String"

@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="2B-vendors-create_output_xml"
   DTS:PackageType="5"
-  DTS:VersionBuild="49"
-  DTS:VersionGUID="{E3F8DABB-8119-4A7D-B05B-9A41D4F01533}">
+  DTS:VersionBuild="53"
+  DTS:VersionGUID="{4943032C-DD99-4672-AAF1-1A2E6ABDC64A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=UKWWHDSQLWI099;Initial Catalog=DM_Dev_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{DA3E360E-0EEF-4BF5-9B1B-E5490FBADE27}UKWWHDSQLWI099.DM_Dev_NP3;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=UKWWHDSQLWI099;Initial Catalog=DM_MoC_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{DA3E360E-0EEF-4BF5-9B1B-E5490FBADE27}UKWWHDSQLWI099.DM_Dev_NP3;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -48,7 +48,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="V:\\vendors\\vendor_data_payload_20240422_1526.xml">
+          DTS:ConnectionString="V:\\vendors\\MCT2_vendor_data_payload_20240801_0734.xml">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -81,7 +81,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
       DTS:ObjectName="pOutputFileName">
       <DTS:Property
         DTS:DataType="8"
-        DTS:Name="ParameterValue">V:\\vendors\\vendor_data_payload_</DTS:Property>
+        DTS:Name="ParameterValue">V:\\vendors\\MCT2_vendor_data_payload_</DTS:Property>
     </DTS:PackageParameter>
     <DTS:PackageParameter
       DTS:CreationName=""
@@ -398,7 +398,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
     design-time-name="Package\Create Output File\Create Output File">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="189.333333333334,42.6666666666667"
           Id="Package\Create Output File\Create Output File\get Payloads for output"
@@ -426,7 +426,9 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

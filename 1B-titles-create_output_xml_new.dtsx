@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="1B-titles-create_output_xml_new"
   DTS:PackageType="5"
-  DTS:VersionBuild="157"
-  DTS:VersionGUID="{E22BF1BF-46A9-489E-A5E8-20B4F3AA10DD}">
+  DTS:VersionBuild="163"
+  DTS:VersionGUID="{EC42356C-50B2-468A-AA6D-2BD02D18C5C1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -36,7 +36,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="V:\\titles\\title_data_payloads_20240711_104255.xml">
+          DTS:ConnectionString="V:\\titles\\MCT2_title_data_payloads_20240801_073100.xml">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -60,7 +60,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=UKWWHDSQLWI099;Initial Catalog=DM_Dev_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{99F55629-A9B6-446D-A42D-D73171C0CC01}UKWWHDSQLWI099.DM_Dev_NP3;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=UKWWHDSQLWI099;Initial Catalog=DM_MoC_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{99F55629-A9B6-446D-A42D-D73171C0CC01}UKWWHDSQLWI099.DM_Dev_NP3;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -81,7 +81,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
       DTS:ObjectName="pOutputFileName">
       <DTS:Property
         DTS:DataType="8"
-        DTS:Name="ParameterValue">V:\\titles\\title_data_payloads_</DTS:Property>
+        DTS:Name="ParameterValue">V:\\titles\\MCT2_title_data_payloads_</DTS:Property>
     </DTS:PackageParameter>
     <DTS:PackageParameter
       DTS:CreationName=""
@@ -386,7 +386,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
           DTS:CreationName="STOCK:FORLOOP"
           DTS:Description="For Loop Container"
           DTS:DTSID="{DCE01F5A-16ED-46BD-BB6D-9DE19C1E2D0A}"
-          DTS:EvalExpression="@LoopCounter&lt;=6"
+          DTS:EvalExpression="@LoopCounter&lt;=11"
           DTS:ExecutableType="STOCK:FORLOOP"
           DTS:InitExpression="@LoopCounter=1"
           DTS:LocaleID="-1"
@@ -1335,7 +1335,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
           PanelSize="205.333333333334,278.666666666667"
           Size="205.333333333334,321.333333333334"
           Id="Package\Sequence Container\For Loop Container"
-          TopLeft="16.0833242622517,25.157898033755" />
+          TopLeft="16.0833242622518,25.157898033755" />
         <NodeLayout
           Size="196,42.6666666666667"
           Id="Package\Sequence Container\run_status to SentToFile"
@@ -1365,7 +1365,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="230.666666666667,482"
+          PanelSize="230.666666666667,482.666666666667"
           Size="230.666666666667,525.333333333334"
           Id="Package\Sequence Container"
           TopLeft="592.499991171062,107.421054653514" />
@@ -1424,15 +1424,15 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
     design-time-name="Package\Sequence Container\For Loop Container\Create Output File">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="161.333333333334,42.6666666666667"
-          Id="Package\Sequence Container\For Loop Container\Create Output File\create output_file"
-          TopLeft="583,133.368421078389" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="189.333333333334,42.6666666666667"
           Id="Package\Sequence Container\For Loop Container\Create Output File\get Payloads for output"
           TopLeft="235.624996488914,135.473686760483" />
+        <NodeLayout
+          Size="161.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\For Loop Container\Create Output File\create output_file"
+          TopLeft="583,133.368421078389" />
         <EdgeLayout
           Id="Package\Sequence Container\For Loop Container\Create Output File.Paths[OLE DB Source Output]"
           TopLeft="424.958329822247,155.754387252769">
@@ -1452,7 +1452,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

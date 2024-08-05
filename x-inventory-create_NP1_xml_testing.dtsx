@@ -5,21 +5,21 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="UKWWHDSQLWI099"
   DTS:CreatorName="UK\PAM-WMS-Migration"
-  DTS:DTSID="{A79C1B77-1866-4EC0-BA33-FA0FED8D2B6B}"
+  DTS:DTSID="{EB834FE5-8412-4FF8-BB28-7506E3D71858}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="16.0.5270.0"
   DTS:LocaleID="2057"
-  DTS:ObjectName="3B-inventory-create_output_xml_NEW"
+  DTS:ObjectName="x-inventory-create_NP1_xml_testing"
   DTS:PackageType="5"
-  DTS:VersionBuild="70"
-  DTS:VersionGUID="{E85F7F5B-9A50-4B66-825A-B0498E198637}">
+  DTS:VersionBuild="72"
+  DTS:VersionGUID="{DEE0569D-0E12-42E9-8CD6-346C4A6CD8B0}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[inventory_output_files]"
       DTS:CreationName="FLATFILE"
-      DTS:DTSID="{55757001-83A4-4D98-8DC3-28FCA511913C}"
+      DTS:DTSID="{9303020A-3E8E-49CF-97FE-4B6FCD7A1E16}"
       DTS:ObjectName="inventory_output_files">
       <DTS:PropertyExpression
         DTS:Name="ConnectionString">@[$Package::pOutputFileName]  + (DT_WSTR,4)DATEPART("yyyy",GetDate()) +
@@ -36,7 +36,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="V:\\inventories\\MCT2_inventory_data_payloads_20240801_074914.xml">
+          DTS:ConnectionString="V:\\inventories\\NP1_testing_inventory_payloads_20240724_085141.xml">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -45,7 +45,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="resultant_payload"
-              DTS:DTSID="{1F65E066-92D5-4F81-96ED-45A5C9FFA557}"
+              DTS:DTSID="{9E8FC031-5380-4731-BB21-A1637643E245}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -54,25 +54,25 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{3E0FD922-6C9A-44B5-8169-1940842E04B9}"
+      DTS:DTSID="{D6BBD3BD-1834-46DA-967C-DC94C092783D}"
       DTS:ObjectName="UKWWHDSQLWI099.DM_Dev_NP3">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=UKWWHDSQLWI099;Initial Catalog=DM_Dev_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{3E0FD922-6C9A-44B5-8169-1940842E04B9}UKWWHDSQLWI099.DM_Dev_NP3;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=UKWWHDSQLWI099;Initial Catalog=DM_Dev_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{D6BBD3BD-1834-46DA-967C-DC94C092783D}UKWWHDSQLWI099.DM_Dev_NP3;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3 1]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{99F55629-A9B6-446D-A42D-D73171C0CC01}"
+      DTS:DTSID="{2492CD3C-8C09-4CEA-B402-0DC899231985}"
       DTS:ObjectName="UKWWHDSQLWI099.DM_Dev_NP3 1">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=UKWWHDSQLWI099;Initial Catalog=DM_MoC_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{99F55629-A9B6-446D-A42D-D73171C0CC01}UKWWHDSQLWI099.DM_Dev_NP3;" />
+          DTS:ConnectionString="Data Source=UKWWHDSQLWI099;Initial Catalog=DM_MoC_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{2492CD3C-8C09-4CEA-B402-0DC899231985}UKWWHDSQLWI099.DM_Dev_NP3;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -80,7 +80,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
     <DTS:PackageParameter
       DTS:CreationName=""
       DTS:DataType="8"
-      DTS:DTSID="{F65BD2EC-C06C-4493-9571-A62A8ADEBBE8}"
+      DTS:DTSID="{620027E0-5CF4-47F9-8576-38F75F4F325E}"
       DTS:ObjectName="pFileExtension">
       <DTS:Property
         DTS:DataType="8"
@@ -89,35 +89,35 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
     <DTS:PackageParameter
       DTS:CreationName=""
       DTS:DataType="8"
-      DTS:DTSID="{AAB3CD1D-154A-42E7-9288-8FEAACBE1CE5}"
+      DTS:DTSID="{899205B7-EE97-4964-8C58-8DDDD7E7B3BD}"
       DTS:ObjectName="pOutputFileName">
       <DTS:Property
         DTS:DataType="8"
-        DTS:Name="ParameterValue">V:\\inventories\\MCT2_inventory_data_payloads_</DTS:Property>
+        DTS:Name="ParameterValue">V:\\inventories\\NP1_testing_inventory_payloads_</DTS:Property>
     </DTS:PackageParameter>
     <DTS:PackageParameter
       DTS:CreationName=""
       DTS:DataType="3"
-      DTS:DTSID="{D3638640-1A30-4D0B-890B-CAE906A258A1}"
+      DTS:DTSID="{088DE721-5561-4DCF-A6AE-0B7F29F40DB8}"
       DTS:ObjectName="pRunID">
       <DTS:Property
         DTS:DataType="3"
-        DTS:Name="ParameterValue">3</DTS:Property>
+        DTS:Name="ParameterValue">6</DTS:Property>
     </DTS:PackageParameter>
     <DTS:PackageParameter
       DTS:CreationName=""
       DTS:DataType="8"
-      DTS:DTSID="{6932987C-56C6-41BB-9D4A-F766A9448312}"
+      DTS:DTSID="{16A1F807-5FAB-4AA5-8BC4-D4C5E4CC62C1}"
       DTS:ObjectName="pSQLQuery">
       <DTS:Property
         DTS:DataType="8"
-        DTS:Name="ParameterValue">SELECT '&lt;CREATE_INVENTORY_IN_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), inv.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/CREATE_INVENTORY_IN_IFD&gt;' AS resultant_payload   FROM final.inventories inv    LEFT JOIN config.wms_dm_run_ctl ctl ON inv.run_id = ctl.run_id   CROSS JOIN config.data_element_payload_fillers de    WHERE ctl.package_name = 'inventory'     AND ctl.run_status = 'Transformed'     AND de.data_element_name = 'inventory' --AND  inv.record_number &gt;=1 AND inv.record_number &lt;= 5000;</DTS:Property>
+        DTS:Name="ParameterValue">SELECT '&lt;CREATE_INVENTORY_IN_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), inv.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/CREATE_INVENTORY_IN_IFD&gt;' AS resultant_payload    FROM final.inventories inv  WHERE inv.ISBN_SuppEd IN ( '9780141183923-UKS03001', '9781784708252-UKS00601', '9781784708214-UKS00301', '9781784165116-UKS00301', '9781784708474-UKS00501', '9781784164201-UKS00401', '9781784708535-UKS00201', '9780141188522-UKS02301', '9780141188539-UKS01801', '9780099527947-UKS02601', '9780099527121-UKS02501', '9780099596356-UKS01001', '9780099590088-UKS07501', '9780141399744-UKS00801', '9780099474197-UKS01601', '9781409372042-UKS00901', '9780099474159-UKS02501', '9780099526407-UKS03201', '9781529150537-UKS00101');</DTS:Property>
     </DTS:PackageParameter>
   </DTS:PackageParameters>
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{64378349-0EF2-409B-9615-9CED8BE041BB}"
+      DTS:DTSID="{0334631A-878D-4B7C-9D6B-12DAFA17DC74}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="LoopCounter">
@@ -126,7 +126,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{4A1423DA-0BCD-4067-AA15-AD6A6438EBF0}"
+      DTS:DTSID="{0ABE23B9-7A2B-472C-806A-BA2A1D285F5A}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="vOrigSQL">
@@ -135,7 +135,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{6B660F4A-78B0-4A52-895C-0DA5E1CA2961}"
+      DTS:DTSID="{E3EF7F6B-6C7E-434F-8B8D-CABB8220F732}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="vSQLQuery">
@@ -148,8 +148,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
       DTS:refId="Package\Create Output File"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:Disabled="True"
-      DTS:DTSID="{3B72B997-8C63-47A0-A671-FFD04F5E6535}"
+      DTS:DTSID="{F018B723-292E-44B3-B052-F23A517E095E}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
       DTS:ObjectName="Create Output File">
@@ -159,7 +158,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
           DTS:refId="Package\Create Output File\Create Output File"
           DTS:CreationName="Microsoft.Pipeline"
           DTS:Description="Data Flow Task"
-          DTS:DTSID="{24876061-85DC-4599-A386-3A245DE2DAD6}"
+          DTS:DTSID="{A0F9103F-0EA5-46C9-AD62-06E73BC5C91D}"
           DTS:ExecutableType="Microsoft.Pipeline"
           DTS:LocaleID="-1"
           DTS:ObjectName="Create Output File"
@@ -278,8 +277,8 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
                   <connections>
                     <connection
                       refId="Package\Create Output File\Create Output File\get Payloads for output.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
-                      connectionManagerRefId="Package.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                      connectionManagerID="Package.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3 1]"
+                      connectionManagerRefId="Package.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3 1]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -351,15 +350,15 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
           DTS:refId="Package\Create Output File\run_status to SentToFile"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{52CB697A-8AB4-4563-8263-692F8F0D310E}"
+          DTS:DTSID="{4FDD6B53-1515-498B-8338-37CC1140AED8}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="run_status to SentToFile"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{3E0FD922-6C9A-44B5-8169-1940842E04B9}"
+              SQLTask:Connection="{D6BBD3BD-1834-46DA-967C-DC94C092783D}"
               SQLTask:SqlStatementSource="UPDATE [config].[wms_dm_run_ctl] &#xA;SET run_status = 'SentToFile' &#xA;       ,run_finish_time = GetDate()&#xA;WHERE run_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
@@ -375,7 +374,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Create Output File.PrecedenceConstraints[Constraint]"
           DTS:CreationName=""
-          DTS:DTSID="{5695BD04-7802-4EDA-A124-965A874671CE}"
+          DTS:DTSID="{07887E23-9636-4523-8B5B-74FB13BD627E}"
           DTS:From="Package\Create Output File\Create Output File"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
@@ -386,7 +385,8 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
       DTS:refId="Package\Sequence Container"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:DTSID="{b89b8e58-306a-418c-93b1-47bd74638c06}"
+      DTS:Disabled="True"
+      DTS:DTSID="{1600E2F6-E1DA-46E5-B0D1-3401AE67AEA4}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
       DTS:ObjectName="Sequence Container">
@@ -397,8 +397,8 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
           DTS:AssignExpression="@LoopCounter = @LoopCounter + 1 "
           DTS:CreationName="STOCK:FORLOOP"
           DTS:Description="For Loop Container"
-          DTS:DTSID="{7fd9de02-ab7d-46f5-802f-5f2b76f2aa11}"
-          DTS:EvalExpression="@LoopCounter&lt;=16"
+          DTS:DTSID="{4E281916-F9F1-428A-9A9B-9A21989025A2}"
+          DTS:EvalExpression="@LoopCounter&lt;=18"
           DTS:ExecutableType="STOCK:FORLOOP"
           DTS:InitExpression="@LoopCounter=1"
           DTS:LocaleID="-1"
@@ -410,7 +410,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
               DTS:refId="Package\Sequence Container\For Loop Container\Create Output File"
               DTS:CreationName="Microsoft.Pipeline"
               DTS:Description="Data Flow Task"
-              DTS:DTSID="{154fa55e-ec24-4a31-b3cb-0405149cfb7c}"
+              DTS:DTSID="{5BC1916E-2FFD-4A05-800A-D928DAD36BE9}"
               DTS:ExecutableType="Microsoft.Pipeline"
               DTS:LocaleID="-1"
               DTS:ObjectName="Create Output File"
@@ -602,11 +602,11 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
               DTS:refId="Package\Sequence Container\For Loop Container\Set SQL Query"
               DTS:CreationName="Microsoft.ScriptTask"
               DTS:Description="Script Task"
-              DTS:DTSID="{80f642e1-6741-446e-964c-3a536e7044c4}"
+              DTS:DTSID="{1D033753-9487-47FD-A45F-C7AFEC1FFCE6}"
               DTS:ExecutableType="Microsoft.ScriptTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Set SQL Query"
-              DTS:ThreadHint="0">
+              DTS:ThreadHint="1">
               <DTS:Variables />
               <DTS:ObjectData>
                 <ScriptProject
@@ -1219,7 +1219,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
             <DTS:PrecedenceConstraint
               DTS:refId="Package\Sequence Container\For Loop Container.PrecedenceConstraints[Constraint]"
               DTS:CreationName=""
-              DTS:DTSID="{c56b5896-94fe-4188-99fa-7f03f6e3eba0}"
+              DTS:DTSID="{3AFCC878-7B80-4FF5-A3B5-965EB5DE9384}"
               DTS:From="Package\Sequence Container\For Loop Container\Set SQL Query"
               DTS:LogicalAnd="True"
               DTS:ObjectName="Constraint"
@@ -1230,15 +1230,15 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
           DTS:refId="Package\Sequence Container\run_status to SentToFile"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{6aba3499-1884-469b-a0b3-f6c3ad38180f}"
+          DTS:DTSID="{850E30FA-E424-4E10-B0C5-0E8C1CBC8DAE}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="run_status to SentToFile"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{99F55629-A9B6-446D-A42D-D73171C0CC01}"
+              SQLTask:Connection="{2492CD3C-8C09-4CEA-B402-0DC899231985}"
               SQLTask:SqlStatementSource="UPDATE [config].[wms_dm_run_ctl] &#xA;SET run_status = 'SentToFile' &#xA;       ,run_finish_time = GetDate()&#xA;WHERE run_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
@@ -1254,7 +1254,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
           DTS:CreationName=""
-          DTS:DTSID="{08bd5b2f-1760-4c39-a053-fe0e7a49a7de}"
+          DTS:DTSID="{E3378BE7-0E61-4381-8871-38FA2601CDDB}"
           DTS:From="Package\Sequence Container\For Loop Container"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
@@ -1388,13 +1388,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
     design-time-name="Package\Create Output File\Create Output File">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="189,43"
+          Size="189.333333333334,42.6666666666667"
           Id="Package\Create Output File\Create Output File\get Payloads for output"
           TopLeft="235.624996488914,134.105265682094" />
         <NodeLayout
-          Size="161,43"
+          Size="161.333333333334,42.6666666666667"
           Id="Package\Create Output File\Create Output File\create output_file"
           TopLeft="583,132" />
         <EdgeLayout
@@ -1416,9 +1416,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

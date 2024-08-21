@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="91"
-  DTS:VersionGUID="{F6FD8FC6-5982-4135-AE0F-452CD886C48D}">
+  DTS:VersionBuild="97"
+  DTS:VersionGUID="{5DBDFD9B-7405-4E24-A727-7C6E5D44E00F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -189,7 +189,8 @@
                                 ,'&lt;filler_short_dsc&gt;', tt.title_short_desc) 
                                 ,'&lt;filler_alt_prtnum&gt;', tt.[ISBN])
 								--,'&lt;filler_ftpcod&gt;', tt.[ISBN])
-								,'&lt;filler_ftpcod&gt;', tt.[ISBN])--tt.[ISBN_SuppEd]) --BYWP-3041 : Same ISBN but different Supply Edition with the same footprint description (Need To Add SE to Footprint Description) 25/07/2024
+								,'&lt;filler_ftpcod&gt;', tt.[ISBN] + '-' + REPLACE(TRY_CONVERT(VARCHAR,GETDATE(),5),'-',''))--tt.[ISBN_SuppEd])--REPLACE(TRY_CONVERT(VARCHAR,GETDATE(),5),'-','') 
+								--BYWP-3041 : Same ISBN but different Supply Edition with the same footprint description (Need To Add SE to Footprint Description) 25/07/2024
 								--,'&lt;filler_len&gt;', tt.BookDepth) 
 								--,'&lt;filler_wid&gt;', tt.BookWidth) 
 								--,'&lt;filler_hgt&gt;', tt.BookHeight) 
@@ -207,14 +208,14 @@
 								,'&lt;filler_cs_hgt&gt;', tt.PackDepth) 
 								,'&lt;filler_cs_wgt&gt;', tt.PackWeight)
 								,'&lt;filler_cs_untqty&gt;', CASE WHEN tt.[PackSize] = 0 THEN 1 ELSE tt.[PackSize] END)
-								,'&lt;filler_pa_len&gt;', tt.PalletHeight) 
+								,'&lt;filler_pa_len&gt;', tt.PalletDepth) 
 								,'&lt;filler_pa_wid&gt;', tt.PalletWidth) 
-								,'&lt;filler_pa_hgt&gt;', tt.PalletDepth) 
+								,'&lt;filler_pa_hgt&gt;', tt.PalletHeight) 
 								,'&lt;filler_pa_wgt&gt;', tt.PalletWeight)
 								,'&lt;filler_deptcod&gt;', CASE WHEN tt.PackagingType IS NOT NULL THEN CAST(tt.PackagingType as VARCHAR) ELSE '' END)
-								,'&lt;filler_caslvl&gt;', CASE WHEN tt.CasesPerLayer IS NOT NULL THEN tt.CasesPerLayer ELSE 0 END) --BYWP-3134 : Fixing Cases Per Layer or Level issue.
+								,'&lt;filler_caslvl&gt;', CASE WHEN tt.CasesPerLayer IS NOT NULL AND tt.CasesPerLayer &gt; 0 THEN tt.CasesPerLayer ELSE 15 END) --BYWP-3134 : Fixing Cases Per Layer or Level issue. Tom D confirmed the default value must be 15.
 								--BYWP-3074 : Pallet footprint UOM quantity and Unit quantity are set to 9999 Fix
-								,'&lt;filler_pa_untqty&gt;', CASE WHEN tt.CasesPerLayer*tt.LayersPerPallet*tt.PackSize &gt; 0 THEN tt.CasesPerLayer*tt.LayersPerPallet*tt.PackSize ELSE 9999 END)
+								,'&lt;filler_pa_untqty&gt;', CASE WHEN tt.CasesPerLayer*tt.LayersPerPallet*tt.PackSize &gt; 0 THEN tt.CasesPerLayer*tt.LayersPerPallet*tt.PackSize ELSE 9999 END) --
 								AS resultant_payload
 
 FROM (
@@ -273,7 +274,7 @@ SELECT [output_file_batch]
 	  ,LayersPerPallet
 	  ,MaxBooksPallet
 	  ,CAST([by_payload_filler] AS VARCHAR(8000)) AS [by_payload_filler]
-  FROM [transform].[titles_staging]) tt --and isbn = '9780241550540'
+  FROM [transform].[titles_staging]) tt --where isbn = '9780141981048'
   ORDER BY 1;</property>
                     <property
                       dataType="System.String"

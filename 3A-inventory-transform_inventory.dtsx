@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="3A-inventory-transform_inventory_NEW"
   DTS:PackageType="5"
-  DTS:VersionBuild="98"
-  DTS:VersionGUID="{FD05AC28-4E7E-4759-8FBB-FA446A6D8A43}">
+  DTS:VersionBuild="99"
+  DTS:VersionGUID="{7D44B22B-717B-427A-8BF0-CC41B778FFB5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -1683,11 +1683,11 @@
                                  ,'&lt;filler_untcas&gt;', CASE WHEN tt.[PackSize] = 0 THEN 1 ELSE tt.[PackSize] END) --clarify whether mandatory, if mandatory, find mapping from Dan.
                                  ,'&lt;filler_invsts&gt;', CASE WHEN tt.[Frozen-Code-2] = '' THEN 'A' ELSE tt.[Frozen-Code-2] END)--tt.[FrozenCode]) -- remove hardcoding once we have new datacut.
                                  ,'&lt;filler_untqty&gt;', CAST(tt.[No-of-Units-1] AS INTEGER) + CAST(tt.[No-of-Units-2] AS INTEGER)) --clarify with Dan if it has been converted to eaches.
-                                 ,'&lt;filler_orgcod&gt;', tt.country_of_origin) --Uncomment before final inventory run.
+                                 ,'&lt;filler_orgcod&gt;', '') --do not pass country of origin into origin code anymore.
                                  ,'&lt;filler_dstloc&gt;', tt.[Location])                       
 		                         ,'&lt;filler_lodnum&gt;', tt.[BaseLuId])--tt.[LPN]) --clarify whether mandatory
                                  --,'&lt;filler_ftpcod&gt;', tt.[ISBN]) 
-								 ,'&lt;filler_ftpcod&gt;', tt.ISBN)--tt.[ISBN_SuppEd]) --BYWP-3041 : Same ISBN but different Supply Edition with the same footprint description (Need To Add SE to Footprint Description) 25/07/2024
+								 ,'&lt;filler_ftpcod&gt;', tt.[ISBN] + '-' + REPLACE(TRY_CONVERT(VARCHAR,GETDATE(),5),'-',''))--tt.[ISBN_SuppEd]) --BYWP-3041 : Same ISBN but different Supply Edition with the same footprint description (Need To Add SE to Footprint Description) 25/07/2024
                                 --,'&lt;filler_untpak&gt;', 0) --clarify whether mandatory, if mandatory, find mapping from Dan.
                                  ,'&lt;filler_fifdte&gt;', CASE WHEN REPLACE(CONVERT(VARCHAR,CONVERT(DATE,tt.[ReceivedDate], 103),112) ,'19000101','') &lt;&gt; '' THEN REPLACE(CONVERT(VARCHAR,CONVERT(DATE,tt.[ReceivedDate], 103),112) ,'19000101','') + '000000' ELSE '' END) -- as per mapping
                                  ,'&lt;filler_suppnum&gt;', CASE WHEN tt.VendorID IS NULL THEN '' ELSE tt.VendorID END) --clarify whether mandatory, if mandatory, find mapping from Dan.

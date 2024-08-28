@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="97"
-  DTS:VersionGUID="{5DBDFD9B-7405-4E24-A727-7C6E5D44E00F}">
+  DTS:VersionBuild="98"
+  DTS:VersionGUID="{37597C79-6175-41E1-9757-F7E146C23933}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -266,10 +266,10 @@ SELECT [output_file_batch]
 	  ,BookWeight
 	  ,BookWidth
 	  ,BookDepth
-	  ,1160 AS PalletWidth --default value currently
-	  ,920 AS PalletDepth  --default value currently
-	  ,(LayersPerPallet*PackHeight)+200 AS PalletHeight -- calculated currently
-	  ,(CasesPerLayer*LayersPerPallet*PackWeight) + 20000 AS PalletWeight -- calculated currently
+	  ,1000 AS PalletWidth --default value was 1160 previously BYWP-3273 : Fixing Pallet Dimensions
+	  ,1200 AS PalletDepth  --default value was 920 previously BYWP-3273 : Fixing Pallet Dimensions
+	  ,(LayersPerPallet*PackHeight)+90 AS PalletHeight -- calculated value BYWP-3273 : Fixing Pallet Dimensions
+	  ,(CasesPerLayer*LayersPerPallet*PackWeight) + 20000 AS PalletWeight -- calculated value
 	  ,CasesPerLayer
 	  ,LayersPerPallet
 	  ,MaxBooksPallet

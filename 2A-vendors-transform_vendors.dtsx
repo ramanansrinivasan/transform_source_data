@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="75"
-  DTS:VersionGUID="{E13E987A-4B85-4169-8A85-08BB277FF300}">
+  DTS:VersionBuild="76"
+  DTS:VersionGUID="{AF970A83-E0EE-488E-B33D-C4690B886609}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -168,7 +168,8 @@ SELECT vend.[record_number]
                                 ,'&lt;filler_hostextid&gt;', vend.[Binder Code])--* 
                                 ,'&lt;filler_adrnam&gt;', vend.name1) 
                                 ,'&lt;filler_adrtyp&gt;', '')--* 
-                                ,'&lt;filler_adrln1&gt;', CASE WHEN LTRIM(RTRIM(vend.name2)) &lt;&gt; '' THEN LTRIM(RTRIM(vend.name2)) + ',' + LTRIM(RTRIM(vend.[Street and House No ])) ELSE LTRIM(RTRIM(vend.[Street and House No ])) END) --REVISIT IF REQUIRED after speaking with Dan Tovey
+                                --,'&lt;filler_adrln1&gt;', CASE WHEN LTRIM(RTRIM(vend.name2)) &lt;&gt; '' THEN LTRIM(RTRIM(vend.name2)) + ',' + LTRIM(RTRIM(vend.[Street and House No ])) ELSE LTRIM(RTRIM(vend.[Street and House No ])) END) --REVISIT IF REQUIRED after speaking with Dan Tovey
+                                ,'&lt;filler_adrln1&gt;', CASE WHEN LEN(LTRIM(RTRIM(vend.[Street and House No ]))) = 0 THEN LTRIM(RTRIM(vend.name2)) ELSE LTRIM(RTRIM(vend.[Street and House No ])) END) --28/08/2024 : Mapping Street and House No field to addressline 1 instead of name 2 because Data Quality of this field is better.
                                 ,'&lt;filler_adrln2&gt;', vend.name3) 
                                 ,'&lt;filler_adrln3&gt;', vend.name4) 
                                 ,'&lt;filler_adrcty&gt;', vend.City) 
@@ -2368,19 +2369,19 @@ SELECT v.[record_number]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="196,42.6666666666667"
+          Size="196,43"
           Id="Package\Transform Vendor Data\run_status to InProgress"
           TopLeft="16.8333306883773,85.2280735238658" />
         <NodeLayout
-          Size="204,42.6666666666667"
+          Size="204,43"
           Id="Package\Transform Vendor Data\run_status to Transformed"
           TopLeft="8.70833080944908,226.175444597903" />
         <NodeLayout
-          Size="169.333333333334,42.6666666666667"
+          Size="171,42"
           Id="Package\Transform Vendor Data\Transform vendors"
           TopLeft="33.0833304462334,154.333337982496" />
         <NodeLayout
-          Size="121.333333333334,42.6666666666667"
+          Size="121,43"
           Id="Package\Transform Vendor Data\Truncate"
           TopLeft="49.3333302040895,11.3333352908754" />
         <EdgeLayout
@@ -2407,18 +2408,18 @@ SELECT v.[record_number]
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Transform Vendor Data.PrecedenceConstraints[Constraint 1]"
-          TopLeft="114.229163961175,197.000004649163">
+          TopLeft="114.645830627841,196.333337982496">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.1754399487403"
+              EndConnector="0,29.842106615407"
               Start="0,0"
-              End="0,21.6754399487403">
+              End="0,22.342106615407">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,21.6754399487403" />
+                    End="0,22.342106615407" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2429,18 +2430,18 @@ SELECT v.[record_number]
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Transform Vendor Data.PrecedenceConstraints[Constraint 2]"
-          TopLeft="116.291663900639,127.894740190532">
+          TopLeft="116.708330567305,128.228073523866">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,26.4385977919635"
+              EndConnector="0,26.1052644586302"
               Start="0,0"
-              End="0,18.9385977919635">
+              End="0,18.6052644586302">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,18.9385977919635" />
+                    End="0,18.6052644586302" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2452,8 +2453,8 @@ SELECT v.[record_number]
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="229.333333333334,324"
-          Size="229.333333333334,366.666666666667"
+          PanelSize="229,324"
+          Size="229,367"
           Id="Package\Transform Vendor Data"
           TopLeft="160.624997606501,49.947369361188" />
       </GraphLayout>
@@ -2465,15 +2466,15 @@ SELECT v.[record_number]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="202.666666666667,42.6666666666667"
+          Size="203,43"
           Id="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors"
           TopLeft="450.874992670492,270.894741903382" />
         <NodeLayout
-          Size="162.666666666667,42.6666666666667"
+          Size="163,43"
           Id="Package\Transform Vendor Data\Transform vendors\transformed_data"
           TopLeft="478.749992866069,114.947370584652" />
         <NodeLayout
-          Size="178.666666666667,42.6666666666667"
+          Size="179,43"
           Id="Package\Transform Vendor Data\Transform vendors\Read vendor records"
           TopLeft="116.874998258427,117.684212741429" />
         <EdgeLayout

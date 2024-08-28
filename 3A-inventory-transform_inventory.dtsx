@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="3A-inventory-transform_inventory_NEW"
   DTS:PackageType="5"
-  DTS:VersionBuild="99"
-  DTS:VersionGUID="{7D44B22B-717B-427A-8BF0-CC41B778FFB5}">
+  DTS:VersionBuild="100"
+  DTS:VersionGUID="{4A324B9B-F8AA-4A9C-BA20-B6057356A7DF}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -1818,7 +1818,9 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
 	  ,stg.record_number
       ,CAST(stg.[by_payload_filler] AS VARCHAR(8000)) AS [by_payload_filler]
   FROM [transform].[vista_inventory] stg
-  ) tt;</property>
+  ) tt
+ --   WHERE CAST(tt.[No-of-Units-1] AS INTEGER) + CAST(tt.[No-of-Units-2] AS INTEGER) &gt; 0; 
+ -- WDM-9 : To fix Negative Numbers error coming from BY load, limit the data migration only for those inventory records with Quantity &gt; 0</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -5861,19 +5863,19 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="196,42.6666666666667"
+          Size="196,43"
           Id="Package\Transform Inventory Data\run_status to InProgress"
           TopLeft="16.8333306883773,85.2280735238658" />
         <NodeLayout
-          Size="204,42.6666666666667"
+          Size="204,43"
           Id="Package\Transform Inventory Data\run_status to Transformed"
           TopLeft="8.70833080944908,226.175444597903" />
         <NodeLayout
-          Size="150.666666666667,42.6666666666667"
+          Size="151,43"
           Id="Package\Transform Inventory Data\Transform inventories"
           TopLeft="33.0833304462334,154.333337982496" />
         <NodeLayout
-          Size="121.333333333334,42.6666666666667"
+          Size="121,43"
           Id="Package\Transform Inventory Data\Truncate"
           TopLeft="49.3333302040895,11.3333352908754" />
         <EdgeLayout
@@ -5945,8 +5947,8 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="229.333333333334,324"
-          Size="229.333333333334,366.666666666667"
+          PanelSize="229,324"
+          Size="229,367"
           Id="Package\Transform Inventory Data"
           TopLeft="160.624997606501,49.947369361188" />
       </GraphLayout>
@@ -5958,15 +5960,15 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="194.666666666667,42.6666666666667"
+          Size="195,43"
           Id="Package\Transform Inventory Data\Transform inventories\Read Inventory Records"
           TopLeft="74.5333333333333,88.1333333333333" />
         <NodeLayout
-          Size="170.666666666667,42"
+          Size="171,42"
           Id="Package\Transform Inventory Data\Transform inventories\Transformed_Data"
           TopLeft="426.874993639067,82.7017553904931" />
         <NodeLayout
-          Size="173.333333333334,42.6666666666667"
+          Size="173,43"
           Id="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors"
           TopLeft="421.999993816018,223.473688473332" />
         <EdgeLayout

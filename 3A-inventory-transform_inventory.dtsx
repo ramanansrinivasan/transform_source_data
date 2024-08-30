@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="3A-inventory-transform_inventory_NEW"
   DTS:PackageType="5"
-  DTS:VersionBuild="100"
-  DTS:VersionGUID="{4A324B9B-F8AA-4A9C-BA20-B6057356A7DF}">
+  DTS:VersionBuild="103"
+  DTS:VersionGUID="{F6013335-7542-4FE1-BD0C-6A2F603B7A94}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -953,6 +953,12 @@
                           cachedName="BaseLuId"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[BaseLuId]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[BaseLuId]" />
+                        <inputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[location_stock_value]"
+                          cachedDataType="i4"
+                          cachedName="location_stock_value"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[location_stock_value]"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[location_stock_value]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -1502,6 +1508,10 @@
                           dataType="str"
                           length="20"
                           name="BaseLuId" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[location_stock_value]"
+                          dataType="i4"
+                          name="location_stock_value" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -1682,7 +1692,7 @@
        REPLACE(by_payload_filler, '&lt;filler_prtnum&gt;', tt.[ISBN_SuppEd]) 
                                  ,'&lt;filler_untcas&gt;', CASE WHEN tt.[PackSize] = 0 THEN 1 ELSE tt.[PackSize] END) --clarify whether mandatory, if mandatory, find mapping from Dan.
                                  ,'&lt;filler_invsts&gt;', CASE WHEN tt.[Frozen-Code-2] = '' THEN 'A' ELSE tt.[Frozen-Code-2] END)--tt.[FrozenCode]) -- remove hardcoding once we have new datacut.
-                                 ,'&lt;filler_untqty&gt;', CAST(tt.[No-of-Units-1] AS INTEGER) + CAST(tt.[No-of-Units-2] AS INTEGER)) --clarify with Dan if it has been converted to eaches.
+                                 ,'&lt;filler_untqty&gt;', tt.location_stock_value) --clarify with Dan if it has been converted to eaches.
                                  ,'&lt;filler_orgcod&gt;', '') --do not pass country of origin into origin code anymore.
                                  ,'&lt;filler_dstloc&gt;', tt.[Location])                       
 		                         ,'&lt;filler_lodnum&gt;', tt.[BaseLuId])--tt.[LPN]) --clarify whether mandatory
@@ -1694,6 +1704,7 @@
                                  ,'&lt;filler_assettyp&gt;', '')--clarify whether mandatory, if mandatory, find mapping from Dan.
 	  							AS VARCHAR(8000))
 	  							AS resultant_payload
+	,tt.location_stock_value
   FROM (
 SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
       ,stg.[Isbn13] AS [ISBN]
@@ -1735,6 +1746,7 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
       ,stg.[UnitsAwOut3A]
       ,stg.[NoOfUnitsB] AS [No-of-Units-2]
       ,CAST(LTRIM(RTRIM(stg.[FrozenCodeB])) AS VARCHAR) AS [Frozen-Code-2]
+	  ,(CAST(stg.[NoOfUnitsA] AS INTEGER) + CAST(stg.[NoOfUnitsB] AS INTEGER))*CAST(stg.UnitSize AS INTEGER) AS location_stock_value
       ,stg.[UnitsAwIn1B]
       ,stg.[UnitsAwIn2B]
       ,stg.[UnitsAwIn3B]
@@ -3039,6 +3051,15 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[record_number]"
                           name="record_number"
                           truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[location_stock_value]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[location_stock_value]"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[location_stock_value]"
+                          name="location_stock_value"
+                          truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -3596,6 +3617,10 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[record_number]"
                           dataType="i8"
                           name="record_number" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[location_stock_value]"
+                          dataType="i4"
+                          name="location_stock_value" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -4280,6 +4305,11 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           length="8000"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[resultant_payload]"
                           name="resultant_payload" />
+                        <outputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[location_stock_value]"
+                          dataType="i4"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[location_stock_value]"
+                          name="location_stock_value" />
                         <outputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                           dataType="i4"
@@ -5183,6 +5213,12 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           cachedName="record_number"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[record_number]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[record_number]" />
+                        <inputColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[location_stock_value]"
+                          cachedDataType="i4"
+                          cachedName="location_stock_value"
+                          externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[location_stock_value]"
+                          lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[location_stock_value]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -5754,6 +5790,10 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[record_number]"
                           dataType="i8"
                           name="record_number" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[location_stock_value]"
+                          dataType="i4"
+                          name="location_stock_value" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -5863,19 +5903,19 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="196,43"
+          Size="196,42.6666666666667"
           Id="Package\Transform Inventory Data\run_status to InProgress"
           TopLeft="16.8333306883773,85.2280735238658" />
         <NodeLayout
-          Size="204,43"
+          Size="204,42.6666666666667"
           Id="Package\Transform Inventory Data\run_status to Transformed"
           TopLeft="8.70833080944908,226.175444597903" />
         <NodeLayout
-          Size="151,43"
+          Size="150.666666666667,42.6666666666667"
           Id="Package\Transform Inventory Data\Transform inventories"
           TopLeft="33.0833304462334,154.333337982496" />
         <NodeLayout
-          Size="121,43"
+          Size="121.333333333334,42.6666666666667"
           Id="Package\Transform Inventory Data\Truncate"
           TopLeft="49.3333302040895,11.3333352908754" />
         <EdgeLayout
@@ -5947,8 +5987,8 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="229,324"
-          Size="229,367"
+          PanelSize="229.333333333334,324"
+          Size="229.333333333334,366.666666666667"
           Id="Package\Transform Inventory Data"
           TopLeft="160.624997606501,49.947369361188" />
       </GraphLayout>
@@ -5960,15 +6000,15 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="195,43"
+          Size="194.666666666667,42.6666666666667"
           Id="Package\Transform Inventory Data\Transform inventories\Read Inventory Records"
           TopLeft="74.5333333333333,88.1333333333333" />
         <NodeLayout
-          Size="171,42"
+          Size="170.666666666667,42"
           Id="Package\Transform Inventory Data\Transform inventories\Transformed_Data"
           TopLeft="426.874993639067,82.7017553904931" />
         <NodeLayout
-          Size="173,43"
+          Size="216,42.6666666666667"
           Id="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors"
           TopLeft="421.999993816018,223.473688473332" />
         <EdgeLayout
@@ -5995,25 +6035,37 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Transform Inventory Data\Transform inventories.Paths[Capture Errors]"
-          TopLeft="510.437493727543,124.701755390493">
+          TopLeft="512.2083269724,124.701755390493">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,98.7719330828389"
+              EndConnector="17.7916668436177,98.7719330828389"
               Start="0,0"
-              End="0,91.2719330828389">
+              End="17.7916668436177,91.2719330828389">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,91.2719330828389" />
+                    End="0,45.3859665414195" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,45.3859665414195"
+                    Point2="0,49.3859665414195"
+                    Point3="4,49.3859665414195" />
+                  <mssgle:LineSegment
+                    End="13.7916668436177,49.3859665414195" />
+                  <mssgle:CubicBezierSegment
+                    Point1="13.7916668436177,49.3859665414195"
+                    Point2="17.7916668436177,49.3859665414195"
+                    Point3="17.7916668436177,53.3859665414195" />
+                  <mssgle:LineSegment
+                    End="17.7916668436177,91.2719330828389" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-32.74509765625,39.9289352914195,65.4901953125,11.4140625"
+              BoundingBox="-23.8492642344412,54.3859665414195,65.4901953125,11.4140625"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>

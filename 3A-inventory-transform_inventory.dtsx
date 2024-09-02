@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="3A-inventory-transform_inventory_NEW"
   DTS:PackageType="5"
-  DTS:VersionBuild="103"
-  DTS:VersionGUID="{F6013335-7542-4FE1-BD0C-6A2F603B7A94}">
+  DTS:VersionBuild="104"
+  DTS:VersionGUID="{900DCB71-FF33-4319-B601-E102C09B216E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -1693,7 +1693,7 @@
                                  ,'&lt;filler_untcas&gt;', CASE WHEN tt.[PackSize] = 0 THEN 1 ELSE tt.[PackSize] END) --clarify whether mandatory, if mandatory, find mapping from Dan.
                                  ,'&lt;filler_invsts&gt;', CASE WHEN tt.[Frozen-Code-2] = '' THEN 'A' ELSE tt.[Frozen-Code-2] END)--tt.[FrozenCode]) -- remove hardcoding once we have new datacut.
                                  ,'&lt;filler_untqty&gt;', tt.location_stock_value) --clarify with Dan if it has been converted to eaches.
-                                 ,'&lt;filler_orgcod&gt;', '') --do not pass country of origin into origin code anymore.
+                                 ,'&lt;filler_orgcod&gt;', '') --BYWP-3110 : fix.
                                  ,'&lt;filler_dstloc&gt;', tt.[Location])                       
 		                         ,'&lt;filler_lodnum&gt;', tt.[BaseLuId])--tt.[LPN]) --clarify whether mandatory
                                  --,'&lt;filler_ftpcod&gt;', tt.[ISBN]) 
@@ -1831,7 +1831,7 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
       ,CAST(stg.[by_payload_filler] AS VARCHAR(8000)) AS [by_payload_filler]
   FROM [transform].[vista_inventory] stg
   ) tt
- --   WHERE CAST(tt.[No-of-Units-1] AS INTEGER) + CAST(tt.[No-of-Units-2] AS INTEGER) &gt; 0; 
+    WHERE CAST(tt.[No-of-Units-1] AS INTEGER) + CAST(tt.[No-of-Units-2] AS INTEGER) &gt; 0; 
  -- WDM-9 : To fix Negative Numbers error coming from BY load, limit the data migration only for those inventory records with Quantity &gt; 0</property>
                     <property
                       dataType="System.String"
@@ -6000,10 +6000,6 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="194.666666666667,42.6666666666667"
-          Id="Package\Transform Inventory Data\Transform inventories\Read Inventory Records"
-          TopLeft="74.5333333333333,88.1333333333333" />
-        <NodeLayout
           Size="170.666666666667,42"
           Id="Package\Transform Inventory Data\Transform inventories\Transformed_Data"
           TopLeft="426.874993639067,82.7017553904931" />
@@ -6011,6 +6007,10 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
           Size="216,42.6666666666667"
           Id="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors"
           TopLeft="421.999993816018,223.473688473332" />
+        <NodeLayout
+          Size="194.666666666667,42.6666666666667"
+          Id="Package\Transform Inventory Data\Transform inventories\Read Inventory Records"
+          TopLeft="74.5333333333333,88.1333333333333" />
         <EdgeLayout
           Id="Package\Transform Inventory Data\Transform inventories.Paths[OLE DB Source Output]"
           TopLeft="269.2,106.58421102858">
@@ -6073,14 +6073,6 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Transform Inventory Data\Transform inventories\Read Inventory Records">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Transform Inventory Data\Transform inventories\Transformed_Data">
     <Properties>
       <Property>
@@ -6103,6 +6095,14 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transform Inventory Data\Transform inventories\Read Inventory Records">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

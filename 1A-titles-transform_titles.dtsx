@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="98"
-  DTS:VersionGUID="{37597C79-6175-41E1-9757-F7E146C23933}">
+  DTS:VersionBuild="99"
+  DTS:VersionGUID="{BEE3EEC4-7EED-45FD-A3DD-8CBF8B345DC8}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -181,7 +181,9 @@
                                 ,'&lt;filler_prtfam&gt;', tt.[Binding]) 
                                 ,'&lt;filler_untcst&gt;', tt.se_publication_price) 
                                 ,'&lt;filler_prtsize&gt;', tt.answer_code) 
-                                ,'&lt;filler_dflt_orgcode&gt;', tt.country_of_origin) 
+                                ,'&lt;filler_dflt_orgcode&gt;', CASE WHEN tt.country_of_origin = '' OR
+								                                    tt.country_of_origin IS NULL THEN 'GB' ELSE tt.country_of_origin END
+								                    ) --BYWP-3110 : Temporarily default to GB if source country of origin is empty.
                                 ,'&lt;filler_cstms_cmmdty_cod&gt;', tt.[commodity_code2]) 
                                 ,'&lt;filler_dsp_prtnum&gt;', tt.ISBN_SuppEd) --BYWP-3071 : Supply Edition not showing on Item Fix 16/07/2024
                                 ,'&lt;filler_prthrcy&gt;', tt.ISBN_SuppEd) 
@@ -2882,7 +2884,7 @@ SELECT [output_file_batch]
           TopLeft="483.124992800876,296.263163471156" />
         <EdgeLayout
           Id="Package\Transform Title Data\Transform titles.Paths[OLE DB Source Output]"
-          TopLeft="279.541664925093,140.728072422748">
+          TopLeft="279.541664925094,140.728072422748">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"

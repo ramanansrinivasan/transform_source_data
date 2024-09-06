@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="2B-vendors-create_output_xml"
   DTS:PackageType="5"
-  DTS:VersionBuild="53"
-  DTS:VersionGUID="{4943032C-DD99-4672-AAF1-1A2E6ABDC64A}">
+  DTS:VersionBuild="54"
+  DTS:VersionGUID="{23AB0460-B4E9-48AE-BA78-096CD43EF762}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -48,7 +48,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="V:\\vendors\\MCT2_vendor_data_payload_20240801_0734.xml">
+          DTS:ConnectionString="V:\\vendors\\MCT2Fixes0309_vendor_data_payload_20240903_1028.xml">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -81,7 +81,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
       DTS:ObjectName="pOutputFileName">
       <DTS:Property
         DTS:DataType="8"
-        DTS:Name="ParameterValue">V:\\vendors\\MCT2_vendor_data_payload_</DTS:Property>
+        DTS:Name="ParameterValue">V:\\vendors\\MCT2Fixes0309_vendor_data_payload_</DTS:Property>
     </DTS:PackageParameter>
     <DTS:PackageParameter
       DTS:CreationName=""
@@ -90,7 +90,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
       DTS:ObjectName="pRunID">
       <DTS:Property
         DTS:DataType="3"
-        DTS:Name="ParameterValue">2</DTS:Property>
+        DTS:Name="ParameterValue">6</DTS:Property>
     </DTS:PackageParameter>
     <DTS:PackageParameter
       DTS:CreationName=""
@@ -355,11 +355,11 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="166.666666666667,42.6666666666667"
+          Size="167,43"
           Id="Package\Create Output File\Create Output File"
           TopLeft="45.8333289747438,63.1578985231405" />
         <NodeLayout
-          Size="196,42.6666666666667"
+          Size="196,43"
           Id="Package\Create Output File\run_status to SentToFile"
           TopLeft="25.2083292820801,152.105268618407" />
         <EdgeLayout
@@ -388,7 +388,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
           HeaderHeight="43"
           IsExpanded="True"
           PanelSize="236,250"
-          Size="236,292.666666666667"
+          Size="236,293"
           Id="Package\Create Output File"
           TopLeft="246.874996321276,95.1052649480154" />
       </GraphLayout>

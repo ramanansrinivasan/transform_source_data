@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="99"
-  DTS:VersionGUID="{BEE3EEC4-7EED-45FD-A3DD-8CBF8B345DC8}">
+  DTS:VersionBuild="100"
+  DTS:VersionGUID="{3E20AA49-7E77-4F58-99AD-9F1A3ED766F2}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -2774,19 +2774,19 @@ SELECT [output_file_batch]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="196,42.6666666666667"
+          Size="196,43"
           Id="Package\Transform Title Data\run_status to InProgress"
           TopLeft="16.8333306883773,85.2280735238658" />
         <NodeLayout
-          Size="204,42.6666666666667"
+          Size="204,43"
           Id="Package\Transform Title Data\run_status to Transformed"
           TopLeft="8.70833080944908,226.175444597903" />
         <NodeLayout
-          Size="153.333333333334,42.6666666666667"
+          Size="153,43"
           Id="Package\Transform Title Data\Transform titles"
           TopLeft="33.0833304462334,154.333337982496" />
         <NodeLayout
-          Size="121.333333333334,42.6666666666667"
+          Size="121,43"
           Id="Package\Transform Title Data\Truncate"
           TopLeft="49.3333302040895,11.3333352908754" />
         <EdgeLayout
@@ -2858,8 +2858,8 @@ SELECT [output_file_batch]
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="229.333333333334,324"
-          Size="229.333333333334,366.666666666667"
+          PanelSize="229,324"
+          Size="229,367"
           Id="Package\Transform Title Data"
           TopLeft="79.4583284438901,35.3684215677742" />
       </GraphLayout>
@@ -2871,31 +2871,31 @@ SELECT [output_file_batch]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="162.666666666667,42.6666666666667"
+          Size="163,43"
           Id="Package\Transform Title Data\Transform titles\transformed_data"
           TopLeft="496.249992605299,121.105265437401" />
         <NodeLayout
-          Size="162.666666666667,42.6666666666667"
+          Size="163,43"
           Id="Package\Transform Title Data\Transform titles\Read title records"
-          TopLeft="116.874998258427,117.684212741429" />
+          TopLeft="116.874998258427,116.684212741429" />
         <NodeLayout
-          Size="186.666666666667,42.6666666666667"
+          Size="187,43"
           Id="Package\Transform Title Data\Transform titles\titles_transform_errors"
           TopLeft="483.124992800876,296.263163471156" />
         <EdgeLayout
           Id="Package\Transform Title Data\Transform titles.Paths[OLE DB Source Output]"
-          TopLeft="279.541664925094,140.728072422748">
+          TopLeft="279.874998258427,140.394739089415">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="216.708327680205,0"
+              EndConnector="216.374994346872,0"
               Start="0,0"
-              End="209.208327680205,0">
+              End="208.874994346872,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="209.208327680205,0" />
+                    End="208.874994346872,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

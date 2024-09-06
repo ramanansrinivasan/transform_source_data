@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="76"
-  DTS:VersionGUID="{AF970A83-E0EE-488E-B33D-C4690B886609}">
+  DTS:VersionBuild="77"
+  DTS:VersionGUID="{4A02E518-1E9D-4B29-B0B0-C1AC1EB53A9C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -2379,7 +2379,7 @@ SELECT v.[record_number]
         <NodeLayout
           Size="171,42"
           Id="Package\Transform Vendor Data\Transform vendors"
-          TopLeft="33.0833304462334,154.333337982496" />
+          TopLeft="32.0833304462334,154.333337982496" />
         <NodeLayout
           Size="121,43"
           Id="Package\Transform Vendor Data\Truncate"
@@ -2408,7 +2408,7 @@ SELECT v.[record_number]
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Transform Vendor Data.PrecedenceConstraints[Constraint 1]"
-          TopLeft="114.645830627841,196.333337982496">
+          TopLeft="114.145830627841,196.333337982496">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2430,7 +2430,7 @@ SELECT v.[record_number]
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Transform Vendor Data.PrecedenceConstraints[Constraint 2]"
-          TopLeft="116.708330567305,128.228073523866">
+          TopLeft="116.208330567305,128.228073523866">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"

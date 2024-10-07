@@ -5,14 +5,14 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="UKWWHDSQLWI099"
   DTS:CreatorName="UK\PAM-WMS-Migration"
-  DTS:DTSID="{A2388E03-D6A8-4978-A9D1-1B53ED080D5D}"
+  DTS:DTSID="{D7DB8B0D-5794-4E65-8401-0A7D3B1D73A9}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="16.0.5270.0"
   DTS:LocaleID="2057"
-  DTS:ObjectName="3B-inventory-create_output_xml_NEW"
+  DTS:ObjectName="x-inventory-create_output_xml_limited"
   DTS:PackageType="5"
-  DTS:VersionBuild="54"
-  DTS:VersionGUID="{D568A786-E2EE-429F-B107-4D834F02DA76}">
+  DTS:VersionBuild="55"
+  DTS:VersionGUID="{B088A1E3-2150-4C30-9A76-62E8FAD00229}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -36,7 +36,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="V:\\inventories\\inventory_data_payloads_20240530_1010.xml">
+          DTS:ConnectionString="V:\\inventories\\inventory_data_payloads_20240906_1052.xml">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -355,11 +355,11 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="167,43"
+          Size="166.666666666667,42.6666666666667"
           Id="Package\Create Output File\Create Output File"
           TopLeft="45.8333289747438,63.1578985231405" />
         <NodeLayout
-          Size="196,43"
+          Size="196,42.6666666666667"
           Id="Package\Create Output File\run_status to SentToFile"
           TopLeft="25.2083292820801,152.105268618407" />
         <EdgeLayout
@@ -387,8 +387,8 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="236,251"
-          Size="236,293"
+          PanelSize="236,250.666666666667"
+          Size="236,293.333333333334"
           Id="Package\Create Output File"
           TopLeft="246.874996321276,95.1052649480154" />
       </GraphLayout>

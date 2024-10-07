@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="100"
-  DTS:VersionGUID="{3E20AA49-7E77-4F58-99AD-9F1A3ED766F2}">
+  DTS:VersionBuild="113"
+  DTS:VersionGUID="{E5950033-8CD4-410B-B20A-B0518FAA9C69}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -23,7 +23,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="varRunID">
       <DTS:VariableValue
-        DTS:DataType="3">0</DTS:VariableValue>
+        DTS:DataType="3">1</DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
@@ -270,13 +270,15 @@ SELECT [output_file_batch]
 	  ,BookDepth
 	  ,1000 AS PalletWidth --default value was 1160 previously BYWP-3273 : Fixing Pallet Dimensions
 	  ,1200 AS PalletDepth  --default value was 920 previously BYWP-3273 : Fixing Pallet Dimensions
-	  ,(LayersPerPallet*PackHeight)+90 AS PalletHeight -- calculated value BYWP-3273 : Fixing Pallet Dimensions
+	  ,CASE WHEN (LayersPerPallet*PackDepth)+150 &gt; 1160 THEN 1160 ELSE (LayersPerPallet*PackHeight)+150 END AS PalletHeight -- calculated value BYWP-3273 : Fixing Pallet Dimensions
 	  ,(CasesPerLayer*LayersPerPallet*PackWeight) + 20000 AS PalletWeight -- calculated value
 	  ,CasesPerLayer
 	  ,LayersPerPallet
 	  ,MaxBooksPallet
 	  ,CAST([by_payload_filler] AS VARCHAR(8000)) AS [by_payload_filler]
-  FROM [transform].[titles_staging]) tt --where isbn = '9780141981048'
+  FROM [transform].[titles_staging]) tt 
+  JOIN transform.delta_title_list dt ON tt.ISBN_SuppEd = dt.ISBN_SuppEd AND tt.run_id = dt.run_id AND dt.[Storage Location] = tt.[Storage Location]
+  --WHERE tt.ISBN_SuppEd in( '9780241357552-UKS01201', '9780241642245-UKS00101')--where isbn = '9780141981048'
   ORDER BY 1;</property>
                     <property
                       dataType="System.String"
@@ -2774,19 +2776,19 @@ SELECT [output_file_batch]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="196,43"
+          Size="196,42.6666666666667"
           Id="Package\Transform Title Data\run_status to InProgress"
           TopLeft="16.8333306883773,85.2280735238658" />
         <NodeLayout
-          Size="204,43"
+          Size="204,42.6666666666667"
           Id="Package\Transform Title Data\run_status to Transformed"
           TopLeft="8.70833080944908,226.175444597903" />
         <NodeLayout
-          Size="153,43"
+          Size="130.666666666667,42.6666666666667"
           Id="Package\Transform Title Data\Transform titles"
           TopLeft="33.0833304462334,154.333337982496" />
         <NodeLayout
-          Size="121,43"
+          Size="121.333333333334,42.6666666666667"
           Id="Package\Transform Title Data\Truncate"
           TopLeft="49.3333302040895,11.3333352908754" />
         <EdgeLayout
@@ -2813,18 +2815,30 @@ SELECT [output_file_batch]
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Transform Title Data.PrecedenceConstraints[Constraint 1]"
-          TopLeft="110.229163961175,197.000004649163">
+          TopLeft="98.4166637795667,197.000004649163">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.1754399487403"
+              EndConnector="12.2916670298823,29.1754399487403"
               Start="0,0"
-              End="0,21.6754399487403">
+              End="12.2916670298823,21.6754399487403">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,21.6754399487403" />
+                    End="0,10.5877199743702" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.5877199743702"
+                    Point2="0,14.5877199743702"
+                    Point3="4,14.5877199743702" />
+                  <mssgle:LineSegment
+                    End="8.29166702988235,14.5877199743702" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.29166702988235,14.5877199743702"
+                    Point2="12.2916670298823,14.5877199743702"
+                    Point3="12.2916670298823,18.5877199743702" />
+                  <mssgle:LineSegment
+                    End="12.2916670298823,21.6754399487403" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2835,18 +2849,30 @@ SELECT [output_file_batch]
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Transform Title Data.PrecedenceConstraints[Constraint 2]"
-          TopLeft="112.291663900639,127.894740190532">
+          TopLeft="114.833330688377,127.894740190532">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,26.4385977919635"
+              EndConnector="-16.4166669088106,26.4385977919635"
               Start="0,0"
-              End="0,18.9385977919635">
+              End="-16.4166669088106,18.9385977919635">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,18.9385977919635" />
+                    End="0,9.21929889598177" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.21929889598177"
+                    Point2="0,13.2192988959818"
+                    Point3="-4,13.2192988959818" />
+                  <mssgle:LineSegment
+                    End="-12.4166669088106,13.2192988959818" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-12.4166669088106,13.2192988959818"
+                    Point2="-16.4166669088106,13.2192988959818"
+                    Point3="-16.4166669088106,17.2192988959818" />
+                  <mssgle:LineSegment
+                    End="-16.4166669088106,18.9385977919635" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2858,8 +2884,8 @@ SELECT [output_file_batch]
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="229,324"
-          Size="229,367"
+          PanelSize="229.333333333334,324"
+          Size="229.333333333334,366.666666666667"
           Id="Package\Transform Title Data"
           TopLeft="79.4583284438901,35.3684215677742" />
       </GraphLayout>
@@ -2871,15 +2897,15 @@ SELECT [output_file_batch]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="163,43"
+          Size="162.666666666667,42.6666666666667"
           Id="Package\Transform Title Data\Transform titles\transformed_data"
           TopLeft="496.249992605299,121.105265437401" />
         <NodeLayout
-          Size="163,43"
+          Size="162.666666666667,42.6666666666667"
           Id="Package\Transform Title Data\Transform titles\Read title records"
           TopLeft="116.874998258427,116.684212741429" />
         <NodeLayout
-          Size="187,43"
+          Size="186.666666666667,42.6666666666667"
           Id="Package\Transform Title Data\Transform titles\titles_transform_errors"
           TopLeft="483.124992800876,296.263163471156" />
         <EdgeLayout

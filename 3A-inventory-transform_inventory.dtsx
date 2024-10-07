@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="3A-inventory-transform_inventory_NEW"
   DTS:PackageType="5"
-  DTS:VersionBuild="104"
-  DTS:VersionGUID="{900DCB71-FF33-4319-B601-E102C09B216E}">
+  DTS:VersionBuild="110"
+  DTS:VersionGUID="{EC56A81F-D8A4-4723-A669-E74577D04564}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -179,7 +179,7 @@
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[Site]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="Site"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Site]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Site]" />
@@ -187,7 +187,7 @@
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[Placement]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="Placement"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Placement]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Placement]" />
@@ -195,7 +195,7 @@
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[Location]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="Location"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Location]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Location]" />
@@ -203,23 +203,19 @@
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[ISBN_SuppEd]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="ISBN_SuppEd"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[ISBN_SuppEd]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[ISBN_SuppEd]" />
                         <inputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[ReceivedDate]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
+                          cachedDataType="dbDate"
                           cachedName="ReceivedDate"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[ReceivedDate]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[ReceivedDate]" />
                         <inputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[No-of-Units-1]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
+                          cachedDataType="i4"
                           cachedName="No-of-Units-1"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-1]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-1]" />
@@ -227,15 +223,13 @@
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[Frozen-Code-1]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="Frozen-Code-1"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-1]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-1]" />
                         <inputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[No-of-Units-2]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
+                          cachedDataType="i4"
                           cachedName="No-of-Units-2"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-2]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-2]" />
@@ -243,15 +237,13 @@
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[Frozen-Code-2]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="Frozen-Code-2"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-2]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-2]" />
                         <inputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[No-of-Units-3]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
+                          cachedDataType="i4"
                           cachedName="No-of-Units-3"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-3]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-3]" />
@@ -259,15 +251,13 @@
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[Frozen-Code-3]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="Frozen-Code-3"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-3]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-3]" />
                         <inputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[No-of-Units-4]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
+                          cachedDataType="i4"
                           cachedName="No-of-Units-4"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-4]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-4]" />
@@ -275,15 +265,13 @@
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[Frozen-Code-4]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="Frozen-Code-4"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-4]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-4]" />
                         <inputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[No-of-Units-5]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
+                          cachedDataType="i4"
                           cachedName="No-of-Units-5"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-5]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-5]" />
@@ -291,15 +279,13 @@
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[Frozen-Code-5]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="Frozen-Code-5"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-5]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-5]" />
                         <inputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[No-of-Units-6]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
+                          cachedDataType="i4"
                           cachedName="No-of-Units-6"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-6]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-6]" />
@@ -307,7 +293,7 @@
                           refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].Columns[Frozen-Code-6]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="Frozen-Code-6"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-6]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-6]" />
@@ -1694,10 +1680,11 @@
                                  ,'&lt;filler_invsts&gt;', CASE WHEN tt.[Frozen-Code-2] = '' THEN 'A' ELSE tt.[Frozen-Code-2] END)--tt.[FrozenCode]) -- remove hardcoding once we have new datacut.
                                  ,'&lt;filler_untqty&gt;', tt.location_stock_value) --clarify with Dan if it has been converted to eaches.
                                  ,'&lt;filler_orgcod&gt;', '') --BYWP-3110 : fix.
-                                 ,'&lt;filler_dstloc&gt;', tt.[Location])                       
+                                 --,'&lt;filler_dstloc&gt;', tt.[Location])   
+                                 ,'&lt;filler_dstloc&gt;', CASE WHEN ISNULL(tt.[replace_location_if_not_setup],'') &lt;&gt; '' THEN [replace_location_if_not_setup] ELSE  tt.[Location] END)                       
 		                         ,'&lt;filler_lodnum&gt;', tt.[BaseLuId])--tt.[LPN]) --clarify whether mandatory
                                  --,'&lt;filler_ftpcod&gt;', tt.[ISBN]) 
-								 ,'&lt;filler_ftpcod&gt;', tt.[ISBN] + '-' + REPLACE(TRY_CONVERT(VARCHAR,GETDATE(),5),'-',''))--tt.[ISBN_SuppEd]) --BYWP-3041 : Same ISBN but different Supply Edition with the same footprint description (Need To Add SE to Footprint Description) 25/07/2024
+								 ,'&lt;filler_ftpcod&gt;', tt.[ISBN] + '-' + REPLACE(TRY_CONVERT(VARCHAR,GETDATE()-1,5),'-',''))--tt.[ISBN_SuppEd]) --BYWP-3041 : Same ISBN but different Supply Edition with the same footprint description (Need To Add SE to Footprint Description) 25/07/2024
                                 --,'&lt;filler_untpak&gt;', 0) --clarify whether mandatory, if mandatory, find mapping from Dan.
                                  ,'&lt;filler_fifdte&gt;', CASE WHEN REPLACE(CONVERT(VARCHAR,CONVERT(DATE,tt.[ReceivedDate], 103),112) ,'19000101','') &lt;&gt; '' THEN REPLACE(CONVERT(VARCHAR,CONVERT(DATE,tt.[ReceivedDate], 103),112) ,'19000101','') + '000000' ELSE '' END) -- as per mapping
                                  ,'&lt;filler_suppnum&gt;', CASE WHEN tt.VendorID IS NULL THEN '' ELSE tt.VendorID END) --clarify whether mandatory, if mandatory, find mapping from Dan.
@@ -1705,6 +1692,7 @@
 	  							AS VARCHAR(8000))
 	  							AS resultant_payload
 	,tt.location_stock_value
+	,tt.[replace_location_if_not_setup]
   FROM (
 SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
       ,stg.[Isbn13] AS [ISBN]
@@ -1828,6 +1816,7 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
 	  ,stg.output_file_batch
 	  ,stg.dataset_count
 	  ,stg.record_number
+	  ,stg.[replace_location_if_not_setup]
       ,CAST(stg.[by_payload_filler] AS VARCHAR(8000)) AS [by_payload_filler]
   FROM [transform].[vista_inventory] stg
   ) tt
@@ -1884,7 +1873,7 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[Site]"
-                          length="50"
+                          length="30"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Site]"
                           name="Site"
                           truncationRowDisposition="FailComponent" />
@@ -1895,7 +1884,7 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[Placement]"
-                          length="50"
+                          length="30"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Placement]"
                           name="Placement"
                           truncationRowDisposition="FailComponent" />
@@ -1906,7 +1895,7 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[Location]"
-                          length="50"
+                          length="30"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Location]"
                           name="Location"
                           truncationRowDisposition="FailComponent" />
@@ -1917,29 +1906,25 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[ISBN_SuppEd]"
-                          length="50"
+                          length="30"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[ISBN_SuppEd]"
                           name="ISBN_SuppEd"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[ReceivedDate]"
-                          codePage="1252"
-                          dataType="str"
+                          dataType="dbDate"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[ReceivedDate]"
-                          length="50"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[ReceivedDate]"
                           name="ReceivedDate"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-1]"
-                          codePage="1252"
-                          dataType="str"
+                          dataType="i4"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[No-of-Units-1]"
-                          length="50"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-1]"
                           name="No-of-Units-1"
                           truncationRowDisposition="FailComponent" />
@@ -1950,18 +1935,16 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[Frozen-Code-1]"
-                          length="50"
+                          length="30"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-1]"
                           name="Frozen-Code-1"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-2]"
-                          codePage="1252"
-                          dataType="str"
+                          dataType="i4"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[No-of-Units-2]"
-                          length="50"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-2]"
                           name="No-of-Units-2"
                           truncationRowDisposition="FailComponent" />
@@ -1972,18 +1955,16 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[Frozen-Code-2]"
-                          length="50"
+                          length="30"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-2]"
                           name="Frozen-Code-2"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-3]"
-                          codePage="1252"
-                          dataType="str"
+                          dataType="i4"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[No-of-Units-3]"
-                          length="50"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-3]"
                           name="No-of-Units-3"
                           truncationRowDisposition="FailComponent" />
@@ -1994,18 +1975,16 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[Frozen-Code-3]"
-                          length="50"
+                          length="30"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-3]"
                           name="Frozen-Code-3"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-4]"
-                          codePage="1252"
-                          dataType="str"
+                          dataType="i4"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[No-of-Units-4]"
-                          length="50"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-4]"
                           name="No-of-Units-4"
                           truncationRowDisposition="FailComponent" />
@@ -2016,18 +1995,16 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[Frozen-Code-4]"
-                          length="50"
+                          length="30"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-4]"
                           name="Frozen-Code-4"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-5]"
-                          codePage="1252"
-                          dataType="str"
+                          dataType="i4"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[No-of-Units-5]"
-                          length="50"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-5]"
                           name="No-of-Units-5"
                           truncationRowDisposition="FailComponent" />
@@ -2038,18 +2015,16 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[Frozen-Code-5]"
-                          length="50"
+                          length="30"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-5]"
                           name="Frozen-Code-5"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-6]"
-                          codePage="1252"
-                          dataType="str"
+                          dataType="i4"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[No-of-Units-6]"
-                          length="50"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-6]"
                           name="No-of-Units-6"
                           truncationRowDisposition="FailComponent" />
@@ -2060,7 +2035,7 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[Frozen-Code-6]"
-                          length="50"
+                          length="30"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-6]"
                           name="Frozen-Code-6"
                           truncationRowDisposition="FailComponent" />
@@ -3621,6 +3596,12 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[location_stock_value]"
                           dataType="i4"
                           name="location_stock_value" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].ExternalColumns[replace_location_if_not_setup]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="replace_location_if_not_setup" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -4409,7 +4390,7 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[Site]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="Site"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Site]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Site]" />
@@ -4417,7 +4398,7 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[Placement]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="Placement"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Placement]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Placement]" />
@@ -4425,7 +4406,7 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[Location]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="Location"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Location]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Location]" />
@@ -4433,23 +4414,19 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[ISBN_SuppEd]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="ISBN_SuppEd"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[ISBN_SuppEd]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[ISBN_SuppEd]" />
                         <inputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[ReceivedDate]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
+                          cachedDataType="dbDate"
                           cachedName="ReceivedDate"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[ReceivedDate]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[ReceivedDate]" />
                         <inputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[No-of-Units-1]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
+                          cachedDataType="i4"
                           cachedName="No-of-Units-1"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-1]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-1]" />
@@ -4457,15 +4434,13 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[Frozen-Code-1]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="Frozen-Code-1"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-1]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-1]" />
                         <inputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[No-of-Units-2]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
+                          cachedDataType="i4"
                           cachedName="No-of-Units-2"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-2]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-2]" />
@@ -4473,15 +4448,13 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[Frozen-Code-2]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="Frozen-Code-2"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-2]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-2]" />
                         <inputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[No-of-Units-3]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
+                          cachedDataType="i4"
                           cachedName="No-of-Units-3"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-3]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-3]" />
@@ -4489,15 +4462,13 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[Frozen-Code-3]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="Frozen-Code-3"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-3]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-3]" />
                         <inputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[No-of-Units-4]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
+                          cachedDataType="i4"
                           cachedName="No-of-Units-4"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-4]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-4]" />
@@ -4505,15 +4476,13 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[Frozen-Code-4]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="Frozen-Code-4"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-4]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-4]" />
                         <inputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[No-of-Units-5]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
+                          cachedDataType="i4"
                           cachedName="No-of-Units-5"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-5]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-5]" />
@@ -4521,15 +4490,13 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[Frozen-Code-5]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="Frozen-Code-5"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-5]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-5]" />
                         <inputColumn
                           refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[No-of-Units-6]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
+                          cachedDataType="i4"
                           cachedName="No-of-Units-6"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[No-of-Units-6]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[No-of-Units-6]" />
@@ -4537,7 +4504,7 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                           refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].Columns[Frozen-Code-6]"
                           cachedCodepage="1252"
                           cachedDataType="str"
-                          cachedLength="50"
+                          cachedLength="30"
                           cachedName="Frozen-Code-6"
                           externalMetadataColumnId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Inputs[OLE DB Destination Input].ExternalColumns[Frozen-Code-6]"
                           lineageId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Outputs[OLE DB Source Output].Columns[Frozen-Code-6]" />
@@ -6012,28 +5979,6 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
           Id="Package\Transform Inventory Data\Transform inventories\Read Inventory Records"
           TopLeft="74.5333333333333,88.1333333333333" />
         <EdgeLayout
-          Id="Package\Transform Inventory Data\Transform inventories.Paths[OLE DB Source Output]"
-          TopLeft="269.2,106.58421102858">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="157.674993639067,0"
-              Start="0,0"
-              End="150.174993639067,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="150.174993639067,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package\Transform Inventory Data\Transform inventories.Paths[Capture Errors]"
           TopLeft="512.2083269724,124.701755390493">
           <EdgeLayout.Curve>
@@ -6067,6 +6012,28 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
             <mssgm:EdgeLabel
               BoundingBox="-23.8492642344412,54.3859665414195,65.4901953125,11.4140625"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transform Inventory Data\Transform inventories.Paths[OLE DB Source Output]"
+          TopLeft="269.2,106.58421102858">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="157.674993639067,0"
+              Start="0,0"
+              End="150.174993639067,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="150.174993639067,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

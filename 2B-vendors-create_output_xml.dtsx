@@ -11,34 +11,22 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="2B-vendors-create_output_xml"
   DTS:PackageType="5"
-  DTS:VersionBuild="54"
-  DTS:VersionGUID="{23AB0460-B4E9-48AE-BA78-096CD43EF762}">
+  DTS:VersionBuild="66"
+  DTS:VersionGUID="{C0AE1506-3B07-4F07-8851-32E6F47B53B9}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{DA3E360E-0EEF-4BF5-9B1B-E5490FBADE27}"
-      DTS:ObjectName="UKWWHDSQLWI099.DM_Dev_NP3">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectRetryCount="1"
-          DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=UKWWHDSQLWI099;Initial Catalog=DM_MoC_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{DA3E360E-0EEF-4BF5-9B1B-E5490FBADE27}UKWWHDSQLWI099.DM_Dev_NP3;" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[vendor_output_files]"
       DTS:CreationName="FLATFILE"
       DTS:DTSID="{B0613613-39BA-4534-99A6-E7529873C74F}"
       DTS:ObjectName="vendor_output_files">
       <DTS:PropertyExpression
-        DTS:Name="ConnectionString">@[$Package::pOutputFileName] + (DT_WSTR,4)DATEPART("yyyy",GetDate()) +
+        DTS:Name="ConnectionString">@[User::vOutputFile] + (DT_WSTR,4)DATEPART("yyyy",GetDate()) +
 RIGHT("0" + (DT_WSTR,2)DATEPART("mm",GetDate()) ,2) +
 RIGHT("0" + (DT_WSTR,2)DATEPART("dd",GetDate()),2) + "_" +
 RIGHT("0" + (DT_WSTR,2)DATEPART("hh",GetDate()),2)+
-RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension]</DTS:PropertyExpression>
+RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[User::vFileExtension]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:Format="Delimited"
@@ -48,7 +36,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="V:\\vendors\\MCT2Fixes0309_vendor_data_payload_20240903_1028.xml">
+          DTS:ConnectionString="V:\\vendors\\DryRun2_vendor_data_payload_20240925_1313.xml">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -64,45 +52,44 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
-  <DTS:PackageParameters>
-    <DTS:PackageParameter
+  <DTS:Variables>
+    <DTS:Variable
       DTS:CreationName=""
-      DTS:DataType="8"
-      DTS:DTSID="{712CADD4-2694-4AFF-8256-9D9058E94AB6}"
-      DTS:ObjectName="pFileExtension">
-      <DTS:Property
-        DTS:DataType="8"
-        DTS:Name="ParameterValue">.xml</DTS:Property>
-    </DTS:PackageParameter>
-    <DTS:PackageParameter
+      DTS:DTSID="{376D64AC-1A50-47E6-A5ED-8CBF872F7651}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="varRunID">
+      <DTS:VariableValue
+        DTS:DataType="3">2</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
       DTS:CreationName=""
-      DTS:DataType="8"
-      DTS:DTSID="{8152013E-C195-402B-8135-329705B51917}"
-      DTS:ObjectName="pOutputFileName">
-      <DTS:Property
-        DTS:DataType="8"
-        DTS:Name="ParameterValue">V:\\vendors\\MCT2Fixes0309_vendor_data_payload_</DTS:Property>
-    </DTS:PackageParameter>
-    <DTS:PackageParameter
+      DTS:DTSID="{9655FEDF-E403-43EF-8232-148FD87DB4F2}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="vFileExtension">
+      <DTS:VariableValue
+        DTS:DataType="8">.xml</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
       DTS:CreationName=""
-      DTS:DataType="3"
-      DTS:DTSID="{9C11D010-4546-4FD4-9729-69A801CD7AF9}"
-      DTS:ObjectName="pRunID">
-      <DTS:Property
-        DTS:DataType="3"
-        DTS:Name="ParameterValue">6</DTS:Property>
-    </DTS:PackageParameter>
-    <DTS:PackageParameter
+      DTS:DTSID="{757E8D0B-D143-41DE-AE24-780ADE84BB83}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="vOutputFile">
+      <DTS:VariableValue
+        DTS:DataType="8">V:\\vendors\\DryRun2_vendor_data_payload_</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
       DTS:CreationName=""
-      DTS:DataType="8"
-      DTS:DTSID="{297D18FB-E6AC-4DB8-BE0D-E6C804A5F6C7}"
-      DTS:ObjectName="pSQLQuery">
-      <DTS:Property
-        DTS:DataType="8"
-        DTS:Name="ParameterValue">SELECT '&lt;SUPP_INB_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), vend.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/SUPP_INB_IFD&gt;' AS resultant_payload  FROM final.vendors vend   LEFT JOIN config.wms_dm_run_ctl ctl ON vend.run_id = ctl.run_id  CROSS JOIN config.data_element_payload_fillers de   WHERE ctl.package_name = 'vendors'    AND ctl.run_status = 'Transformed'    AND de.data_element_name = 'vendor'</DTS:Property>
-    </DTS:PackageParameter>
-  </DTS:PackageParameters>
-  <DTS:Variables />
+      DTS:DTSID="{CA21D63F-CC5B-4336-9091-00F3A998C084}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="vSQLQuery">
+      <DTS:VariableValue
+        DTS:DataType="8">SELECT '&lt;?xml version="1.0" encoding="utf-8"?&gt;' + CHAR(13) + '&lt;SUPP_INB_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), vend.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/SUPP_INB_IFD&gt;' AS resultant_payload  FROM final.vendors vend   LEFT JOIN config.wms_dm_run_ctl ctl ON vend.run_id = ctl.run_id  CROSS JOIN config.data_element_payload_fillers de   WHERE ctl.package_name = 'vendors'    AND ctl.run_status = 'Transformed'    AND de.data_element_name = 'vendor'</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
       DTS:refId="Package\Create Output File"
@@ -215,7 +202,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
-                      name="SqlCommandVariable">$Package::pSQLQuery</property>
+                      name="SqlCommandVariable">User::vSQLQuery</property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -237,8 +224,8 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
                   <connections>
                     <connection
                       refId="Package\Create Output File\Create Output File\get Payloads for output.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
-                      connectionManagerRefId="Package.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                      connectionManagerID="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -318,11 +305,11 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{DA3E360E-0EEF-4BF5-9B1B-E5490FBADE27}"
+              SQLTask:Connection="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}"
               SQLTask:SqlStatementSource="UPDATE [config].[wms_dm_run_ctl] &#xA;SET run_status = 'SentToFile' &#xA;       ,run_finish_time = GetDate()&#xA;WHERE run_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
-                SQLTask:DtsVariableName="$Package::pRunID"
+                SQLTask:DtsVariableName="User::varRunID"
                 SQLTask:ParameterDirection="Input"
                 SQLTask:DataType="3"
                 SQLTask:ParameterSize="-1" />
@@ -355,11 +342,11 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="167,43"
+          Size="166.666666666667,42.6666666666667"
           Id="Package\Create Output File\Create Output File"
           TopLeft="45.8333289747438,63.1578985231405" />
         <NodeLayout
-          Size="196,43"
+          Size="196,42.6666666666667"
           Id="Package\Create Output File\run_status to SentToFile"
           TopLeft="25.2083292820801,152.105268618407" />
         <EdgeLayout
@@ -387,8 +374,8 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="236,250"
-          Size="236,293"
+          PanelSize="236,250.666666666667"
+          Size="236,293.333333333334"
           Id="Package\Create Output File"
           TopLeft="246.874996321276,95.1052649480154" />
       </GraphLayout>
@@ -398,7 +385,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
     design-time-name="Package\Create Output File\Create Output File">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="189.333333333334,42.6666666666667"
           Id="Package\Create Output File\Create Output File\get Payloads for output"
@@ -426,9 +413,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +  @[$Package::pFileExtension
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

@@ -5,21 +5,21 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="UKWWHDSQLWI099"
   DTS:CreatorName="UK\PAM-WMS-Migration"
-  DTS:DTSID="{466275C5-9DFC-4FA0-A57A-8CE3F5408CB1}"
+  DTS:DTSID="{5300A720-25FD-428C-8E6F-69C248820D94}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="16.0.5270.0"
   DTS:LocaleID="2057"
-  DTS:ObjectName="1B-titles-create_output_xml_new"
+  DTS:ObjectName="Test - 1B-titles-create_output_xml_new"
   DTS:PackageType="5"
-  DTS:VersionBuild="185"
-  DTS:VersionGUID="{BE46DFA9-1A7F-4B29-82FF-D6120743C101}">
+  DTS:VersionBuild="183"
+  DTS:VersionGUID="{F3C3861C-D49D-45F3-9074-6B63C4027BD1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[title_output_files]"
       DTS:CreationName="FLATFILE"
-      DTS:DTSID="{C1D24695-B721-41CB-8DE7-757E911D4AD8}"
+      DTS:DTSID="{4A61E4E0-A154-46BF-8DB3-09CAE399BD85}"
       DTS:ObjectName="title_output_files">
       <DTS:PropertyExpression
         DTS:Name="ConnectionString">@[User::vOutputFileName] + (DT_WSTR,4)DATEPART("yyyy",GetDate()) +
@@ -36,7 +36,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="V:\\titles\\DryRun2_title_data_payloads_20241001_094318.xml">
+          DTS:ConnectionString="V:\\titles\\DryRun1_title_data_payloads_20240924_151632.xml">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -45,7 +45,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="resultant_payload"
-              DTS:DTSID="{DB6B3815-BD6A-4270-8460-6B216087134C}"
+              DTS:DTSID="{3406487F-D2F5-4A86-A6DD-453ECAA7B899}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -55,16 +55,16 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{9C13576B-45E3-4A8C-914E-F9042FDE90F6}"
+      DTS:DTSID="{7D96E9BA-6F35-4E30-8DDA-D126CF520B24}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="LoopCounter">
       <DTS:VariableValue
-        DTS:DataType="3">10</DTS:VariableValue>
+        DTS:DataType="3">0</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{9C91793D-1C32-40F9-983B-9304F75AD497}"
+      DTS:DTSID="{69F99A9D-3EA7-4B49-A645-FF845C15EB7C}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="vFileExtension">
@@ -73,25 +73,25 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{238A0FAE-8E2F-4817-9BEA-0C556AB1ADC4}"
+      DTS:DTSID="{20573E35-F492-44F8-B011-63BE6D5BD4BB}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="vOrigSQL">
       <DTS:VariableValue
-        DTS:DataType="8">SELECT '&lt;?xml version="1.0" encoding="utf-8"?&gt;' + CHAR(10) + '&lt;UC_PART_INB_IFD&gt;' +CHAR(10)+ STRING_AGG(CONVERT(VARCHAR(MAX), tit.resultant_payload),CHAR(10)) +CHAR(10)+ '&lt;/UC_PART_INB_IFD&gt;' AS resultant_payload    FROM final.titles tit   WHERE tit.output_file_batch =</DTS:VariableValue>
+        DTS:DataType="8">SELECT '&lt;UC_PART_INB_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), tit.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/UC_PART_INB_IFD&gt;' AS resultant_payload    FROM final.titles tit   WHERE tit.output_file_batch =</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{9DA07E99-CA30-4D66-BD03-DF7E0D424A46}"
+      DTS:DTSID="{5B4E57F7-987B-4712-8B5C-2F82AC24CD21}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="vOutputFileName">
       <DTS:VariableValue
-        DTS:DataType="8">V:\\titles\\DryRun2_title_data_payloads_</DTS:VariableValue>
+        DTS:DataType="8">V:\\titles\\DryRun1_title_data_payloads_</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{8D42ED79-95FD-42E7-AC4E-B1AC30A54C07}"
+      DTS:DTSID="{A886ADF9-085E-489B-8116-798C75D493ED}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="vRunID">
@@ -100,12 +100,12 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{F487A3FD-29CB-41C7-9E33-5833E4B090B7}"
+      DTS:DTSID="{A83C926D-A7D5-43BB-9F8D-EE55C2976146}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="vSQLQuery">
       <DTS:VariableValue
-        DTS:DataType="8">SELECT '&lt;?xml version="1.0" encoding="utf-8"?&gt;' + CHAR(10) + '&lt;UC_PART_INB_IFD&gt;' +CHAR(10)+ STRING_AGG(CONVERT(VARCHAR(MAX), tit.resultant_payload),CHAR(10)) +CHAR(10)+ '&lt;/UC_PART_INB_IFD&gt;' AS resultant_payload    FROM final.titles tit   WHERE tit.output_file_batch = 1 and run_id = 1</DTS:VariableValue>
+        DTS:DataType="8">SELECT '&lt;UC_PART_INB_IFD&gt;' +CHAR(13)+ STRING_AGG(CONVERT(VARCHAR(MAX), tit.resultant_payload),CHAR(13)) +CHAR(13)+ '&lt;/UC_PART_INB_IFD&gt;' AS resultant_payload    FROM final.titles tit   WHERE tit.output_file_batch = 1 and run_id = 3</DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
@@ -113,7 +113,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
       DTS:refId="Package\Sequence Container"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:DTSID="{F44BCB8D-0F1B-47A9-AF42-D34E68F3CCC3}"
+      DTS:DTSID="{7EB06B13-D63B-4E22-B663-CE3B919ECE5F}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
       DTS:ObjectName="Sequence Container">
@@ -124,7 +124,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
           DTS:AssignExpression="@LoopCounter = @LoopCounter + 1 "
           DTS:CreationName="STOCK:FORLOOP"
           DTS:Description="For Loop Container"
-          DTS:DTSID="{DCE01F5A-16ED-46BD-BB6D-9DE19C1E2D0A}"
+          DTS:DTSID="{B206C1DF-9804-40CB-AE53-D150B614861E}"
           DTS:EvalExpression="@LoopCounter&lt;=10"
           DTS:ExecutableType="STOCK:FORLOOP"
           DTS:InitExpression="@LoopCounter=1"
@@ -137,7 +137,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
               DTS:refId="Package\Sequence Container\For Loop Container\Create Output File"
               DTS:CreationName="Microsoft.Pipeline"
               DTS:Description="Data Flow Task"
-              DTS:DTSID="{33be21a0-6e36-43ad-b183-1991895dd546}"
+              DTS:DTSID="{708CAA6B-31EC-4EE2-9563-BAB29F7A44EE}"
               DTS:ExecutableType="Microsoft.Pipeline"
               DTS:LocaleID="-1"
               DTS:ObjectName="Create Output File"
@@ -329,7 +329,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
               DTS:refId="Package\Sequence Container\For Loop Container\Set SQL Query"
               DTS:CreationName="Microsoft.ScriptTask"
               DTS:Description="Script Task"
-              DTS:DTSID="{A40CFBE5-476C-4665-86BA-867866AE7726}"
+              DTS:DTSID="{5FC044A3-56E4-49B4-89EB-00A960C4F03A}"
               DTS:ExecutableType="Microsoft.ScriptTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Set SQL Query"
@@ -946,7 +946,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
             <DTS:PrecedenceConstraint
               DTS:refId="Package\Sequence Container\For Loop Container.PrecedenceConstraints[Constraint]"
               DTS:CreationName=""
-              DTS:DTSID="{BA7CB0C6-7ABD-40D9-AC47-D77E8B548AFD}"
+              DTS:DTSID="{E2C2F304-D674-46CA-AB25-7951D42CB3D9}"
               DTS:From="Package\Sequence Container\For Loop Container\Set SQL Query"
               DTS:LogicalAnd="True"
               DTS:ObjectName="Constraint"
@@ -957,7 +957,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
           DTS:refId="Package\Sequence Container\run_status to SentToFile"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{001bda97-4e54-46a7-bf0f-b4b18f40f35c}"
+          DTS:DTSID="{9532A2AE-0D8E-49DC-8A37-B7EB09BF3108}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="run_status to SentToFile"
@@ -981,7 +981,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
           DTS:CreationName=""
-          DTS:DTSID="{EB12C5FC-D9CC-42F0-ACB2-058988EB4BFB}"
+          DTS:DTSID="{5E1A8D3B-5CC2-4AE4-AF00-ECCA2B39887C}"
           DTS:From="Package\Sequence Container\For Loop Container"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
@@ -1006,23 +1006,35 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
           Id="Package\Sequence Container\For Loop Container\Create Output File"
           TopLeft="28,114.666666666667" />
         <NodeLayout
-          Size="129.333333333334,42.6666666666667"
+          Size="152,42.6666666666667"
           Id="Package\Sequence Container\For Loop Container\Set SQL Query"
           TopLeft="33.3333333333334,20.6666666666667" />
         <EdgeLayout
           Id="Package\Sequence Container\For Loop Container.PrecedenceConstraints[Constraint]"
-          TopLeft="98,63.3333333333333">
+          TopLeft="109.333333333333,63.3333333333334">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,51.3333333333333"
+              EndConnector="-11.3333333333334,51.3333333333337"
               Start="0,0"
-              End="0,43.8333333333333">
+              End="-11.3333333333334,43.8333333333337">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,43.8333333333333" />
+                    End="0,21.6666666666668" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.6666666666668"
+                    Point2="0,25.6666666666668"
+                    Point3="-4,25.6666666666668" />
+                  <mssgle:LineSegment
+                    End="-7.3333333333334,25.6666666666668" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-7.3333333333334,25.6666666666668"
+                    Point2="-11.3333333333334,25.6666666666668"
+                    Point3="-11.3333333333334,29.6666666666668" />
+                  <mssgle:LineSegment
+                    End="-11.3333333333334,43.8333333333337" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1070,7 +1082,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
           PanelSize="230.666666666667,482.666666666667"
           Size="230.666666666667,526"
           Id="Package\Sequence Container"
-          TopLeft="71.0714275123816,43.8646624986015" />
+          TopLeft="592.499991171062,106.421054653514" />
       </GraphLayout>
     </LayoutInfo>
   </Package>

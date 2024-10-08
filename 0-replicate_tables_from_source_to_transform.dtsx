@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="103"
-  DTS:VersionGUID="{CB4863B9-AF1E-41FD-A780-099B810FEBA3}">
+  DTS:VersionBuild="106"
+  DTS:VersionGUID="{4CF149CA-B40A-4A46-9613-7562CC952C8A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -2047,7 +2047,7 @@ JOIN config.data_element_payload_fillers fil ON fil.data_element_name = 'title'
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
                   SQLTask:Connection="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}"
-                  SQLTask:SqlStatementSource="DECLARE @run INTEGER = 0;&#xA;&#xA;BEGIN&#xA;SELECT  @run = COUNT(1)&#xA;  FROM config.wms_dm_run_ctl WHERE package_name = 'titles' AND run_status = 'Staged';&#xA;&#xA;IF ISNULL(@run,0)=0  &#xA;BEGIN&#xA;TRUNCATE TABLE transform.titles_staging;&#xA;END;&#xA;SELECT ?=run_id FROM [config].[wms_dm_run_ctl] WHERE package_name = 'titles' AND run_status = 'Staged';&#xA;END;&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  SQLTask:SqlStatementSource="DECLARE @run INTEGER = 0;&#xA;&#xA;BEGIN&#xA;SELECT  @run = COUNT(1)&#xA;  FROM config.wms_dm_run_ctl WHERE package_name = 'titles' AND run_status = 'SentToFile';&#xA;&#xA;IF ISNULL(@run,0)=0  &#xA;BEGIN&#xA;TRUNCATE TABLE transform.titles_staging;&#xA;END;&#xA;SELECT ?=run_id FROM [config].[wms_dm_run_ctl] WHERE package_name = 'titles' AND run_status = 'Staged';&#xA;END;&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="0"
                     SQLTask:DtsVariableName="User::varRunID"
@@ -3651,7 +3651,7 @@ SELECT ROW_NUMBER() OVER (PARTITION BY NULL ORDER BY vendors.run_id) AS record_n
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
                   SQLTask:Connection="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}"
-                  SQLTask:SqlStatementSource="DECLARE @run INTEGER = 0;&#xA;&#xA;BEGIN&#xA;SELECT  @run = COUNT(1)&#xA;  FROM config.wms_dm_run_ctl WHERE package_name = 'vendors' AND run_status = 'Staged';&#xA;&#xA;IF ISNULL(@run,0)=0  &#xA;BEGIN&#xA;TRUNCATE TABLE transform.vendors_staging;&#xA;END;&#xA;SELECT ?=run_id FROM [config].[wms_dm_run_ctl] WHERE package_name = 'vendors' AND run_status = 'Staged';&#xA;END;&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  SQLTask:SqlStatementSource="DECLARE @run INTEGER = 0;&#xA;&#xA;BEGIN&#xA;SELECT  @run = COUNT(1)&#xA;  FROM config.wms_dm_run_ctl WHERE package_name = 'vendors' AND run_status = 'SentToFile';&#xA;&#xA;IF ISNULL(@run,0)=0  &#xA;BEGIN&#xA;TRUNCATE TABLE transform.vendors_staging;&#xA;END;&#xA;SELECT ?=run_id FROM [config].[wms_dm_run_ctl] WHERE package_name = 'vendors' AND run_status = 'Staged';&#xA;END;&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="0"
                     SQLTask:DtsVariableName="User::varRunID"
@@ -3721,21 +3721,21 @@ SELECT ROW_NUMBER() OVER (PARTITION BY NULL ORDER BY vendors.run_id) AS record_n
         <NodeLayout
           Size="186.666666666667,42.6666666666667"
           Id="Package\Replicate tables - run separately in order\Replicate titles into staging\Truncate titles_staging"
-          TopLeft="15.0416649623464,6.89474092461072" />
+          TopLeft="15.0416649623465,6.89474092461072" />
         <EdgeLayout
           Id="Package\Replicate tables - run separately in order\Replicate titles into staging.PrecedenceConstraints[Constraint]"
           TopLeft="201.708331629013,27.8859689883468">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="30.208330101644,0"
+              EndConnector="30.2083301016439,0"
               Start="0,0"
-              End="22.708330101644,0">
+              End="22.7083301016439,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="22.708330101644,0" />
+                    End="22.7083301016439,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3758,21 +3758,21 @@ SELECT ROW_NUMBER() OVER (PARTITION BY NULL ORDER BY vendors.run_id) AS record_n
         <NodeLayout
           Size="202.666666666667,42.6666666666667"
           Id="Package\Replicate tables - run separately in order\Replicate vendors into staging\Truncate vendors_staging"
-          TopLeft="15.0416649623464,6.89474092461072" />
+          TopLeft="15.0416649623464,6.8947409246108" />
         <EdgeLayout
           Id="Package\Replicate tables - run separately in order\Replicate vendors into staging.PrecedenceConstraints[Constraint]"
           TopLeft="217.708331629013,29.5964953363327">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="58.5833294404049,0"
+              EndConnector="58.583329440405,0"
               Start="0,0"
-              End="51.0833294404049,0">
+              End="51.083329440405,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="51.0833294404049,0" />
+                    End="51.083329440405,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3830,7 +3830,7 @@ SELECT ROW_NUMBER() OVER (PARTITION BY NULL ORDER BY vendors.run_id) AS record_n
           HeaderHeight="43"
           IsExpanded="True"
           PanelSize="1042,538.666666666667"
-          Size="1042,581.333333333334"
+          Size="1042,582"
           Id="Package\Replicate tables - run separately in order"
           TopLeft="39.7500028498465,87.7719308806034" />
       </GraphLayout>
@@ -3842,27 +3842,27 @@ SELECT ROW_NUMBER() OVER (PARTITION BY NULL ORDER BY vendors.run_id) AS record_n
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="137.333333333334,42.6666666666667"
+          Size="118.666666666667,42.6666666666667"
           Id="Package\Replicate tables - run separately in order\Replicate titles into staging\Populate titles_staging\title_staging"
           TopLeft="491.249992679805,49.2631588219936" />
         <NodeLayout
-          Size="197.333333333334,42.6666666666667"
+          Size="161.333333333334,42.6666666666667"
           Id="Package\Replicate tables - run separately in order\Replicate titles into staging\Populate titles_staging\Read source title records"
           TopLeft="78.7499988265336,52.000000978771" />
         <EdgeLayout
           Id="Package\Replicate tables - run separately in order\Replicate titles into staging\Populate titles_staging.Paths[OLE DB Source Output]"
-          TopLeft="276.083332159867,71.9649132337156">
+          TopLeft="240.083332159867,71.9649132337156">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="215.166660519938,0"
+              EndConnector="251.166660519938,0"
               Start="0,0"
-              End="207.666660519938,0">
+              End="243.666660519938,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="207.666660519938,0" />
+                    End="243.666660519938,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

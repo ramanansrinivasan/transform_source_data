@@ -11,22 +11,34 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="1B-titles-create_output_xml_new"
   DTS:PackageType="5"
-  DTS:VersionBuild="185"
-  DTS:VersionGUID="{BE46DFA9-1A7F-4B29-82FF-D6120743C101}">
+  DTS:VersionBuild="207"
+  DTS:VersionGUID="{02FAA2AE-5377-4F86-BCC8-A90F7D041FE7}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DM_Working_DB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2B8EDF77-6526-42EA-BB41-3AF07EA07A7E}"
+      DTS:ObjectName="DM_Working_DB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=UKWWHDSQLWI099;Initial Catalog=DM_DryRun3_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-1B-titles-create_output_xml_new-{2B8EDF77-6526-42EA-BB41-3AF07EA07A7E}UKWWHDSQLWI099.DM_DryRun3_NP3;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[title_output_files]"
       DTS:CreationName="FLATFILE"
       DTS:DTSID="{C1D24695-B721-41CB-8DE7-757E911D4AD8}"
       DTS:ObjectName="title_output_files">
       <DTS:PropertyExpression
-        DTS:Name="ConnectionString">@[User::vOutputFileName] + (DT_WSTR,4)DATEPART("yyyy",GetDate()) +
+        DTS:Name="ConnectionString">@[User::varOutputFileName] + (DT_WSTR,4)DATEPART("yyyy",GetDate()) +
 RIGHT("0" + (DT_WSTR,2)DATEPART("mm",GetDate()) ,2) +
-RIGHT("0" + (DT_WSTR,2)DATEPART("dd",GetDate()),2) + "_" +
-RIGHT("0" + (DT_WSTR,2)DATEPART("hh",GetDate()),2)+
-RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEPART("ss",GetDate()),2) +   @[User::vFileExtension]</DTS:PropertyExpression>
+RIGHT("0" + (DT_WSTR,2)DATEPART("dd",GetDate()),2) + "_" + RIGHT("0" + (DT_WSTR,2)@[User::LoopCount],2) + "_" +
+ RIGHT("0" + (DT_WSTR,2)DATEPART("hh",GetDate()),2)+
+RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) + RIGHT("0" + (DT_WSTR,2)DATEPART("ss",GetDate()),2)  +  @[User::varFileExtension]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:Format="Delimited"
@@ -35,17 +47,16 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
           DTS:HeaderRowDelimiter="_x000D__x000A_"
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
-          DTS:CodePage="1252"
-          DTS:ConnectionString="V:\\titles\\DryRun2_title_data_payloads_20241001_094318.xml">
+          DTS:CodePage="65001"
+          DTS:ConnectionString="V:\\titles\\title_data_payloads_20241011_00_142908.xml">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
               DTS:ColumnDelimiter="_x000D__x000A_"
-              DTS:MaximumWidth="8000"
-              DTS:DataType="129"
+              DTS:DataType="302"
               DTS:TextQualified="True"
               DTS:ObjectName="resultant_payload"
-              DTS:DTSID="{DB6B3815-BD6A-4270-8460-6B216087134C}"
+              DTS:DTSID="{87D23E1C-F678-4C0F-8A9A-76369E0936E7}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -55,28 +66,37 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{9C13576B-45E3-4A8C-914E-F9042FDE90F6}"
+      DTS:DTSID="{00ADDC22-E536-4AAB-8F84-6544CB6BB832}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
-      DTS:ObjectName="LoopCounter">
+      DTS:ObjectName="LoopCount">
       <DTS:VariableValue
-        DTS:DataType="3">10</DTS:VariableValue>
+        DTS:DataType="3">0</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
       DTS:DTSID="{9C91793D-1C32-40F9-983B-9304F75AD497}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
-      DTS:ObjectName="vFileExtension">
+      DTS:ObjectName="varFileExtension">
       <DTS:VariableValue
         DTS:DataType="8">.xml</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9C13576B-45E3-4A8C-914E-F9042FDE90F6}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="varLoopCounter">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
       DTS:DTSID="{238A0FAE-8E2F-4817-9BEA-0C556AB1ADC4}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
-      DTS:ObjectName="vOrigSQL">
+      DTS:ObjectName="varOrigSQL">
       <DTS:VariableValue
         DTS:DataType="8">SELECT '&lt;?xml version="1.0" encoding="utf-8"?&gt;' + CHAR(10) + '&lt;UC_PART_INB_IFD&gt;' +CHAR(10)+ STRING_AGG(CONVERT(VARCHAR(MAX), tit.resultant_payload),CHAR(10)) +CHAR(10)+ '&lt;/UC_PART_INB_IFD&gt;' AS resultant_payload    FROM final.titles tit   WHERE tit.output_file_batch =</DTS:VariableValue>
     </DTS:Variable>
@@ -85,30 +105,82 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
       DTS:DTSID="{9DA07E99-CA30-4D66-BD03-DF7E0D424A46}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
-      DTS:ObjectName="vOutputFileName">
+      DTS:ObjectName="varOutputFileName">
       <DTS:VariableValue
-        DTS:DataType="8">V:\\titles\\DryRun2_title_data_payloads_</DTS:VariableValue>
+        DTS:DataType="8">V:\\titles\\title_data_payloads_</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
       DTS:DTSID="{8D42ED79-95FD-42E7-AC4E-B1AC30A54C07}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
-      DTS:ObjectName="vRunID">
+      DTS:ObjectName="varRunID">
       <DTS:VariableValue
-        DTS:DataType="3">1</DTS:VariableValue>
+        DTS:DataType="3">0</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
       DTS:DTSID="{F487A3FD-29CB-41C7-9E33-5833E4B090B7}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
-      DTS:ObjectName="vSQLQuery">
+      DTS:ObjectName="varSQLQuery">
       <DTS:VariableValue
         DTS:DataType="8">SELECT '&lt;?xml version="1.0" encoding="utf-8"?&gt;' + CHAR(10) + '&lt;UC_PART_INB_IFD&gt;' +CHAR(10)+ STRING_AGG(CONVERT(VARCHAR(MAX), tit.resultant_payload),CHAR(10)) +CHAR(10)+ '&lt;/UC_PART_INB_IFD&gt;' AS resultant_payload    FROM final.titles tit   WHERE tit.output_file_batch = 1 and run_id = 1</DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Assign Loop Counter"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{015bc930-1794-4abd-8351-b6ce45aa2ed2}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Assign Loop Counter"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2B8EDF77-6526-42EA-BB41-3AF07EA07A7E}"
+          SQLTask:SqlStatementSource="SELECT ?=max(output_file_batch) FROM final.titles where run_id = ?&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::varLoopCounter"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::varRunID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Assign RunID"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{e0c88d7f-1d77-4338-a1ff-98a0e26fa1d2}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Assign RunID"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2B8EDF77-6526-42EA-BB41-3AF07EA07A7E}"
+          SQLTask:SqlStatementSource="DECLARE @run INTEGER = 0;&#xA;&#xA;SELECT ?=run_id FROM [config].[wms_dm_run_ctl] WHERE package_name = 'titles' AND run_status = 'Transformed';&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::varRunID"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Sequence Container"
       DTS:CreationName="STOCK:SEQUENCE"
@@ -121,13 +193,13 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
       <DTS:Executables>
         <DTS:Executable
           DTS:refId="Package\Sequence Container\For Loop Container"
-          DTS:AssignExpression="@LoopCounter = @LoopCounter + 1 "
+          DTS:AssignExpression="@LoopCount = @LoopCount+ 1 "
           DTS:CreationName="STOCK:FORLOOP"
           DTS:Description="For Loop Container"
           DTS:DTSID="{DCE01F5A-16ED-46BD-BB6D-9DE19C1E2D0A}"
-          DTS:EvalExpression="@LoopCounter&lt;=10"
+          DTS:EvalExpression="@LoopCount&lt;=@varLoopCounter"
           DTS:ExecutableType="STOCK:FORLOOP"
-          DTS:InitExpression="@LoopCounter=1"
+          DTS:InitExpression="@LoopCount=1"
           DTS:LocaleID="-1"
           DTS:MaxConcurrent="1"
           DTS:ObjectName="For Loop Container">
@@ -184,7 +256,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
                           <inputColumns>
                             <inputColumn
                               refId="Package\Sequence Container\For Loop Container\Create Output File\create output_file.Inputs[Flat File Destination Input].Columns[resultant_payload]"
-                              cachedCodepage="1252"
+                              cachedCodepage="65001"
                               cachedDataType="text"
                               cachedName="resultant_payload"
                               externalMetadataColumnId="Package\Sequence Container\For Loop Container\Create Output File\create output_file.Inputs[Flat File Destination Input].ExternalColumns[resultant_payload]"
@@ -194,9 +266,8 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
                             isUsed="True">
                             <externalMetadataColumn
                               refId="Package\Sequence Container\For Loop Container\Create Output File\create output_file.Inputs[Flat File Destination Input].ExternalColumns[resultant_payload]"
-                              codePage="1252"
-                              dataType="str"
-                              length="8000"
+                              codePage="65001"
+                              dataType="text"
                               name="resultant_payload" />
                           </externalMetadataColumns>
                         </input>
@@ -234,15 +305,15 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
                         <property
                           dataType="System.String"
                           description="The variable that contains the SQL command to be executed."
-                          name="SqlCommandVariable">User::vSQLQuery</property>
+                          name="SqlCommandVariable">User::varSQLQuery</property>
                         <property
                           dataType="System.Int32"
                           description="Specifies the column code page to use when code page information is unavailable from the data source."
-                          name="DefaultCodePage">1252</property>
+                          name="DefaultCodePage">65001</property>
                         <property
                           dataType="System.Boolean"
                           description="Forces the use of the DefaultCodePage property value when describing character data."
-                          name="AlwaysUseDefaultCodePage">false</property>
+                          name="AlwaysUseDefaultCodePage">true</property>
                         <property
                           dataType="System.Int32"
                           description="Specifies the mode used to access the database."
@@ -256,8 +327,8 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
                       <connections>
                         <connection
                           refId="Package\Sequence Container\For Loop Container\Create Output File\get Payloads for output.Connections[OleDbConnection]"
-                          connectionManagerID="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}:external"
-                          connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                          connectionManagerID="Package.ConnectionManagers[DM_Working_DB]"
+                          connectionManagerRefId="Package.ConnectionManagers[DM_Working_DB]"
                           description="The OLE DB runtime connection used to access the database."
                           name="OleDbConnection" />
                       </connections>
@@ -268,7 +339,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
                           <outputColumns>
                             <outputColumn
                               refId="Package\Sequence Container\For Loop Container\Create Output File\get Payloads for output.Outputs[OLE DB Source Output].Columns[resultant_payload]"
-                              codePage="1252"
+                              codePage="65001"
                               dataType="text"
                               errorOrTruncationOperation="Conversion"
                               errorRowDisposition="FailComponent"
@@ -281,7 +352,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
                             isUsed="True">
                             <externalMetadataColumn
                               refId="Package\Sequence Container\For Loop Container\Create Output File\get Payloads for output.Outputs[OLE DB Source Output].ExternalColumns[resultant_payload]"
-                              codePage="1252"
+                              codePage="65001"
                               dataType="text"
                               name="resultant_payload" />
                           </externalMetadataColumns>
@@ -293,7 +364,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
                           <outputColumns>
                             <outputColumn
                               refId="Package\Sequence Container\For Loop Container\Create Output File\get Payloads for output.Outputs[OLE DB Source Error Output].Columns[resultant_payload]"
-                              codePage="1252"
+                              codePage="65001"
                               dataType="text"
                               lineageId="Package\Sequence Container\For Loop Container\Create Output File\get Payloads for output.Outputs[OLE DB Source Error Output].Columns[resultant_payload]"
                               name="resultant_payload" />
@@ -341,7 +412,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) +RIGHT("0" + (DT_WSTR,2)DATEP
                   VSTAMajorVersion="15"
                   VSTAMinorVersion="0"
                   Language="CSharp"
-                  ReadWriteVariables="User::LoopCounter,User::vOrigSQL,User::vRunID,User::vSQLQuery">
+                  ReadWriteVariables="User::LoopCount,User::varOrigSQL,User::varRunID,User::varSQLQuery">
                   <ProjectItem
                     Name="Properties\Settings.settings"
                     Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
@@ -565,8 +636,8 @@ namespace ST_d2a50c98aa554a9ea09ea0c63505ecba
 		public void Main()
 		{
             // TODO: Add your code here
-            String originalValue = Dts.Variables["User::vOrigSQL"].Value.ToString();
-            Dts.Variables["User::vSQLQuery"].Value = originalValue + Dts.Variables["User::LoopCounter"].Value.ToString() + " AND run_id = " + Dts.Variables["User::vRunID"].Value.ToString();
+            String originalValue = Dts.Variables["User::varOrigSQL"].Value.ToString();
+            Dts.Variables["User::varSQLQuery"].Value = originalValue + Dts.Variables["User::LoopCount"].Value.ToString() + " AND run_id = " + Dts.Variables["User::varRunID"].Value.ToString();
             System.Threading.Thread.Sleep(1000);
             Dts.TaskResult = (int)ScriptResults.Success;
 		}
@@ -681,7 +752,7 @@ namespace ST_d2a50c98aa554a9ea09ea0c63505ecba
     <msb:CodeName>ST_d2a50c98aa554a9ea09ea0c63505ecba</msb:CodeName>
     <msb:Language>msBuild</msb:Language>
     <msb:DisplayName>ST_d2a50c98aa554a9ea09ea0c63505ecba</msb:DisplayName>
-    <msb:ProjectId>{56A06EBD-B263-4DEC-989D-11B16A2291F1}</msb:ProjectId>
+    <msb:ProjectId>{9A13E71B-B893-4809-A3BC-000351E2B952}</msb:ProjectId>
   </msb:PropertyGroup>
   <msb:ItemGroup>
     <msb:Project Include="ST_d2a50c98aa554a9ea09ea0c63505ecba.csproj" />
@@ -823,21 +894,21 @@ namespace ST_d2a50c98aa554a9ea09ea0c63505ecba.Properties {
                   <BinaryItem
                     Name="ST_d2a50c98aa554a9ea09ea0c63505ecba.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
-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
+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
-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
+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
-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
+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
-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
+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
-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
+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
-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
+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
@@ -853,7 +924,7 @@ yQC/AykA0QDZAi8AiQAeAzMA2QBUBTcA0QDjAj8A4QAzBEQAwQBuBQEAcQBNBAYAiQBNBAYA6QCQ
 AEkA6QB9BVAAkQBNBFUAsQBNBAYACAAUAG4ACAAYAHMAKQBzANsALgALALMALgATALwALgAbANsA
 LgAjAOQALgArAA0BLgAzAA0BLgA7AA0BLgBDAOQALgBLABMBLgBTAA0BLgBbACoBQwBjAHMASQBz
 ANsAYQB7AHMAYwBrAHMAGwADAAEABAADAAAAPQSkAAAA7wCpAAAAZgWuAAIABAADAAIABQAFAAEA
-BgAFAAIABwAHAASAAAABAAAAPCNjWAAAAAAAADEAAAAEAAAAAAAAAAAAAABcAFUAAAAAAA4AAAAA
+BgAFAAIABwAHAASAAAABAAAAWSMCUwAAAAAAADEAAAAEAAAAAAAAAAAAAABcAFUAAAAAAA4AAAAA
 AAAAAAAAAGUAJwMAAAAABAAAAAAAAAAAAAAAXADIAwAAAAAOAAAAAAAAAAAAAABlAAoAAAAAAAAA
 AAABAAAAngQAAAUAAgAAAAAAADxNb2R1bGU+AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuTWFuYWdlZERU
 UwB2YWx1ZV9fAFNUX2QyYTUwYzk4YWE1NTRhOWVhMDllYTBjNjM1MDVlY2JhAG1zY29ybGliAFRo
@@ -880,23 +951,23 @@ ZXMAU1RfZDJhNTBjOThhYTU1NGE5ZWEwOWVhMGM2MzUwNWVjYmEuUHJvcGVydGllcy5SZXNvdXJj
 ZXMucmVzb3VyY2VzAERlYnVnZ2luZ01vZGVzAFNUX2QyYTUwYzk4YWE1NTRhOWVhMDllYTBjNjM1
 MDVlY2JhLlByb3BlcnRpZXMAZ2V0X1ZhcmlhYmxlcwBTZXR0aW5ncwBTdWNjZXNzAGdldF9EdHMA
 U2NyaXB0UmVzdWx0cwBDb25jYXQAT2JqZWN0AGdldF9EZWZhdWx0AHNldF9UYXNrUmVzdWx0AGdl
-dF9Bc3NlbWJseQAAAAAdVQBzAGUAcgA6ADoAdgBPAHIAaQBnAFMAUQBMAAAfVQBzAGUAcgA6ADoA
-dgBTAFEATABRAHUAZQByAHkAACNVAHMAZQByADoAOgBMAG8AbwBwAEMAbwB1AG4AdABlAHIAAB0g
-AEEATgBEACAAcgB1AG4AXwBpAGQAIAA9ACAAABlVAHMAZQByADoAOgB2AFIAdQBuAEkARAAAcVMA
-VABfAGQAMgBhADUAMABjADkAOABhAGEANQA1ADQAYQA5AGUAYQAwADkAZQBhADAAYwA2ADMANQAw
-ADUAZQBjAGIAYQAuAFAAcgBvAHAAZQByAHQAaQBlAHMALgBSAGUAcwBvAHUAcgBjAGUAcwAAAAAA
-0mT7fw7bM0agBEyM2/kMqgAEIAEBCAMgAAEFIAEBEREEIAEBDgUgAQERUQMHAQ4EIAASYQQgABJl
-BSABEmkcAyAAHAMgAA4HAAQODg4ODgQgAQEcBAABAQgGAAESdRF5BCAAEn0GIAIBDhJ9CLd6XFYZ
-NOCJCImEXc2AgMyRBAAAAAAEAQAAAAMGEkkDBhJNAwYSEAIGCAMGERQEAAASSQQAABJNBQABARJN
-BAAAEhADAAABBAgAEkkECAASTQQIABIQCAEACAAAAAAAHgEAAQBUAhZXcmFwTm9uRXhjZXB0aW9u
-VGhyb3dzAQgBAAIAAAAAACgBACNTVF9kMmE1MGM5OGFhNTU0YTllYTA5ZWEwYzYzNTA1ZWNiYQAA
-BQEAAAAAFgEAEUNvcHlyaWdodCBAICAyMDI0AABJAQAaLk5FVEZyYW1ld29yayxWZXJzaW9uPXY0
-LjUBAFQOFEZyYW1ld29ya0Rpc3BsYXlOYW1lEi5ORVQgRnJhbWV3b3JrIDQuNbQAAADOyu++AQAA
-AJEAAABsU3lzdGVtLlJlc291cmNlcy5SZXNvdXJjZVJlYWRlciwgbXNjb3JsaWIsIFZlcnNpb249
-NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5
-I1N5c3RlbS5SZXNvdXJjZXMuUnVudGltZVJlc291cmNlU2V0AgAAAAAAAAAAAAAAUEFEUEFEULQA
-AACkLgAAAAAAAAAAAAC+LgAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsC4AAAAAAAAAAAAAAABf
-Q29yRGxsTWFpbgBtc2NvcmVlLmRsbAAAAAAA/yUAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+dF9Bc3NlbWJseQAAAAAhVQBzAGUAcgA6ADoAdgBhAHIATwByAGkAZwBTAFEATAAAI1UAcwBlAHIA
+OgA6AHYAYQByAFMAUQBMAFEAdQBlAHIAeQAAH1UAcwBlAHIAOgA6AEwAbwBvAHAAQwBvAHUAbgB0
+AAAdIABBAE4ARAAgAHIAdQBuAF8AaQBkACAAPQAgAAAdVQBzAGUAcgA6ADoAdgBhAHIAUgB1AG4A
+SQBEAABxUwBUAF8AZAAyAGEANQAwAGMAOQA4AGEAYQA1ADUANABhADkAZQBhADAAOQBlAGEAMABj
+ADYAMwA1ADAANQBlAGMAYgBhAC4AUAByAG8AcABlAHIAdABpAGUAcwAuAFIAZQBzAG8AdQByAGMA
+ZQBzAAAAAAC84dB16Xt3Sbdm2HlNwgdlAAQgAQEIAyAAAQUgAQEREQQgAQEOBSABARFRAwcBDgQg
+ABJhBCAAEmUFIAESaRwDIAAcAyAADgcABA4ODg4OBCABARwEAAEBCAYAARJ1EXkEIAASfQYgAgEO
+En0It3pcVhk04IkIiYRdzYCAzJEEAAAAAAQBAAAAAwYSSQMGEk0DBhIQAgYIAwYRFAQAABJJBAAA
+Ek0FAAEBEk0EAAASEAMAAAEECAASSQQIABJNBAgAEhAIAQAIAAAAAAAeAQABAFQCFldyYXBOb25F
+eGNlcHRpb25UaHJvd3MBCAEAAgAAAAAAKAEAI1NUX2QyYTUwYzk4YWE1NTRhOWVhMDllYTBjNjM1
+MDVlY2JhAAAFAQAAAAAWAQARQ29weXJpZ2h0IEAgIDIwMjQAAEkBABouTkVURnJhbWV3b3JrLFZl
+cnNpb249djQuNQEAVA4URnJhbWV3b3JrRGlzcGxheU5hbWUSLk5FVCBGcmFtZXdvcmsgNC41tAAA
+AM7K774BAAAAkQAAAGxTeXN0ZW0uUmVzb3VyY2VzLlJlc291cmNlUmVhZGVyLCBtc2NvcmxpYiwg
+VmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2
+MTkzNGUwODkjU3lzdGVtLlJlc291cmNlcy5SdW50aW1lUmVzb3VyY2VTZXQCAAAAAAAAAAAAAABQ
+QURQQURQtAAAAKwuAAAAAAAAAAAAAMYuAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC4LgAAAAAA
+AAAAAAAAAF9Db3JEbGxNYWluAG1zY29yZWUuZGxsAAAAAAD/JQAgABAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -904,14 +975,14 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAABABAAAAAYAACAAAAAAAAAAAAAAAAAAAABAAEAAAAwAACAAAAAAAAAAAAAAAAAAAABAAAA
 AABIAAAAWEAAABoEAAAAAAAAAAAAABoENAAAAFYAUwBfAFYARQBSAFMASQBPAE4AXwBJAE4ARgBP
-AAAAAAC9BO/+AAABAAAAAQBjWDwjAAABAGNYPCM/AAAAAAAAAAQAAAACAAAAAAAAAAAAAAAAAAAA
+AAAAAAC9BO/+AAABAAAAAQACU1kjAAABAAJTWSM/AAAAAAAAAAQAAAACAAAAAAAAAAAAAAAAAAAA
 RAAAAAEAVgBhAHIARgBpAGwAZQBJAG4AZgBvAAAAAAAkAAQAAABUAHIAYQBuAHMAbABhAHQAaQBv
 AG4AAAAAAAAAsAR6AwAAAQBTAHQAcgBpAG4AZwBGAGkAbABlAEkAbgBmAG8AAABWAwAAAQAwADAA
 MAAwADAANABiADAAAAAaAAEAAQBDAG8AbQBtAGUAbgB0AHMAAAAAAAAAIgABAAEAQwBvAG0AcABh
 AG4AeQBOAGEAbQBlAAAAAAAAAAAAcAAkAAEARgBpAGwAZQBEAGUAcwBjAHIAaQBwAHQAaQBvAG4A
 AAAAAFMAVABfAGQAMgBhADUAMABjADkAOABhAGEANQA1ADQAYQA5AGUAYQAwADkAZQBhADAAYwA2
 ADMANQAwADUAZQBjAGIAYQAAAD4ADwABAEYAaQBsAGUAVgBlAHIAcwBpAG8AbgAAAAAAMQAuADAA
-LgA5ADAAMgAwAC4AMgAyADYAMgA3AAAAAABwACgAAQBJAG4AdABlAHIAbgBhAGwATgBhAG0AZQAA
+LgA5ADAANAA5AC4AMgAxADIANQAwAAAAAABwACgAAQBJAG4AdABlAHIAbgBhAGwATgBhAG0AZQAA
 AFMAVABfAGQAMgBhADUAMABjADkAOABhAGEANQA1ADQAYQA5AGUAYQAwADkAZQBhADAAYwA2ADMA
 NQAwADUAZQBjAGIAYQAuAGQAbABsAAAASAASAAEATABlAGcAYQBsAEMAbwBwAHkAcgBpAGcAaAB0
 AAAAQwBvAHAAeQByAGkAZwBoAHQAIABAACAAIAAyADAAMgA0AAAAKgABAAEATABlAGcAYQBsAFQA
@@ -920,15 +991,15 @@ AGEAbQBlAAAAUwBUAF8AZAAyAGEANQAwAGMAOQA4AGEAYQA1ADUANABhADkAZQBhADAAOQBlAGEA
 MABjADYAMwA1ADAANQBlAGMAYgBhAC4AZABsAGwAAABoACQAAQBQAHIAbwBkAHUAYwB0AE4AYQBt
 AGUAAAAAAFMAVABfAGQAMgBhADUAMABjADkAOABhAGEANQA1ADQAYQA5AGUAYQAwADkAZQBhADAA
 YwA2ADMANQAwADUAZQBjAGIAYQAAAEIADwABAFAAcgBvAGQAdQBjAHQAVgBlAHIAcwBpAG8AbgAA
-ADEALgAwAC4AOQAwADIAMAAuADIAMgA2ADIANwAAAAAARgAPAAEAQQBzAHMAZQBtAGIAbAB5ACAA
-VgBlAHIAcwBpAG8AbgAAADEALgAwAC4AOQAwADIAMAAuADIAMgA2ADIANwAAAAAAAAAAAAAAAAAA
+ADEALgAwAC4AOQAwADQAOQAuADIAMQAyADUAMAAAAAAARgAPAAEAQQBzAHMAZQBtAGIAbAB5ACAA
+VgBlAHIAcwBpAG8AbgAAADEALgAwAC4AOQAwADQAOQAuADIAMQAyADUAMAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAwAAADQPgAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAwAAADYPgAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -965,11 +1036,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}"
+              SQLTask:Connection="{2B8EDF77-6526-42EA-BB41-3AF07EA07A7E}"
               SQLTask:SqlStatementSource="UPDATE [config].[wms_dm_run_ctl] &#xA;SET run_status = 'SentToFile' &#xA;       ,run_finish_time = GetDate()&#xA;WHERE run_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
-                SQLTask:DtsVariableName="User::vRunID"
+                SQLTask:DtsVariableName="User::varRunID"
                 SQLTask:ParameterDirection="Input"
                 SQLTask:DataType="3"
                 SQLTask:ParameterSize="-1" />
@@ -989,6 +1060,24 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
   </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{3A6AEFB5-2EA4-45E7-8AE7-44276FDA2270}"
+      DTS:From="Package\Assign RunID"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Assign Loop Counter" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{8DD7289D-E6A2-4311-B42C-A78F8D5BD32A}"
+      DTS:From="Package\Assign Loop Counter"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Sequence Container" />
+  </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -1000,7 +1089,15 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="178.666666666667,42.6666666666667"
+          Id="Package\Assign Loop Counter"
+          TopLeft="997.499985136092,281.894742148074" />
+        <NodeLayout
+          Size="186.666666666667,42.6666666666667"
+          Id="Package\Assign RunID"
+          TopLeft="992.499985210598,201.842109062335" />
         <NodeLayout
           Size="140,42.6666666666667"
           Id="Package\Sequence Container\For Loop Container\Create Output File"
@@ -1070,7 +1167,51 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
           PanelSize="230.666666666667,482.666666666667"
           Size="230.666666666667,526"
           Id="Package\Sequence Container"
-          TopLeft="71.0714275123816,43.8646624986015" />
+          TopLeft="965.446414185156,359.969931606394" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="1086.33331850668,244.508775729002">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.3859664190723"
+              Start="0,0"
+              End="0,29.8859664190723">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.8859664190723" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="1083.80653299396,324.561408814741">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.4085227916526"
+              Start="0,0"
+              End="0,27.9085227916526">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.9085227916526" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>

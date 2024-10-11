@@ -11,10 +11,24 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="3A-inventory-transform_inventory_NEW"
   DTS:PackageType="5"
-  DTS:VersionBuild="110"
-  DTS:VersionGUID="{EC56A81F-D8A4-4723-A669-E74577D04564}">
+  DTS:VersionBuild="116"
+  DTS:VersionGUID="{5FC731C6-5818-4C9A-B8AD-75265C10578B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DM_Working_DB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{36E9EFF6-4EEA-45DD-9CC3-CF4210D836F9}"
+      DTS:ObjectName="DM_Working_DB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=UKWWHDSQLWI099;Initial Catalog=DM_DryRun3_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-3A-inventory-transform_inventory_NEW-{36E9EFF6-4EEA-45DD-9CC3-CF4210D836F9}UKWWHDSQLWI099.DM_DryRun3_NP3;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
@@ -49,7 +63,7 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}"
+              SQLTask:Connection="{36E9EFF6-4EEA-45DD-9CC3-CF4210D836F9}"
               SQLTask:SqlStatementSource="UPDATE [config].[wms_dm_run_ctl] SET run_status = 'InProgress' WHERE run_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
@@ -72,7 +86,7 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}"
+              SQLTask:Connection="{36E9EFF6-4EEA-45DD-9CC3-CF4210D836F9}"
               SQLTask:SqlStatementSource="UPDATE [config].[wms_dm_run_ctl] &#xA;SET run_status = 'Transformed',&#xA;         run_finish_time = GetDate()&#xA;WHERE run_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
@@ -156,8 +170,8 @@
                   <connections>
                     <connection
                       refId="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors.Connections[OleDbConnection]"
-                      connectionManagerID="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}:external"
-                      connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                      connectionManagerID="Package.ConnectionManagers[DM_Working_DB]"
+                      connectionManagerRefId="Package.ConnectionManagers[DM_Working_DB]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -1847,8 +1861,8 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                   <connections>
                     <connection
                       refId="Package\Transform Inventory Data\Transform inventories\Read Inventory Records.Connections[OleDbConnection]"
-                      connectionManagerID="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}:external"
-                      connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                      connectionManagerID="Package.ConnectionManagers[DM_Working_DB]"
+                      connectionManagerRefId="Package.ConnectionManagers[DM_Working_DB]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -4367,8 +4381,8 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
                   <connections>
                     <connection
                       refId="Package\Transform Inventory Data\Transform inventories\Transformed_Data.Connections[OleDbConnection]"
-                      connectionManagerID="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}:external"
-                      connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                      connectionManagerID="Package.ConnectionManagers[DM_Working_DB]"
+                      connectionManagerRefId="Package.ConnectionManagers[DM_Working_DB]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -5817,7 +5831,7 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}"
+              SQLTask:Connection="{36E9EFF6-4EEA-45DD-9CC3-CF4210D836F9}"
               SQLTask:SqlStatementSource="TRUNCATE TABLE final.inventories;&#xA;GO&#xA; SELECT ?=run_id FROM [config].[wms_dm_run_ctl] WHERE package_name = 'inventory' AND run_status = 'Staged';&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
@@ -5973,47 +5987,11 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
         <NodeLayout
           Size="216,42.6666666666667"
           Id="Package\Transform Inventory Data\Transform inventories\inventories_transform_errors"
-          TopLeft="421.999993816018,223.473688473332" />
+          TopLeft="405.124994067475,221.421056855749" />
         <NodeLayout
           Size="194.666666666667,42.6666666666667"
           Id="Package\Transform Inventory Data\Transform inventories\Read Inventory Records"
           TopLeft="74.5333333333333,88.1333333333333" />
-        <EdgeLayout
-          Id="Package\Transform Inventory Data\Transform inventories.Paths[Capture Errors]"
-          TopLeft="512.2083269724,124.701755390493">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="17.7916668436177,98.7719330828389"
-              Start="0,0"
-              End="17.7916668436177,91.2719330828389">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,45.3859665414195" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,45.3859665414195"
-                    Point2="0,49.3859665414195"
-                    Point3="4,49.3859665414195" />
-                  <mssgle:LineSegment
-                    End="13.7916668436177,49.3859665414195" />
-                  <mssgle:CubicBezierSegment
-                    Point1="13.7916668436177,49.3859665414195"
-                    Point2="17.7916668436177,49.3859665414195"
-                    Point3="17.7916668436177,53.3859665414195" />
-                  <mssgle:LineSegment
-                    End="17.7916668436177,91.2719330828389" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-23.8492642344412,54.3859665414195,65.4901953125,11.4140625"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package\Transform Inventory Data\Transform inventories.Paths[OLE DB Source Output]"
           TopLeft="269.2,106.58421102858">
@@ -6034,6 +6012,30 @@ SELECT CAST(stg.[ISBN_SuppEd] AS VARCHAR) AS [ISBN_SuppEd]
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transform Inventory Data\Transform inventories.Paths[Capture Errors]"
+          TopLeft="512.666660519938,124.701755390493">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,96.7193014652558"
+              Start="0,0"
+              End="0,89.2193014652558">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,89.2193014652558" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-32.74509765625,38.9026194826279,65.4901953125,11.4140625"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

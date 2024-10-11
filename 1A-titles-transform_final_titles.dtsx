@@ -11,10 +11,24 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="113"
-  DTS:VersionGUID="{E5950033-8CD4-410B-B20A-B0518FAA9C69}">
+  DTS:VersionBuild="122"
+  DTS:VersionGUID="{89B5BF80-B382-4D27-AC18-6E24A42C1636}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DM_Working_DB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D8621E49-C8EC-4847-9476-605887381A02}"
+      DTS:ObjectName="DM_Working_DB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=UKWWHDSQLWI099;Initial Catalog=DM_DryRun3_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{D8621E49-C8EC-4847-9476-605887381A02}UKWWHDSQLWI099.DM_DryRun3_NP3;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
@@ -49,7 +63,7 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}"
+              SQLTask:Connection="{D8621E49-C8EC-4847-9476-605887381A02}"
               SQLTask:SqlStatementSource="UPDATE [config].[wms_dm_run_ctl] SET run_status = 'InProgress' WHERE run_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
@@ -72,7 +86,7 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}"
+              SQLTask:Connection="{D8621E49-C8EC-4847-9476-605887381A02}"
               SQLTask:SqlStatementSource="UPDATE [config].[wms_dm_run_ctl] &#xA;SET run_status = 'Transformed',&#xA;         run_finish_time = GetDate()&#xA;WHERE run_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
@@ -278,7 +292,7 @@ SELECT [output_file_batch]
 	  ,CAST([by_payload_filler] AS VARCHAR(8000)) AS [by_payload_filler]
   FROM [transform].[titles_staging]) tt 
   JOIN transform.delta_title_list dt ON tt.ISBN_SuppEd = dt.ISBN_SuppEd AND tt.run_id = dt.run_id AND dt.[Storage Location] = tt.[Storage Location]
-  --WHERE tt.ISBN_SuppEd in( '9780241357552-UKS01201', '9780241642245-UKS00101')--where isbn = '9780141981048'
+  --WHERE tt.ISBN_SuppEd in( '9780241357552-UKS01201', '9780241642245-UKS00101')
   ORDER BY 1;</property>
                     <property
                       dataType="System.String"
@@ -305,8 +319,8 @@ SELECT [output_file_batch]
                   <connections>
                     <connection
                       refId="Package\Transform Title Data\Transform titles\Read title records.Connections[OleDbConnection]"
-                      connectionManagerID="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}:external"
-                      connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                      connectionManagerID="Package.ConnectionManagers[DM_Working_DB]"
+                      connectionManagerRefId="Package.ConnectionManagers[DM_Working_DB]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -1424,8 +1438,8 @@ SELECT [output_file_batch]
                   <connections>
                     <connection
                       refId="Package\Transform Title Data\Transform titles\titles_transform_errors.Connections[OleDbConnection]"
-                      connectionManagerID="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}:external"
-                      connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                      connectionManagerID="Package.ConnectionManagers[DM_Working_DB]"
+                      connectionManagerRefId="Package.ConnectionManagers[DM_Working_DB]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -2073,8 +2087,8 @@ SELECT [output_file_batch]
                   <connections>
                     <connection
                       refId="Package\Transform Title Data\Transform titles\transformed_data.Connections[OleDbConnection]"
-                      connectionManagerID="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}:external"
-                      connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                      connectionManagerID="Package.ConnectionManagers[DM_Working_DB]"
+                      connectionManagerRefId="Package.ConnectionManagers[DM_Working_DB]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -2419,6 +2433,14 @@ SELECT [output_file_batch]
                           cachedName="PalletWeight"
                           externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[PalletWeight]"
                           lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[PalletWeight]" />
+                        <inputColumn
+                          refId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].Columns[by_payload_filler]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="4000"
+                          cachedName="by_payload_filler"
+                          externalMetadataColumnId="Package\Transform Title Data\Transform titles\transformed_data.Inputs[OLE DB Destination Input].ExternalColumns[by_payload_filler]"
+                          lineageId="Package\Transform Title Data\Transform titles\Read title records.Outputs[OLE DB Source Output].Columns[by_payload_filler]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -2723,7 +2745,7 @@ SELECT [output_file_batch]
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}"
+              SQLTask:Connection="{D8621E49-C8EC-4847-9476-605887381A02}"
               SQLTask:SqlStatementSource="TRUNCATE TABLE final.titles;&#xA;GO&#xA; SELECT ?=run_id FROM [config].[wms_dm_run_ctl] WHERE package_name = 'titles' AND run_status = 'Staged';&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
@@ -2910,18 +2932,18 @@ SELECT [output_file_batch]
           TopLeft="483.124992800876,296.263163471156" />
         <EdgeLayout
           Id="Package\Transform Title Data\Transform titles.Paths[OLE DB Source Output]"
-          TopLeft="279.874998258427,140.394739089415">
+          TopLeft="279.541664925094,140.228072422748">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="216.374994346872,0"
+              EndConnector="216.708327680205,0"
               Start="0,0"
-              End="208.874994346872,0">
+              End="209.208327680205,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="208.874994346872,0" />
+                    End="209.208327680205,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2950,7 +2972,7 @@ SELECT [output_file_batch]
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-32.74509765625,56.788584433544,65.4901953125,11.4140625"
+              BoundingBox="-32.74509765625,56.7885844335442,65.4901953125,11.4140625"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>

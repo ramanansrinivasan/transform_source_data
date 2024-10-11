@@ -1,0 +1,2587 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/18/2024 8:20:39 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="UKWWHDSQLWI099"
+  DTS:CreatorName="UK\PAM-WMS-Migration"
+  DTS:DTSID="{A371EA1B-0D00-47E5-BDB8-85C3CD89ACF1}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5270.0"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="85"
+  DTS:VersionGUID="{9F1A3628-B44B-4CE9-B3FE-4C77FFA3E532}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DM_Working_DB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C1F2EB1A-E0A6-4202-82A2-BD8F68F28D65}"
+      DTS:ObjectName="DM_Working_DB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=UKWWHDSQLWI099;Initial Catalog=DM_DryRun3_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{C1F2EB1A-E0A6-4202-82A2-BD8F68F28D65}UKWWHDSQLWI099.DM_DryRun3_NP3;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{586E1796-5EDF-4395-9B10-C37531030ADC}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="varRunID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Transform Vendor Data"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{519110BD-132F-4EA9-B278-2AC44605745F}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Transform Vendor Data">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Transform Vendor Data\run_status to InProgress"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{BAEB8A62-321B-4848-9232-56935912F060}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="run_status to InProgress"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C1F2EB1A-E0A6-4202-82A2-BD8F68F28D65}"
+              SQLTask:SqlStatementSource="UPDATE [config].[wms_dm_run_ctl] SET run_status = 'InProgress' WHERE run_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::varRunID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Transform Vendor Data\run_status to Transformed"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{A12A27B2-8F2D-4F6F-AE93-A66E4295550C}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="run_status to Transformed"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C1F2EB1A-E0A6-4202-82A2-BD8F68F28D65}"
+              SQLTask:SqlStatementSource="UPDATE [config].[wms_dm_run_ctl] &#xA;SET run_status = 'Transformed',&#xA;         run_finish_time = GetDate()&#xA;WHERE run_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::varRunID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Transform Vendor Data\Transform vendors"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{95104BF5-1894-49F1-8FF8-7A596D142B46}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Transform vendors"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Transform Vendor Data\Transform vendors\final_vendors"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="final_vendors"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[final].[vendors]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[DM_Working_DB]"
+                      connectionManagerRefId="Package.ConnectionManagers[DM_Working_DB]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="RedirectRow"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Created On]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Created On"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Created On]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Created On]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Plant]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Plant"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Plant]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Plant]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[resultant_payload]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="8000"
+                          cachedName="resultant_payload"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[resultant_payload]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[resultant_payload]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[run_id]"
+                          cachedDataType="i4"
+                          cachedName="run_id"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[run_id]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[run_id]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[record_number]"
+                          cachedDataType="i8"
+                          cachedName="record_number"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[record_number]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[record_number]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Vendor]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Vendor"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Vendor]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Vendor]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Purch  Organization]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Purch  Organization"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Purch  Organization]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Purch  Organization]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Binder Code]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Binder Code"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Binder Code]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Binder Code]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Country Key]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Country Key"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Country Key]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Country Key]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[name1]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="name1"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[name1]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[name1]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[name2]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="name2"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[name2]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[name2]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[name3]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="name3"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[name3]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[name3]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[name4]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="name4"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[name4]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[name4]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[City]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="City"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[City]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[PO Box]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="PO Box"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[PO Box]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[PO Box]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[P O  Box Postal Code]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="P O  Box Postal Code"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[P O  Box Postal Code]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[P O  Box Postal Code]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Postal Code]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Postal Code"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Postal Code]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Postal Code]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Region]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Region"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Region]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Search term]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Search term"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Search term]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Search term]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Street and House No ]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Street and House No "
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Street and House No ]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Street and House No ]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Account Group]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Account Group"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Account Group]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Account Group]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Customer]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Customer"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Customer]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Customer]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Language Key]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Language Key"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Language Key]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Language Key]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Telephone 1]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Telephone 1"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Telephone 1]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Telephone 1]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[VAT Registration No ]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="VAT Registration No "
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[VAT Registration No ]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[VAT Registration No ]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Sort key]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Sort key"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Sort key]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Sort key]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Reconciliation acct]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Reconciliation acct"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Reconciliation acct]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Reconciliation acct]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Payment methods]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Payment methods"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Payment methods]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Payment methods]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Terms of Payment]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Terms of Payment"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Terms of Payment]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Terms of Payment]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Previous account no ]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Previous account no "
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Previous account no ]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Previous account no ]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Credit memo pyt term]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Credit memo pyt term"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Credit memo pyt term]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Credit memo pyt term]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[Order currency]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Order currency"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Order currency]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Order currency]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[main_tag_starter]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="main_tag_starter"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_starter]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[main_tag_starter]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[main_tag_finisher]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="main_tag_finisher"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_finisher]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[main_tag_finisher]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].Columns[by_payload_filler]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="4000"
+                          cachedName="by_payload_filler"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[by_payload_filler]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[by_payload_filler]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[run_id]"
+                          dataType="i4"
+                          name="run_id" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[record_number]"
+                          dataType="i8"
+                          name="record_number" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Created On]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Created On" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Plant]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Plant" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Vendor]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Vendor" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Purch  Organization]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Purch  Organization" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Binder Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Binder Code" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Country Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Country Key" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[name1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name1" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[name2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name2" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[name3]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name3" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[name4]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name4" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="City" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[PO Box]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="PO Box" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[P O  Box Postal Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="P O  Box Postal Code" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Postal Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Postal Code" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Region" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Search term]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Search term" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Street and House No ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Street and House No " />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Account Group]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Account Group" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Customer]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Customer" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Language Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Language Key" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Telephone 1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Telephone 1" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[VAT Registration No ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="VAT Registration No " />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Sort key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Sort key" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Reconciliation acct]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Reconciliation acct" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Payment methods]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Payment methods" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Terms of Payment]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Terms of Payment" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Previous account no ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Previous account no " />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Credit memo pyt term]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Credit memo pyt term" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[Order currency]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Order currency" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_starter]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="main_tag_starter" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[by_payload_filler]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4000"
+                          name="by_payload_filler" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[resultant_payload]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          name="resultant_payload" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_finisher]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="main_tag_finisher" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\final_vendors.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\final_vendors.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\final_vendors.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Transform Vendor Data\Transform vendors\Read vendor records"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Read vendor records"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[transform].[titles_staging]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT vend.[record_number]
+      ,vend.[run_id]
+      ,vend.[Vendor]
+      ,vend.[Purch  Organization]
+      ,vend.[Created On]
+      ,vend.[Binder Code]
+      ,vend.[Country Key]
+	  ,vend.[name1]
+      ,vend.[name2]
+      ,vend.[name3]
+      ,vend.[name4]
+      ,vend.[City]
+      ,vend.[PO Box]
+      ,vend.[P O  Box Postal Code]
+      ,vend.[Postal Code]
+      ,vend.[Region]
+      ,vend.[Search term]
+      ,vend.[Street and House No ]
+      ,vend.[Account Group]
+      ,vend.[Customer]
+      ,vend.[Language Key]
+      ,vend.[Telephone 1]
+      ,vend.[VAT Registration No ]
+      ,vend.[Plant]
+      ,vend.[Sort key]
+      ,vend.[Reconciliation acct]
+      ,vend.[Payment methods]
+      ,vend.[Terms of Payment]
+      ,vend.[Previous account no ]
+      ,vend.[Credit memo pyt term]
+      ,vend.[Order currency]
+      ,vend.[main_tag_starter]
+      ,vend.[by_payload_filler]
+      ,vend.[main_tag_finisher]
+	  --,REPLACE(CAST(by_payload_filler AS VARCHAR(8000)), '&lt;filler_supnum&gt;', vend.[Binder Code])
+      ,REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
+       REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE( 
+       REPLACE(CAST(by_payload_filler AS VARCHAR(8000)), '&lt;filler_supnum&gt;', vend.[Vendor])
+                                ,'&lt;filler_hostextid&gt;', vend.[Binder Code])--* 
+                                ,'&lt;filler_adrnam&gt;', vend.name1) 
+                                ,'&lt;filler_adrtyp&gt;', '')--* 
+                                --,'&lt;filler_adrln1&gt;', CASE WHEN LTRIM(RTRIM(vend.name2)) &lt;&gt; '' THEN LTRIM(RTRIM(vend.name2)) + ',' + LTRIM(RTRIM(vend.[Street and House No ])) ELSE LTRIM(RTRIM(vend.[Street and House No ])) END) --REVISIT IF REQUIRED after speaking with Dan Tovey
+                                ,'&lt;filler_adrln1&gt;', CASE WHEN LEN(LTRIM(RTRIM(vend.[Street and House No ]))) = 0 THEN LTRIM(RTRIM(vend.name2)) ELSE LTRIM(RTRIM(vend.[Street and House No ])) END) --28/08/2024 : Mapping Street and House No field to addressline 1 instead of name 2 because Data Quality of this field is better.
+                                ,'&lt;filler_adrln2&gt;', vend.name3) 
+                                ,'&lt;filler_adrln3&gt;', vend.name4) 
+                                ,'&lt;filler_adrcty&gt;', vend.City) 
+                                ,'&lt;filler_adrstc&gt;', '') --* 
+                                ,'&lt;filler_adrpsz&gt;', vend.[Postal Code]) 
+                                ,'&lt;filler_ctryname&gt;', vend.[Country Key]) 
+                                ,'&lt;filler_rgncod&gt;', vend.Region) 
+                                ,'&lt;filler_phnnum&gt;', vend.[Telephone 1]) 
+                                ,'&lt;filler_faxnum&gt;', '') --* 
+                                ,'&lt;filler_poboxflg&gt;', CASE WHEN LTRIM(RTRIM(vend.[PO Box])) IS NOT NULL AND LTRIM(RTRIM(vend.[PO Box])) &lt;&gt; '' THEN 1 ELSE 0 END) AS resultant_payload
+  FROM (
+SELECT v.[record_number]
+      ,v.[run_id]
+      ,v.[Vendor]
+      ,v.[Purch  Organization]
+      ,v.[Created On]
+      ,v.[Binder Code]
+      ,v.[Country Key]
+	  ,CAST(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(v.[Name 1],'&amp;','&amp;amp;'),'''','&amp;apos;'),'&gt;','&amp;gt;'),'&lt;','&amp;lt;'),'"','&amp;quot;') AS VARCHAR(500)) AS [name1]
+      ,CAST(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(v.[Name 2],'&amp;','&amp;amp;'),'''','&amp;apos;'),'&gt;','&amp;gt;'),'&lt;','&amp;lt;'),'"','&amp;quot;') AS VARCHAR(500)) AS [name2]
+      ,CAST(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(v.[Name 3],'&amp;','&amp;amp;'),'''','&amp;apos;'),'&gt;','&amp;gt;'),'&lt;','&amp;lt;'),'"','&amp;quot;') AS VARCHAR(500)) AS [name3]
+      ,CAST(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(v.[Name 4],'&amp;','&amp;amp;'),'''','&amp;apos;'),'&gt;','&amp;gt;'),'&lt;','&amp;lt;'),'"','&amp;quot;') AS VARCHAR(500)) AS [name4]
+      ,v.[City]
+      ,v.[PO Box]
+      ,v.[P O  Box Postal Code]
+      ,v.[Postal Code]
+      ,v.[Region]
+      ,v.[Search term]
+      --,v.[Street and House No ]
+	  ,CAST(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(v.[Street and House No ],'&amp;','&amp;amp;'),'''','&amp;apos;'),'&gt;','&amp;gt;'),'&lt;','&amp;lt;'),'"','&amp;quot;') AS VARCHAR(500)) AS [Street and House No ]
+      ,v.[Account Group]
+      ,v.[Customer]
+      ,v.[Language Key]
+      ,v.[Telephone 1]
+      ,v.[VAT Registration No ]
+      ,v.[Plant]
+      ,v.[Sort key]
+      ,v.[Reconciliation acct]
+      ,v.[Payment methods]
+      ,v.[Terms of Payment]
+      ,v.[Previous account no ]
+      ,v.[Credit memo pyt term]
+      ,v.[Order currency]
+      ,v.[main_tag_starter]
+      ,v.[by_payload_filler]
+      ,v.[main_tag_finisher]
+  FROM [transform].[vendors_staging] v
+JOIN transform.delta_vendor_list vl ON v.Vendor = vl.Vendor AND v.run_id = vl.run_id
+  ) vend;</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[DM_Working_DB]"
+                      connectionManagerRefId="Package.ConnectionManagers[DM_Working_DB]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Created On]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Created On]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Created On]"
+                          name="Created On"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Plant]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Plant]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Plant]"
+                          name="Plant"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[by_payload_filler]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[by_payload_filler]"
+                          length="4000"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[by_payload_filler]"
+                          name="by_payload_filler"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[resultant_payload]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[resultant_payload]"
+                          length="8000"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[resultant_payload]"
+                          name="resultant_payload"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[run_id]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[run_id]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[run_id]"
+                          name="run_id"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[record_number]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[record_number]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[record_number]"
+                          name="record_number"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Vendor]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Vendor]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Vendor]"
+                          name="Vendor"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Purch  Organization]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Purch  Organization]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Purch  Organization]"
+                          name="Purch  Organization"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Binder Code]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Binder Code]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Binder Code]"
+                          name="Binder Code"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Country Key]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Country Key]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Country Key]"
+                          name="Country Key"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[name1]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[name1]"
+                          length="500"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[name1]"
+                          name="name1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[name2]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[name2]"
+                          length="500"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[name2]"
+                          name="name2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[name3]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[name3]"
+                          length="500"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[name3]"
+                          name="name3"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[name4]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[name4]"
+                          length="500"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[name4]"
+                          name="name4"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[City]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[City]"
+                          name="City"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[PO Box]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[PO Box]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[PO Box]"
+                          name="PO Box"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[P O  Box Postal Code]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[P O  Box Postal Code]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[P O  Box Postal Code]"
+                          name="P O  Box Postal Code"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Postal Code]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Postal Code]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Postal Code]"
+                          name="Postal Code"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Region]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Region]"
+                          name="Region"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Search term]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Search term]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Search term]"
+                          name="Search term"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Street and House No ]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Street and House No ]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Street and House No ]"
+                          name="Street and House No "
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Account Group]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Account Group]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Account Group]"
+                          name="Account Group"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Customer]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Customer]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Customer]"
+                          name="Customer"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Language Key]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Language Key]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Language Key]"
+                          name="Language Key"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Telephone 1]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Telephone 1]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Telephone 1]"
+                          name="Telephone 1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[VAT Registration No ]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[VAT Registration No ]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[VAT Registration No ]"
+                          name="VAT Registration No "
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Sort key]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Sort key]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Sort key]"
+                          name="Sort key"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Reconciliation acct]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Reconciliation acct]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Reconciliation acct]"
+                          name="Reconciliation acct"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Payment methods]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Payment methods]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Payment methods]"
+                          name="Payment methods"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Terms of Payment]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Terms of Payment]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Terms of Payment]"
+                          name="Terms of Payment"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Previous account no ]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Previous account no ]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Previous account no ]"
+                          name="Previous account no "
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Credit memo pyt term]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Credit memo pyt term]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Credit memo pyt term]"
+                          name="Credit memo pyt term"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Order currency]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Order currency]"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Order currency]"
+                          name="Order currency"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[main_tag_starter]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[main_tag_starter]"
+                          length="200"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[main_tag_starter]"
+                          name="main_tag_starter"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[main_tag_finisher]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[main_tag_finisher]"
+                          length="200"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[main_tag_finisher]"
+                          name="main_tag_finisher"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Created On]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Created On" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Plant]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Plant" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[by_payload_filler]"
+                          codePage="1252"
+                          dataType="text"
+                          name="by_payload_filler" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[resultant_payload]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          name="resultant_payload" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[run_id]"
+                          dataType="i4"
+                          name="run_id" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[record_number]"
+                          dataType="i8"
+                          name="record_number" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Vendor]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Vendor" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Purch  Organization]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Purch  Organization" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Binder Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Binder Code" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Country Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Country Key" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[name1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name1" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[name2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name2" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[name3]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name3" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[name4]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name4" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="City" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[PO Box]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="PO Box" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[P O  Box Postal Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="P O  Box Postal Code" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Postal Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Postal Code" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Region" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Search term]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Search term" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Street and House No ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="Street and House No " />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Account Group]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Account Group" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Customer]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Customer" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Language Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Language Key" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Telephone 1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Telephone 1" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[VAT Registration No ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="VAT Registration No " />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Sort key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Sort key" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Reconciliation acct]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Reconciliation acct" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Payment methods]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Payment methods" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Terms of Payment]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Terms of Payment" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Previous account no ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Previous account no " />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Credit memo pyt term]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Credit memo pyt term" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[Order currency]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Order currency" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[main_tag_starter]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="main_tag_starter" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].ExternalColumns[main_tag_finisher]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="main_tag_finisher" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[record_number]"
+                          dataType="i8"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[record_number]"
+                          name="record_number" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[run_id]"
+                          dataType="i4"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[run_id]"
+                          name="run_id" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Vendor]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Vendor]"
+                          name="Vendor" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Purch  Organization]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Purch  Organization]"
+                          name="Purch  Organization" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Created On]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Created On]"
+                          name="Created On" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Binder Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Binder Code]"
+                          name="Binder Code" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Country Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Country Key]"
+                          name="Country Key" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[name1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[name1]"
+                          name="name1" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[name2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[name2]"
+                          name="name2" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[name3]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[name3]"
+                          name="name3" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[name4]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[name4]"
+                          name="name4" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[City]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[City]"
+                          name="City" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[PO Box]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[PO Box]"
+                          name="PO Box" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[P O  Box Postal Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[P O  Box Postal Code]"
+                          name="P O  Box Postal Code" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Postal Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Postal Code]"
+                          name="Postal Code" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Region]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Region]"
+                          name="Region" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Search term]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Search term]"
+                          name="Search term" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Street and House No ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Street and House No ]"
+                          name="Street and House No " />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Account Group]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Account Group]"
+                          name="Account Group" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Customer]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Customer]"
+                          name="Customer" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Language Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Language Key]"
+                          name="Language Key" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Telephone 1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Telephone 1]"
+                          name="Telephone 1" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[VAT Registration No ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[VAT Registration No ]"
+                          name="VAT Registration No " />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Plant]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Plant]"
+                          name="Plant" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Sort key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Sort key]"
+                          name="Sort key" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Reconciliation acct]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Reconciliation acct]"
+                          name="Reconciliation acct" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Payment methods]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Payment methods]"
+                          name="Payment methods" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Terms of Payment]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Terms of Payment]"
+                          name="Terms of Payment" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Previous account no ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Previous account no ]"
+                          name="Previous account no " />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Credit memo pyt term]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Credit memo pyt term]"
+                          name="Credit memo pyt term" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Order currency]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[Order currency]"
+                          name="Order currency" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[main_tag_starter]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[main_tag_starter]"
+                          name="main_tag_starter" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[by_payload_filler]"
+                          codePage="1252"
+                          dataType="text"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[by_payload_filler]"
+                          name="by_payload_filler" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[main_tag_finisher]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[main_tag_finisher]"
+                          name="main_tag_finisher" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[resultant_payload]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[resultant_payload]"
+                          name="resultant_payload" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="vendors_transform_errors"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[transform].[vendors_transform_errors]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[DM_Working_DB]"
+                      connectionManagerRefId="Package.ConnectionManagers[DM_Working_DB]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Created On]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Created On"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Created On]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Created On]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Plant]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Plant"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Plant]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Plant]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[by_payload_filler]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="4000"
+                          cachedName="by_payload_filler"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[by_payload_filler]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[by_payload_filler]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[resultant_payload]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="8000"
+                          cachedName="resultant_payload"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[resultant_payload]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[resultant_payload]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[run_id]"
+                          cachedDataType="i4"
+                          cachedName="run_id"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[run_id]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[run_id]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[record_number]"
+                          cachedDataType="i8"
+                          cachedName="record_number"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[record_number]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[record_number]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Vendor]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Vendor"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Vendor]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Vendor]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Purch  Organization]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Purch  Organization"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Purch  Organization]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Purch  Organization]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Binder Code]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Binder Code"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Binder Code]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Binder Code]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Country Key]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Country Key"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Country Key]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Country Key]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[name1]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="name1"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[name1]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[name1]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[name2]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="name2"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[name2]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[name2]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[name3]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="name3"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[name3]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[name3]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[name4]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="name4"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[name4]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[name4]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[City]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="City"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[City]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[PO Box]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="PO Box"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PO Box]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[PO Box]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[P O  Box Postal Code]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="P O  Box Postal Code"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[P O  Box Postal Code]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[P O  Box Postal Code]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Postal Code]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Postal Code"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Postal Code]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Postal Code]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Region]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Region"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Region]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Search term]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Search term"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Search term]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Search term]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Street and House No ]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Street and House No "
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Street and House No ]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Street and House No ]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Account Group]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Account Group"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Account Group]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Account Group]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Customer]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Customer"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Customer]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Customer]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Language Key]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Language Key"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Language Key]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Language Key]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Telephone 1]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Telephone 1"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Telephone 1]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Telephone 1]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[VAT Registration No ]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="VAT Registration No "
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[VAT Registration No ]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[VAT Registration No ]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Sort key]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Sort key"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Sort key]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Sort key]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Reconciliation acct]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Reconciliation acct"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Reconciliation acct]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Reconciliation acct]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Payment methods]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Payment methods"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Payment methods]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Payment methods]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Terms of Payment]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Terms of Payment"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Terms of Payment]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Terms of Payment]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Previous account no ]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Previous account no "
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Previous account no ]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Previous account no ]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Credit memo pyt term]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Credit memo pyt term"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Credit memo pyt term]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Credit memo pyt term]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[Order currency]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Order currency"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Order currency]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[Order currency]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[main_tag_starter]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="main_tag_starter"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_starter]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[main_tag_starter]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[main_tag_finisher]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="main_tag_finisher"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_finisher]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output].Columns[main_tag_finisher]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[ErrorCode]"
+                          cachedDataType="i4"
+                          cachedName="ErrorCode"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[ErrorCode]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\final_vendors.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]" />
+                        <inputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].Columns[ErrorColumn]"
+                          cachedDataType="i4"
+                          cachedName="ErrorColumn"
+                          externalMetadataColumnId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[ErrorColumn]"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\final_vendors.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Created On]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Created On" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Plant]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Plant" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[by_payload_filler]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4000"
+                          name="by_payload_filler" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[resultant_payload]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          name="resultant_payload" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[run_id]"
+                          dataType="i4"
+                          name="run_id" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[record_number]"
+                          dataType="i8"
+                          name="record_number" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Vendor]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Vendor" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Purch  Organization]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Purch  Organization" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Binder Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Binder Code" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Country Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Country Key" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[name1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name1" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[name2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name2" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[name3]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name3" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[name4]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="name4" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="City" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[PO Box]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="PO Box" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[P O  Box Postal Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="P O  Box Postal Code" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Postal Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Postal Code" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Region" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Search term]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Search term" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Street and House No ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Street and House No " />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Account Group]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Account Group" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Customer]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Customer" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Language Key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Language Key" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Telephone 1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Telephone 1" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[VAT Registration No ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="VAT Registration No " />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Sort key]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Sort key" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Reconciliation acct]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Reconciliation acct" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Payment methods]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Payment methods" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Terms of Payment]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Terms of Payment" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Previous account no ]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Previous account no " />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Credit memo pyt term]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Credit memo pyt term" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[Order currency]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Order currency" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_starter]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="main_tag_starter" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[main_tag_finisher]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="main_tag_finisher" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[ErrorCode]"
+                          dataType="i4"
+                          name="ErrorCode" />
+                        <externalMetadataColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input].ExternalColumns[ErrorColumn]"
+                          dataType="i4"
+                          name="ErrorColumn" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Transform Vendor Data\Transform vendors.Paths[Capture Errors]"
+                  endId="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors.Inputs[OLE DB Destination Input]"
+                  name="Capture Errors"
+                  startId="Package\Transform Vendor Data\Transform vendors\final_vendors.Outputs[OLE DB Destination Error Output]" />
+                <path
+                  refId="Package\Transform Vendor Data\Transform vendors.Paths[OLE DB Source Output]"
+                  endId="Package\Transform Vendor Data\Transform vendors\final_vendors.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Transform Vendor Data\Transform vendors\Read vendor records.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Transform Vendor Data\Truncate"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{D4014997-5528-4681-8DD5-040E79D4B5A4}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C1F2EB1A-E0A6-4202-82A2-BD8F68F28D65}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE final.vendors;&#xA;GO&#xA; SELECT ?=run_id FROM [config].[wms_dm_run_ctl] WHERE package_name = 'vendors' AND run_status = 'Staged';&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::varRunID"
+                SQLTask:ParameterDirection="Output"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Transform Vendor Data.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{DA7CA910-EA11-49EA-914A-BF14B4BF1B6F}"
+          DTS:From="Package\Transform Vendor Data\Truncate"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Transform Vendor Data\run_status to InProgress" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Transform Vendor Data.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{09AB7070-5B88-41E5-B23B-BFB2108A3497}"
+          DTS:From="Package\Transform Vendor Data\Transform vendors"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Transform Vendor Data\run_status to Transformed" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Transform Vendor Data.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{87FB89EF-97C6-44F5-8139-0F71DEA6DD1D}"
+          DTS:From="Package\Transform Vendor Data\run_status to InProgress"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Transform Vendor Data\Transform vendors" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="196,42.6666666666667"
+          Id="Package\Transform Vendor Data\run_status to InProgress"
+          TopLeft="16.8333306883773,85.2280735238658" />
+        <NodeLayout
+          Size="204,42.6666666666667"
+          Id="Package\Transform Vendor Data\run_status to Transformed"
+          TopLeft="8.70833080944908,226.175444597903" />
+        <NodeLayout
+          Size="165.333333333334,41.3333333333334"
+          Id="Package\Transform Vendor Data\Transform vendors"
+          TopLeft="32.0833304462334,154.333337982496" />
+        <NodeLayout
+          Size="121.333333333334,42.6666666666667"
+          Id="Package\Transform Vendor Data\Truncate"
+          TopLeft="49.3333302040895,9.28070367329232" />
+        <EdgeLayout
+          Id="Package\Transform Vendor Data.PrecedenceConstraints[Constraint]"
+          TopLeft="112.416663779567,51.947370339959">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.2807031839068"
+              Start="0,0"
+              End="0,25.7807031839068">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.7807031839068" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transform Vendor Data.PrecedenceConstraints[Constraint 1]"
+          TopLeft="112.729163961175,195.666671315829">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.5087732820737"
+              Start="0,0"
+              End="0,23.0087732820737">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.0087732820737" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transform Vendor Data.PrecedenceConstraints[Constraint 2]"
+          TopLeft="114.858330567305,127.628073523866">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26.7052644586302"
+              Start="0,0"
+              End="0,19.2052644586302">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.2052644586302" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="229.333333333334,324.666666666667"
+          Size="229.333333333334,368"
+          Id="Package\Transform Vendor Data"
+          TopLeft="160.624997606501,49.947369361188" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Transform Vendor Data\Transform vendors">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="202.666666666667,42.6666666666667"
+          Id="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors"
+          TopLeft="450.874992670492,270.894741903382" />
+        <NodeLayout
+          Size="178.666666666667,42.6666666666667"
+          Id="Package\Transform Vendor Data\Transform vendors\Read vendor records"
+          TopLeft="116.874998258427,117.684212741429" />
+        <NodeLayout
+          Size="142.666666666667,42.6666666666667"
+          Id="Package\Transform Vendor Data\Transform vendors\final_vendors"
+          TopLeft="478.749992866069,114.947370584652" />
+        <EdgeLayout
+          Id="Package\Transform Vendor Data\Transform vendors.Paths[Capture Errors]"
+          TopLeft="551.145826101614,157.614037251319">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,113.280704652063"
+              Start="0,0"
+              End="0,105.780704652063">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,105.780704652063" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-32.74509765625,47.1833210760317,65.4901953125,11.4140625"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transform Vendor Data\Transform vendors.Paths[OLE DB Source Output]"
+          TopLeft="295.541664925094,137.649124996374">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="183.208327940975,0"
+              Start="0,0"
+              End="175.708327940975,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="175.708327940975,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transform Vendor Data\Transform vendors\vendors_transform_errors">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transform Vendor Data\Transform vendors\Read vendor records">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transform Vendor Data\Transform vendors\final_vendors">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -11,10 +11,24 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="106"
-  DTS:VersionGUID="{4CF149CA-B40A-4A46-9613-7562CC952C8A}">
+  DTS:VersionBuild="113"
+  DTS:VersionGUID="{6150F7CD-4DDB-4F72-8C64-1B0927B9CBBD}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DM_Working_DB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{CF906C2F-CC5C-402E-A637-FF90EFA5B8DD}"
+      DTS:ObjectName="DM_Working_DB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=UKWWHDSQLWI099;Initial Catalog=DM_DryRun3_NP3;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{CF906C2F-CC5C-402E-A637-FF90EFA5B8DD}UKWWHDSQLWI099.DM_DryRun3_NP3;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
@@ -86,7 +100,10 @@
                           dataType="System.String"
                           description="The SQL command to be executed."
                           name="SqlCommand"
-                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">WITH titles AS (
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">DECLARE @run_id INT = 0;
+SELECT @run_id = run_id FROM config.wms_dm_run_ctl c WHERE c.package_name = 'titles' AND c.run_status = 'Staged';
+
+WITH titles AS (
 	  SELECT  src.[run_id]
 		  ,src.[ISBN]
 		  ,src.[Created On]
@@ -110,13 +127,13 @@
 		  ,src.[Binding]
 		  ,src.[Binding Description]
 		  ,src.[Country of origin]
-	  FROM [source].[sap_titles] src
+	  FROM transform.delta_title_list src
 	 WHERE src.requirements_check_result = 1
-	   AND run_id = ?
+	   AND run_id = @run_id
 )
 SELECT (ilv2.record_number/5000)+1 AS output_file_batch
        ,ilv2.*
-  FROM (
+FROM (
 SELECT ROW_NUMBER() OVER (PARTITION BY NULL ORDER BY ilv.run_id) AS record_number
       ,COUNT(ilv.ISBN) OVER (PARTITION BY NULL) AS dataset_count
       ,ilv.*
@@ -124,149 +141,148 @@ SELECT ROW_NUMBER() OVER (PARTITION BY NULL ORDER BY ilv.run_id) AS record_numbe
 	  ,fil.by_payload_filler
 	  ,fil.main_tag_finisher
   FROM (
-SELECT titles.run_id
-      ,titles.[ISBN] --DM008
-      ,titles.[Created On]
-      ,titles.[Plant]
-      ,titles.[Storage Location]
-      ,titles.[Supply Edition]
-      ,titles.[Answer Code for Reqs]
-      ,titles.[Answer Code Text]
-      ,REPLACE(titles.[ISBN Name],'–','-') AS [ISBN Name]
-      ,titles.[Original Pub Date of Product]
-      ,CAST([Comm  imp  code no ] AS VARCHAR(50)) AS [Comm  imp  code no ]
-	  ,CAST([Commodity code 2] AS VARCHAR(50)) AS [Commodity code 2]
-      ,titles.[SE publication date]
-      ,titles.[SE publication price]
-      ,titles.[Author Artist]
-      ,titles.[Finance publisher]
-      ,titles.[Finance publisher description]
-      ,titles.[Finance Imprint]
-      ,titles.[Finance imprint description]
-      ,titles.[Export Pub Date of Product]
-      ,titles.[Binding]
-      ,titles.[Binding Description]
-      ,titles.[Country of origin]
-	  ,titles.ISBN + '-' + titles.[Supply Edition] AS ISBN_SuppEd --DM007
-	  ,CASE WHEN vist.ID IS NOT NULL THEN 1 ELSE 0 END AS matched_in_vista
-	  ,ISNULL(vist.PackFlag,'') AS PackFlag
-	  ,ISNULL(vist.PackHeight,0) AS PackHeight
-	  ,ISNULL(vist.PackWeight,0) AS PackWeight
-	  ,ISNULL(vist.PackWidth,0) AS PackWidth
-	  ,ISNULL(vist.PackDepth,0) AS PackDepth
-	  ,ISNULL(vist.PackSize,0) AS PackSize
-	  ,ISNULL(vist.PackagingType,'') AS PackagingType
-	  ,ISNULL(vist.PickPackMethod,'') AS PickPackMethod
-	  ,ISNULL(vist.BookHeight,0) AS BookHeight
-	  ,ISNULL(vist.[Weight],0) AS BookWeight
-	  ,ISNULL(vist.BookWidth,0) AS BookWidth
-	  ,ISNULL(vist.BookDepth,0) AS BookDepth
-	  ,ISNULL(vist.LayersPerPallet,0) AS LayersPerPallet
-	  ,ISNULL(vist.MaxBooksPallet,0) AS MaxBooksPallet
-	  ,ISNULL(vist.CasesPerLayer,0) AS CasesPerLayer
-	  ,vist.sbn
-  FROM titles
-  JOIN [source].vista_titles vist ON titles.ISBN = vist.Isbn13 AND titles.[Supply Edition] = vist.SupplyEd --AND titles.[Answer Code for Reqs] = vist.AnswerCode
-  WHERE titles.[Answer Code for Reqs] &lt;&gt; 'NYP' 
-  AND EXISTS (SELECT 1 FROM source.vista_inventory vi WHERE vi.Isbn13 = titles.ISBN AND vi.SupplyEd = titles.[Supply Edition])
+		SELECT titles.run_id
+			  ,titles.[ISBN] --DM008
+			  ,titles.[Created On]
+			  ,titles.[Plant]
+			  ,titles.[Storage Location]
+			  ,titles.[Supply Edition]
+			  ,titles.[Answer Code for Reqs]
+			  ,titles.[Answer Code Text]
+			  ,REPLACE(titles.[ISBN Name],'–','-') AS [ISBN Name]
+			  ,titles.[Original Pub Date of Product]
+			  ,CAST([Comm  imp  code no ] AS VARCHAR(50)) AS [Comm  imp  code no ]
+			  ,CAST([Commodity code 2] AS VARCHAR(50)) AS [Commodity code 2]
+			  ,titles.[SE publication date]
+			  ,titles.[SE publication price]
+			  ,titles.[Author Artist]
+			  ,titles.[Finance publisher]
+			  ,titles.[Finance publisher description]
+			  ,titles.[Finance Imprint]
+			  ,titles.[Finance imprint description]
+			  ,titles.[Export Pub Date of Product]
+			  ,titles.[Binding]
+			  ,titles.[Binding Description]
+			  ,titles.[Country of origin]
+			  ,titles.ISBN + '-' + titles.[Supply Edition] AS ISBN_SuppEd --DM007
+			  ,CASE WHEN vist.ID IS NOT NULL THEN 1 ELSE 0 END AS matched_in_vista
+			  ,ISNULL(vist.PackFlag,'') AS PackFlag
+			  ,ISNULL(vist.PackHeight,0) AS PackHeight
+			  ,ISNULL(vist.PackWeight,0) AS PackWeight
+			  ,ISNULL(vist.PackWidth,0) AS PackWidth
+			  ,ISNULL(vist.PackDepth,0) AS PackDepth
+			  ,ISNULL(vist.PackSize,0) AS PackSize
+			  ,ISNULL(vist.PackagingType,'') AS PackagingType
+			  ,ISNULL(vist.PickPackMethod,'') AS PickPackMethod
+			  ,ISNULL(vist.BookHeight,0) AS BookHeight
+			  ,ISNULL(vist.[Weight],0) AS BookWeight
+			  ,ISNULL(vist.BookWidth,0) AS BookWidth
+			  ,ISNULL(vist.BookDepth,0) AS BookDepth
+			  ,ISNULL(vist.LayersPerPallet,0) AS LayersPerPallet
+			  ,ISNULL(vist.MaxBooksPallet,0) AS MaxBooksPallet
+			  ,ISNULL(vist.CasesPerLayer,0) AS CasesPerLayer
+			  ,vist.sbn
+		  FROM titles
+		  JOIN [source].vista_titles vist ON titles.ISBN = vist.Isbn13 AND titles.[Supply Edition] = vist.SupplyEd --AND titles.[Answer Code for Reqs] = vist.AnswerCode
+		  WHERE titles.[Answer Code for Reqs] &lt;&gt; 'NYP' 
+		  AND EXISTS (SELECT 1 FROM source.vista_inventory vi WHERE vi.Isbn13 = titles.ISBN AND vi.SupplyEd = titles.[Supply Edition])
 
-  UNION
-  SELECT titles.run_id
-      ,titles.[ISBN] --DM008
-      ,titles.[Created On]
-      ,titles.[Plant]
-      ,titles.[Storage Location]
-      ,titles.[Supply Edition]
-      ,titles.[Answer Code for Reqs]
-      ,titles.[Answer Code Text]
-      ,REPLACE(titles.[ISBN Name],'–','-') AS [ISBN Name]
-      ,titles.[Original Pub Date of Product]
-      ,CAST([Comm  imp  code no ] AS VARCHAR(50)) AS [Comm  imp  code no ]
-	  ,CAST([Commodity code 2] AS VARCHAR(50)) AS [Commodity code 2] 
-      ,titles.[SE publication date]
-      ,titles.[SE publication price]
-      ,titles.[Author Artist]
-      ,titles.[Finance publisher]
-      ,titles.[Finance publisher description]
-      ,titles.[Finance Imprint]
-      ,titles.[Finance imprint description]
-      ,titles.[Export Pub Date of Product]
-      ,titles.[Binding]
-      ,titles.[Binding Description]
-      ,titles.[Country of origin]
-	  ,titles.ISBN + '-' + titles.[Supply Edition] AS ISBN_SuppEd --DM007
-	  ,CASE WHEN vist.ID IS NOT NULL THEN 1 ELSE 0 END AS matched_in_vista
-	  ,ISNULL(vist.PackFlag,'') AS PackFlag
-	  ,ISNULL(vist.PackHeight,0) AS PackHeight
-	  ,ISNULL(vist.PackWeight,0) AS PackWeight
-	  ,ISNULL(vist.PackWidth,0) AS PackWidth
-	  ,ISNULL(vist.PackDepth,0) AS PackDepth
-	  ,ISNULL(vist.PackSize,0) AS PackSize
-	  ,ISNULL(vist.PackagingType,'') AS PackagingType
-	  ,ISNULL(vist.PickPackMethod,'') AS PickPackMethod
-	  ,ISNULL(vist.BookHeight,0) AS BookHeight
-	  ,ISNULL(vist.[Weight],0) AS BookWeight
-	  ,ISNULL(vist.BookWidth,0) AS BookWidth
-	  ,ISNULL(vist.BookDepth,0) AS BookDepth
-	  ,ISNULL(vist.LayersPerPallet,0) AS LayersPerPallet
-	  ,ISNULL(vist.MaxBooksPallet,0) AS MaxBooksPallet
-	  ,ISNULL(vist.CasesPerLayer,0) AS CasesPerLayer
-	  ,vist.sbn
-  FROM titles
-   LEFT JOIN [source].vista_titles vist ON titles.ISBN = vist.Isbn13 AND titles.[Supply Edition] = vist.SupplyEd --AND titles.[Answer Code for Reqs] = vist.AnswerCode
-  WHERE titles.[Answer Code for Reqs] = 'NYP'
---IBD Starts
-  UNION
-  SELECT  distinct
-	   ? as run_id
-      ,ibdtitle.[ISBN] 
-      ,ibdtitle.[Created On]
-      ,ibdtitle.[Plant]
-      ,ibdtitle.[Storage Location]
-      ,ibdtitle.[Supply Edition]
-      ,ibdtitle.[Answer Code for Reqs]
-      ,ibdtitle.[Answer Code Text]
-      ,REPLACE(ibdtitle.[ISBN Name],'–','-') AS [ISBN Name]
-      ,ibdtitle.[Original Pub Date of Product]
-      ,CAST([Comm  imp  code no ] AS VARCHAR(50)) AS [Comm  imp  code no ]
-	  ,CAST([Commodity code 2] AS VARCHAR(50)) AS [Commodity code 2]
-      ,ibdtitle.[SE publication date]
-      ,ibdtitle.[SE publication price]
-      ,ibdtitle.[Author Artist]
-      ,ibdtitle.[Finance publisher]
-      ,ibdtitle.[Finance publisher description]
-      ,ibdtitle.[Finance Imprint]
-      ,ibdtitle.[Finance imprint description]
-      ,ibdtitle.[Export Pub Date of Product]
-      ,ibdtitle.[Binding]
-      ,ibdtitle.[Binding Description]
-      ,ibdtitle.[Country of origin]	  
-	  ,ibdtitle.ISBN + '-' + ibdtitle.[Supply Edition] AS ISBN_SuppEd --DM007
-	  --,ibd.Material + '-' + ibd.Supply_Edition AS ISBN_SuppEd --DM007
-	  ,CASE WHEN vist.ID IS NOT NULL THEN 1 ELSE 0 END AS matched_in_vista
-	  ,ISNULL(vist.PackFlag,'') AS PackFlag
-	  ,ISNULL(vist.PackHeight,0) AS PackHeight
-	  ,ISNULL(vist.PackWeight,0) AS PackWeight
-	  ,ISNULL(vist.PackWidth,0) AS PackWidth
-	  ,ISNULL(vist.PackDepth,0) AS PackDepth
-	  ,ISNULL(vist.PackSize,0) AS PackSize
-	  ,ISNULL(vist.PackagingType,'') AS PackagingType
-	  ,ISNULL(vist.PickPackMethod,'') AS PickPackMethod
-	  ,ISNULL(vist.BookHeight,0) AS BookHeight
-	  ,ISNULL(vist.[Weight],0) AS BookWeight
-	  ,ISNULL(vist.BookWidth,0) AS BookWidth
-	  ,ISNULL(vist.BookDepth,0) AS BookDepth
-	  ,ISNULL(vist.LayersPerPallet,0) AS LayersPerPallet
-	  ,ISNULL(vist.MaxBooksPallet,0) AS MaxBooksPallet
-	  ,ISNULL(vist.CasesPerLayer,0) AS CasesPerLayer
-	  ,vist.sbn
-  FROM [source].[sap_ibd_title_data] ibdtitle
-	  LEFT JOIN [source].vista_titles vist ON ibdtitle.ISBN = vist.Isbn13 AND ibdtitle.[Supply Edition] = vist.SupplyEd
+		  UNION
+		  SELECT titles.run_id
+			  ,titles.[ISBN] --DM008
+			  ,titles.[Created On]
+			  ,titles.[Plant]
+			  ,titles.[Storage Location]
+			  ,titles.[Supply Edition]
+			  ,titles.[Answer Code for Reqs]
+			  ,titles.[Answer Code Text]
+			  ,REPLACE(titles.[ISBN Name],'–','-') AS [ISBN Name]
+			  ,titles.[Original Pub Date of Product]
+			  ,CAST([Comm  imp  code no ] AS VARCHAR(50)) AS [Comm  imp  code no ]
+			  ,CAST([Commodity code 2] AS VARCHAR(50)) AS [Commodity code 2] 
+			  ,titles.[SE publication date]
+			  ,titles.[SE publication price]
+			  ,titles.[Author Artist]
+			  ,titles.[Finance publisher]
+			  ,titles.[Finance publisher description]
+			  ,titles.[Finance Imprint]
+			  ,titles.[Finance imprint description]
+			  ,titles.[Export Pub Date of Product]
+			  ,titles.[Binding]
+			  ,titles.[Binding Description]
+			  ,titles.[Country of origin]
+			  ,titles.ISBN + '-' + titles.[Supply Edition] AS ISBN_SuppEd --DM007
+			  ,CASE WHEN vist.ID IS NOT NULL THEN 1 ELSE 0 END AS matched_in_vista
+			  ,ISNULL(vist.PackFlag,'') AS PackFlag
+			  ,ISNULL(vist.PackHeight,0) AS PackHeight
+			  ,ISNULL(vist.PackWeight,0) AS PackWeight
+			  ,ISNULL(vist.PackWidth,0) AS PackWidth
+			  ,ISNULL(vist.PackDepth,0) AS PackDepth
+			  ,ISNULL(vist.PackSize,0) AS PackSize
+			  ,ISNULL(vist.PackagingType,'') AS PackagingType
+			  ,ISNULL(vist.PickPackMethod,'') AS PickPackMethod
+			  ,ISNULL(vist.BookHeight,0) AS BookHeight
+			  ,ISNULL(vist.[Weight],0) AS BookWeight
+			  ,ISNULL(vist.BookWidth,0) AS BookWidth
+			  ,ISNULL(vist.BookDepth,0) AS BookDepth
+			  ,ISNULL(vist.LayersPerPallet,0) AS LayersPerPallet
+			  ,ISNULL(vist.MaxBooksPallet,0) AS MaxBooksPallet
+			  ,ISNULL(vist.CasesPerLayer,0) AS CasesPerLayer
+			  ,vist.sbn
+		  FROM titles
+		   LEFT JOIN [source].vista_titles vist ON titles.ISBN = vist.Isbn13 AND titles.[Supply Edition] = vist.SupplyEd --AND titles.[Answer Code for Reqs] = vist.AnswerCode
+		  WHERE titles.[Answer Code for Reqs] = 'NYP'
+		--IBD Starts
+		  UNION
+		SELECT titles.run_id
+			  ,titles.[ISBN] --DM008
+			  ,titles.[Created On]
+			  ,titles.[Plant]
+			  ,titles.[Storage Location]
+			  ,titles.[Supply Edition]
+			  ,titles.[Answer Code for Reqs]
+			  ,titles.[Answer Code Text]
+			  ,REPLACE(titles.[ISBN Name],'–','-') AS [ISBN Name]
+			  ,titles.[Original Pub Date of Product]
+			  ,CAST([Comm  imp  code no ] AS VARCHAR(50)) AS [Comm  imp  code no ]
+			  ,CAST([Commodity code 2] AS VARCHAR(50)) AS [Commodity code 2]
+			  ,titles.[SE publication date]
+			  ,titles.[SE publication price]
+			  ,titles.[Author Artist]
+			  ,titles.[Finance publisher]
+			  ,titles.[Finance publisher description]
+			  ,titles.[Finance Imprint]
+			  ,titles.[Finance imprint description]
+			  ,titles.[Export Pub Date of Product]
+			  ,titles.[Binding]
+			  ,titles.[Binding Description]
+			  ,titles.[Country of origin]
+			  ,titles.ISBN + '-' + titles.[Supply Edition] AS ISBN_SuppEd --DM007
+			  ,CASE WHEN vist.ID IS NOT NULL THEN 1 ELSE 0 END AS matched_in_vista
+			  ,ISNULL(vist.PackFlag,'') AS PackFlag
+			  ,ISNULL(vist.PackHeight,0) AS PackHeight
+			  ,ISNULL(vist.PackWeight,0) AS PackWeight
+			  ,ISNULL(vist.PackWidth,0) AS PackWidth
+			  ,ISNULL(vist.PackDepth,0) AS PackDepth
+			  ,ISNULL(vist.PackSize,0) AS PackSize
+			  ,ISNULL(vist.PackagingType,'') AS PackagingType
+			  ,ISNULL(vist.PickPackMethod,'') AS PickPackMethod
+			  ,ISNULL(vist.BookHeight,0) AS BookHeight
+			  ,ISNULL(vist.[Weight],0) AS BookWeight
+			  ,ISNULL(vist.BookWidth,0) AS BookWidth
+			  ,ISNULL(vist.BookDepth,0) AS BookDepth
+			  ,ISNULL(vist.LayersPerPallet,0) AS LayersPerPallet
+			  ,ISNULL(vist.MaxBooksPallet,0) AS MaxBooksPallet
+			  ,ISNULL(vist.CasesPerLayer,0) AS CasesPerLayer
+			  ,vist.sbn
+		  FROM titles
+		  JOIN [source].vista_titles vist ON titles.ISBN = vist.Isbn13 AND titles.[Supply Edition] = vist.SupplyEd --AND titles.[Answer Code for Reqs] = vist.AnswerCode
+		  WHERE EXISTS (SELECT 1 FROM source.sap_inbound_titles vi WHERE vi.ISBN = titles.ISBN AND vi.[Supply Edition] = titles.[Supply Edition])
 -- IBD Ends 
 ) ilv
 JOIN config.data_element_payload_fillers fil ON fil.data_element_name = 'title'
   ) ilv2
-  ORDER BY 1,2;</property>
+ORDER BY 1,2;</property>
                         <property
                           dataType="System.String"
                           description="The variable that contains the SQL command to be executed."
@@ -292,8 +308,8 @@ JOIN config.data_element_payload_fillers fil ON fil.data_element_name = 'title'
                       <connections>
                         <connection
                           refId="Package\Replicate tables - run separately in order\Replicate titles into staging\Populate titles_staging\Read source title records.Connections[OleDbConnection]"
-                          connectionManagerID="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}:external"
-                          connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                          connectionManagerID="Package.ConnectionManagers[DM_Working_DB]"
+                          connectionManagerRefId="Package.ConnectionManagers[DM_Working_DB]"
                           description="The OLE DB runtime connection used to access the database."
                           name="OleDbConnection" />
                       </connections>
@@ -1399,8 +1415,8 @@ JOIN config.data_element_payload_fillers fil ON fil.data_element_name = 'title'
                       <connections>
                         <connection
                           refId="Package\Replicate tables - run separately in order\Replicate titles into staging\Populate titles_staging\title_staging.Connections[OleDbConnection]"
-                          connectionManagerID="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}:external"
-                          connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                          connectionManagerID="Package.ConnectionManagers[DM_Working_DB]"
+                          connectionManagerRefId="Package.ConnectionManagers[DM_Working_DB]"
                           description="The OLE DB runtime connection used to access the database."
                           name="OleDbConnection" />
                       </connections>
@@ -2046,7 +2062,7 @@ JOIN config.data_element_payload_fillers fil ON fil.data_element_name = 'title'
               <DTS:Variables />
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
-                  SQLTask:Connection="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}"
+                  SQLTask:Connection="{CF906C2F-CC5C-402E-A637-FF90EFA5B8DD}"
                   SQLTask:SqlStatementSource="DECLARE @run INTEGER = 0;&#xA;&#xA;BEGIN&#xA;SELECT  @run = COUNT(1)&#xA;  FROM config.wms_dm_run_ctl WHERE package_name = 'titles' AND run_status = 'SentToFile';&#xA;&#xA;IF ISNULL(@run,0)=0  &#xA;BEGIN&#xA;TRUNCATE TABLE transform.titles_staging;&#xA;END;&#xA;SELECT ?=run_id FROM [config].[wms_dm_run_ctl] WHERE package_name = 'titles' AND run_status = 'Staged';&#xA;END;&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="0"
@@ -2118,7 +2134,9 @@ JOIN config.data_element_payload_fillers fil ON fil.data_element_name = 'title'
                           dataType="System.String"
                           description="The SQL command to be executed."
                           name="SqlCommand"
-                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">WITH vendors AS (
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">DECLARE @run_id INT = 0;
+SELECT @run_id = run_id FROM config.wms_dm_run_ctl c WHERE c.package_name = 'vendors' AND c.run_status = 'Staged';
+WITH vendors AS (
 SELECT vend.[run_id]
       ,vend.[Vendor]
       ,vend.[Purch  Organization]
@@ -2152,8 +2170,8 @@ SELECT vend.[run_id]
       ,vend.[Credit memo pyt term]
       ,vend.[Order currency]
 	  ,vend.[Country Key]
-  FROM [source].[sap_vendor_data] vend
- WHERE vend.run_id = ?
+  FROM transform.delta_vendor_list vend
+ WHERE vend.run_id = @run_id
 )
 SELECT ROW_NUMBER() OVER (PARTITION BY NULL ORDER BY vendors.run_id) AS record_number
       ,vendors.[run_id]
@@ -2220,8 +2238,8 @@ SELECT ROW_NUMBER() OVER (PARTITION BY NULL ORDER BY vendors.run_id) AS record_n
                       <connections>
                         <connection
                           refId="Package\Replicate tables - run separately in order\Replicate vendors into staging\Populate vendors_staging\Read source vendor records.Connections[OleDbConnection]"
-                          connectionManagerID="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}:external"
-                          connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                          connectionManagerID="Package.ConnectionManagers[DM_Working_DB]"
+                          connectionManagerRefId="Package.ConnectionManagers[DM_Working_DB]"
                           description="The OLE DB runtime connection used to access the database."
                           name="OleDbConnection" />
                       </connections>
@@ -3117,8 +3135,8 @@ SELECT ROW_NUMBER() OVER (PARTITION BY NULL ORDER BY vendors.run_id) AS record_n
                       <connections>
                         <connection
                           refId="Package\Replicate tables - run separately in order\Replicate vendors into staging\Populate vendors_staging\vendor_staging.Connections[OleDbConnection]"
-                          connectionManagerID="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}:external"
-                          connectionManagerRefId="Project.ConnectionManagers[UKWWHDSQLWI099.DM_Dev_NP3]"
+                          connectionManagerID="Package.ConnectionManagers[DM_Working_DB]"
+                          connectionManagerRefId="Package.ConnectionManagers[DM_Working_DB]"
                           description="The OLE DB runtime connection used to access the database."
                           name="OleDbConnection" />
                       </connections>
@@ -3650,7 +3668,7 @@ SELECT ROW_NUMBER() OVER (PARTITION BY NULL ORDER BY vendors.run_id) AS record_n
               <DTS:Variables />
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
-                  SQLTask:Connection="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}"
+                  SQLTask:Connection="{CF906C2F-CC5C-402E-A637-FF90EFA5B8DD}"
                   SQLTask:SqlStatementSource="DECLARE @run INTEGER = 0;&#xA;&#xA;BEGIN&#xA;SELECT  @run = COUNT(1)&#xA;  FROM config.wms_dm_run_ctl WHERE package_name = 'vendors' AND run_status = 'SentToFile';&#xA;&#xA;IF ISNULL(@run,0)=0  &#xA;BEGIN&#xA;TRUNCATE TABLE transform.vendors_staging;&#xA;END;&#xA;SELECT ?=run_id FROM [config].[wms_dm_run_ctl] WHERE package_name = 'vendors' AND run_status = 'Staged';&#xA;END;&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="0"
@@ -3672,22 +3690,6 @@ SELECT ROW_NUMBER() OVER (PARTITION BY NULL ORDER BY vendors.run_id) AS record_n
               DTS:ObjectName="Constraint"
               DTS:To="Package\Replicate tables - run separately in order\Replicate vendors into staging\Populate vendors_staging" />
           </DTS:PrecedenceConstraints>
-        </DTS:Executable>
-        <DTS:Executable
-          DTS:refId="Package\Replicate tables - run separately in order\Replicate Vista Inventory Table to staging"
-          DTS:CreationName="Microsoft.ExecuteSQLTask"
-          DTS:Description="Execute SQL Task"
-          DTS:DTSID="{a4e05be8-24bd-4ae3-87a6-a0bdc0fd7bef}"
-          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-          DTS:LocaleID="-1"
-          DTS:ObjectName="Replicate Vista Inventory Table to staging"
-          DTS:ThreadHint="1">
-          <DTS:Variables />
-          <DTS:ObjectData>
-            <SQLTask:SqlTaskData
-              SQLTask:Connection="{63C9CD86-098F-4198-A4DF-5EA23B7DC46D}"
-              SQLTask:SqlStatementSource="DROP TABLE IF EXISTS transform.vista_inventory;&#xA;GO&#xA;&#xA;WITH vendors AS (&#xA;SELECT v.Vendor&#xA;      ,v.[Binder Code]&#xA;&#x9;  --,v.vendor_idx&#xA;&#x9;  --,v.[Created On]&#xA;  FROM (&#xA;SELECT  ROW_NUMBER() OVER (PARTITION BY supp.[Binder Code] ORDER BY supp.Vendor DESC) AS vendor_idx&#xA;       ,supp.*&#xA;  FROM final.Vendors supp&#xA;  ) v WHERE v.vendor_idx = 1&#xA;)&#xA;SELECT * INTO transform.vista_inventory&#xA;  FROM (&#xA;&#xA;SELECT (fin.record_number/5000)+1 AS output_file_batch&#xA;       ,fin.*&#xA;  FROM (&#xA;SELECT ilv.*&#xA;      ,ROW_NUMBER() OVER (PARTITION BY NULL ORDER BY ilv.run_id) AS record_number&#xA;      ,COUNT(ilv.Isbn13) OVER (PARTITION BY NULL) AS dataset_count&#xA;      ,tit.PackSize&#xA;&#x9;  ,tit.country_of_origin&#xA;  FROM (&#xA;SELECT LTRIM(RTRIM(inv.[Isbn13])) + '-' + LTRIM(RTRIM(inv.[SupplyEd])) AS ISBN_SuppEd&#xA;      ,inv.[Isbn13]&#xA;      ,inv.[SupplyEd]&#xA;&#x9;  ,inv.[BaseLuType]&#xA;&#x9;  ,inv.[BaseLuId]&#xA;      ,inv.[LocationType]&#xA;      ,inv.[BookWeight]&#xA;&#x9;  ,inv.[binder]&#xA;&#x9;  ,vend.Vendor AS VendorID&#xA;      ,inv.[ID]&#xA;      ,inv.[RecSta]&#xA;      ,inv.[Site]&#xA;      ,inv.[Placement]&#xA;      ,inv.[Location]&#xA;      ,inv.[SegNumber]&#xA;      ,inv.[LuPerSegment]&#xA;      ,inv.[LuInSegment]&#xA;      ,inv.[LuAwaitIn]&#xA;      ,inv.[SegLuType]&#xA;      ,inv.[SegmentStatus]&#xA;      ,inv.[Isbn]&#xA;      ,inv.[ImpressionNo]&#xA;      ,inv.[ReceivedDate]&#xA;      ,inv.[BindOrderNo]&#xA;      ,inv.[DeliveryNo]&#xA;      ,inv.[ProductPrice]&#xA;      ,inv.[UnitSize]&#xA;      ,inv.[UnitWeight]&#xA;      ,inv.[BaseDimLong]&#xA;      ,inv.[BaseDimShort]&#xA;      ,inv.[UnitDimHigh]&#xA;      ,inv.[NoOfUnitsA]&#xA;      ,inv.[FrozenCodeA]&#xA;      ,inv.[UnitsAwIn1A]&#xA;      ,inv.[UnitsAwIn2A]&#xA;      ,inv.[UnitsAwIn3A]&#xA;      ,inv.[UnitsAwOut1A]&#xA;      ,inv.[UnitsAwOut2A]&#xA;      ,inv.[UnitsAwOut3A]&#xA;      ,inv.[NoOfUnitsB]&#xA;      ,inv.[FrozenCodeB]&#xA;      ,inv.[UnitsAwIn1B]&#xA;      ,inv.[UnitsAwIn2B]&#xA;      ,inv.[UnitsAwIn3B]&#xA;      ,inv.[UnitsAwOut1B]&#xA;      ,inv.[UnitsAwOut2B]&#xA;      ,inv.[UnitsAwOut3B]&#xA;      ,inv.[NoOfUnitsC]&#xA;      ,inv.[FrozenCodeC]&#xA;      ,inv.[UnitsAwIn1C]&#xA;      ,inv.[UnitsAwIn2C]&#xA;      ,inv.[UnitsAwIn3C]&#xA;      ,inv.[UnitsAwOut1C]&#xA;      ,inv.[UnitsAwOut2C]&#xA;      ,inv.[UnitsAwOut3C]&#xA;      ,inv.[NoOfUnitsD]&#xA;      ,inv.[FrozenCodeD]&#xA;      ,inv.[UnitsAwIn1D]&#xA;      ,inv.[UnitsAwIn2D]&#xA;      ,inv.[UnitsAwIn3D]&#xA;      ,inv.[UnitsAwOut1D]&#xA;      ,inv.[UnitsAwOut2D]&#xA;      ,inv.[UnitsAwOut3D]&#xA;      ,inv.[NoOfUnitsE]&#xA;      ,inv.[FrozenCodeE]&#xA;      ,inv.[UnitsAwIn1E]&#xA;      ,inv.[UnitsAwIn2E]&#xA;      ,inv.[UnitsAwIn3E]&#xA;      ,inv.[UnitsAwOut1E]&#xA;      ,inv.[UnitsAwOut2E]&#xA;      ,inv.[UnitsAwOut3E]&#xA;      ,inv.[NoOfUnitsF]&#xA;      ,inv.[FrozenCodeF]&#xA;      ,inv.[UnitsAwIn1F]&#xA;      ,inv.[UnitsAwIn2F]&#xA;      ,inv.[UnitsAwIn3F]&#xA;      ,inv.[UnitsAwOut1F]&#xA;      ,inv.[UnitsAwOut2F]&#xA;      ,inv.[UnitsAwOut3F]&#xA;      ,inv.[OpenedDate]&#xA;      ,inv.[NoOfAccesses]&#xA;      ,inv.[LastTransferDate]&#xA;      ,inv.[LastTransferQty]&#xA;      ,inv.[CiCountIn]&#xA;      ,inv.[CiCountOut]&#xA;      ,inv.[CiCountDate]&#xA;      ,inv.[CiCountTotal]&#xA;      ,inv.[CiCountAdjust]&#xA;      ,inv.[PiCountIn]&#xA;      ,inv.[PiCountOut]&#xA;      ,inv.[PiCountDate]&#xA;      ,inv.[PiCountTotal]&#xA;      ,inv.[PiCountAdjust]&#xA;      ,inv.[GbsManifest]&#xA;      ,inv.[GbsSpare]&#xA;      ,inv.[HoldUnitSize]&#xA;      ,inv.[HoldUnitWeight]&#xA;      ,inv.[HoldDimLong]&#xA;      ,inv.[HoldDimShort]&#xA;      ,inv.[HoldDimHigh]&#xA;      ,inv.[FullPalletExtr]&#xA;      ,inv.[PiCountRequested]&#xA;      ,inv.[PiCountQcCheck]&#xA;      ,inv.[FreeLocnFlag]&#xA;      ,inv.[TransferDate]&#xA;      ,inv.[MiscSpare]&#xA;      ,inv.[CumulativeAccesses]&#xA;      ,inv.[PiGeneratedDate]&#xA;      ,inv.[Shippable]&#xA;      ,inv.[InProgress]&#xA;      ,inv.[PickAccessSta]&#xA;      ,inv.[ReplAccessSta]&#xA;      ,inv.[ReleaseWhenEmpty]&#xA;      ,inv.[BindPickPackExcl]&#xA;      ,inv.[run_id]&#xA;      ,inv.[replace_location_if_not_setup]&#xA;      ,fil.main_tag_starter&#xA;      ,fil.by_payload_filler&#xA;      ,fil.main_tag_finisher&#xA;  FROM [source].[vista_inventory] inv&#xA;  JOIN config.data_element_payload_fillers fil ON fil.data_element_name = 'inventory' &#xA;  LEFT OUTER JOIN vendors vend ON vend.[Binder Code] = inv.binder&#xA;) ilv&#xA;    JOIN final.titles tit ON tit.ISBN_SuppEd = ilv.ISBN_SuppEd ) fin&#xA;&#xA;  ) ilv2;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-          </DTS:ObjectData>
         </DTS:Executable>
       </DTS:Executables>
       <DTS:PrecedenceConstraints>
@@ -3717,7 +3719,7 @@ SELECT ROW_NUMBER() OVER (PARTITION BY NULL ORDER BY vendors.run_id) AS record_n
         <NodeLayout
           Size="186.666666666667,42.6666666666667"
           Id="Package\Replicate tables - run separately in order\Replicate titles into staging\Populate titles_staging"
-          TopLeft="231.916661730657,6.21053038541618" />
+          TopLeft="231.916661730657,6.21053038541615" />
         <NodeLayout
           Size="186.666666666667,42.6666666666667"
           Id="Package\Replicate tables - run separately in order\Replicate titles into staging\Truncate titles_staging"
@@ -3728,14 +3730,14 @@ SELECT ROW_NUMBER() OVER (PARTITION BY NULL ORDER BY vendors.run_id) AS record_n
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="30.2083301016439,0"
+              EndConnector="30.2083301016438,0"
               Start="0,0"
-              End="22.7083301016439,0">
+              End="22.7083301016438,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="22.7083301016439,0" />
+                    End="22.7083301016438,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3788,10 +3790,6 @@ SELECT ROW_NUMBER() OVER (PARTITION BY NULL ORDER BY vendors.run_id) AS record_n
           Size="484,170"
           Id="Package\Replicate tables - run separately in order\Replicate vendors into staging"
           TopLeft="59.3749985191971,231.70175955027" />
-        <NodeLayout
-          Size="276,42.6666666666667"
-          Id="Package\Replicate tables - run separately in order\Replicate Vista Inventory Table to staging"
-          TopLeft="93.01191023542,439.809529402501" />
         <EdgeLayout
           Id="Package\Replicate tables - run separately in order.PrecedenceConstraints[Constraint]"
           TopLeft="293.208331517254,183.631582102617">
@@ -3899,7 +3897,7 @@ SELECT ROW_NUMBER() OVER (PARTITION BY NULL ORDER BY vendors.run_id) AS record_n
     design-time-name="Package\Replicate tables - run separately in order\Replicate vendors into staging\Populate vendors_staging">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="213.333333333334,42.6666666666667"
           Id="Package\Replicate tables - run separately in order\Replicate vendors into staging\Populate vendors_staging\Read source vendor records"
@@ -3927,9 +3925,7 @@ SELECT ROW_NUMBER() OVER (PARTITION BY NULL ORDER BY vendors.run_id) AS record_n
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
